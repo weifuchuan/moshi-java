@@ -27,15 +27,15 @@ public class Account extends BaseAccount<Account> {
     return BitKit.at(this.getStatus(), 0) == 1;
   }
 
-  public boolean isStatusLearner() {
+  public boolean isLearner() {
     return BitKit.at(this.getStatus(), 1) == 1;
   }
 
-  public boolean isStatusTeacher() {
+  public boolean isTeacher() {
     return BitKit.at(this.getStatus(), 2) == 1;
   }
 
-  public boolean isStatusManager() {
+  public boolean isManager() {
     return BitKit.at(this.getStatus(), 3) == 1;
   }
 
@@ -49,7 +49,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void toLearner() {
-    if (!isStatusLearner()) {
+    if (!isLearner()) {
       int status = getStatus();
       status += STATUS_LEANER;
       setStatus(status);
@@ -58,7 +58,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void toTeacher() {
-    if (!isStatusTeacher()) {
+    if (!isTeacher()) {
       int status = getStatus();
       status += STATUS_TEACHER;
       setStatus(status);
@@ -67,7 +67,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void toManager() {
-    if (!isStatusManager()) {
+    if (!isManager()) {
       int status = getStatus();
       status += STATUS_MANAGER;
       setStatus(status);
@@ -85,7 +85,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void removeLearner() {
-    if (isStatusLearner()) {
+    if (isLearner()) {
       int status = getStatus();
       status -= STATUS_LEANER;
       setStatus(status);
@@ -94,7 +94,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void removeTeacher() {
-    if (isStatusTeacher()) {
+    if (isTeacher()) {
       int status = getStatus();
       status -= STATUS_TEACHER;
       setStatus(status);
@@ -103,7 +103,7 @@ public class Account extends BaseAccount<Account> {
   }
 
   public void removeManager() {
-    if (isStatusManager()) {
+    if (isManager()) {
       int status = getStatus();
       status -= STATUS_MANAGER;
       setStatus(status);

@@ -40,7 +40,7 @@ public class AdminAuthInterceptor implements Interceptor {
 
   public void intercept(Invocation inv) {
     Account loginAccount = inv.getController().getAttr(LoginService.loginAccountCacheName);
-    if (loginAccount != null && loginAccount.isStatusManager() && !loginAccount.isStatusLock()) {
+    if (loginAccount != null && loginAccount.isManager() && !loginAccount.isStatusLock()) {
       // 传递给 sharedObject、sharedMethod 扩展使用
       threadLocal.set(loginAccount);
 

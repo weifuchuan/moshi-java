@@ -49,7 +49,7 @@ public class SqlSrvTeacherInterceptor implements Interceptor {
     Controller controller = inv.getController();
 
     Account account = controller.getAttr(LoginService.loginAccountCacheName);
-    if (account != null && account.isStatusTeacher()) {
+    if (account != null && account.isTeacher()) {
       String raw = controller.getRawData();
       SqlServiceParams params = JSON.parseObject(raw, SqlServiceParams.class);
 
