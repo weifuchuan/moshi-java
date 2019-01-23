@@ -9,9 +9,9 @@ public class LoginValidator extends Validator {
   protected void validate(Controller c) {
     setShortCircuit(true);
 
-    validateEmail("email", "emailMsg", "email格式错误");
-    validateRequiredString("password", "passwordMsg", "必须密码");
-    validateCaptcha("captcha", "captchaMsg", "验证码错误");
+    validateEmail("email", "msg", "email格式错误");
+    validateRequiredString("password", "msg", "必须填写密码");
+    validateCaptcha("captcha", "msg", "验证码错误");
   }
 
   @Override

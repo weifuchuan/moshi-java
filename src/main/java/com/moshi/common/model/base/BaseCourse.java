@@ -33,12 +33,20 @@ public abstract class BaseCourse<M extends BaseCourse<M>> extends JbootModel<M> 
 		return getStr("columnName");
 	}
 
-	public void setIntro(java.lang.String intro) {
-		set("intro", intro);
+	public void setIntroduce(java.lang.String introduce) {
+		set("introduce", introduce);
 	}
 	
-	public java.lang.String getIntro() {
-		return getStr("intro");
+	public java.lang.String getIntroduce() {
+		return getStr("introduce");
+	}
+
+	public void setIntroduceImage(java.lang.String introduceImage) {
+		set("introduceImage", introduceImage);
+	}
+	
+	public java.lang.String getIntroduceImage() {
+		return getStr("introduceImage");
 	}
 
 	public void setNote(java.lang.String note) {

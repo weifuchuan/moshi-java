@@ -17,6 +17,7 @@ package com.moshi.common.kit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import io.jboot.Jboot;
+import io.jboot.app.config.annotation.ConfigModel;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
@@ -24,53 +25,12 @@ import org.apache.commons.mail.SimpleEmail;
  * 邮件发送工具类
  */
 public class EmailKit {
-
-  public class EmailConfig {
-    private String server;
-    private String from;
-    private String password;
-
-    public String getServer() {
-      return server;
-    }
-
-    public void setServer(String server) {
-      this.server = server;
-    }
-
-    public String getFrom() {
-      return from;
-    }
-
-    public void setFrom(String from) {
-      this.from = from;
-    }
-
-    public String getPassword() {
-      return password;
-    }
-
-    public void setPassword(String password) {
-      this.password = password;
-    }
-  }
-
   private static final Log log = Log.getLog(EmailKit.class);
 
-  public static String sendEmail(String fromEmail, String toEmail, String title, String content) {
-    return sendEmail( toEmail, title, content);
-  }
-
-  private static EmailConfig emailConfig;
-
   public static String sendEmail(String toEmail, String title, String content) {
-    if (emailConfig == null) {
-      emailConfig = Jboot.config(EmailConfig.class, "email");
-    }
-
-    String emailServer = emailConfig.server;
-    String fromEmail = emailConfig.from;
-    String password = emailConfig.password;
+    String emailServer = Jboot.configValue("email.server");
+    String fromEmail = Jboot.configValue("email.from");
+    String password = Jboot.configValue("email.password");
 
     SimpleEmail email = new SimpleEmail();
     if (StrKit.notBlank(emailServer)) {
@@ -96,6 +56,10 @@ public class EmailKit {
       log.error(e.getMessage(), e);
       throw new RuntimeException(e);
     }
+  }
+
+  public static void main(String[] args){
+    EmailKit.sendEmail("url9777@qq.com", "test from moshi", "test from moshi");
   }
 
 }

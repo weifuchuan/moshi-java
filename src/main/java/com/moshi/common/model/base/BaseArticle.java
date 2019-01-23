@@ -57,4 +57,12 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends JbootModel<M
 		return getInt("status");
 	}
 
+	public void setAudioId(java.lang.Integer audioId) {
+		set("audioId", audioId);
+	}
+	
+	public java.lang.Integer getAudioId() {
+		return getInt("audioId");
+	}
+
 }

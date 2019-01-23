@@ -3,7 +3,6 @@ package com.moshi.common.interceptor;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation; 
 import com.jfinal.core.Controller;
-import com.moshi.common.kit.IpKit;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
 
@@ -22,9 +21,8 @@ public class LoginSessionInterceptor implements Interceptor {
     Controller c = inv.getController();
     String sessionId = c.getCookie(LoginService.sessionIdName);
     if (sessionId != null) {
-      loginAccount = LoginService.me.getLoginAccountWithSessionId(sessionId);
+      loginAccount = LoginService.me.getLoginAccountWithSessionIdFromCache(sessionId);
       if (loginAccount == null) {
-        String loginIp = IpKit.getRealIp(c.getRequest());
         loginAccount = LoginService.me.loginWithSessionId(sessionId);
       }
       if (loginAccount != null) {

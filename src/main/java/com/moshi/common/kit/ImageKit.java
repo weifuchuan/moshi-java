@@ -221,7 +221,7 @@ public class ImageKit {
 			param.setCompressionQuality(quality);
 			ImageOutputStream os = ImageIO.createImageOutputStream(newImage);
 			writer.setOutput(os);
-			writer.write((IIOMetadata) null, new IIOImage(newBufferedImage, null, null), param);
+			writer.write(null, new IIOImage(newBufferedImage, null, null), param);
 			os.flush();
 			os.close();
 		}

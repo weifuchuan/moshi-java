@@ -1,11 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec11eadb-c19d-43ee-810a-699baffe6ac0" name="Default Changelist" comment="" />
+    <list default="true" id="ec11eadb-c19d-43ee-810a-699baffe6ac0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphql.config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphql.schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_config_json.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_db_view.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLGetter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLGetterImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceParams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvLearnerInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvManagerInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvTeacherInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/Violation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallCheckResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallConfigMBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallDenyStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallFilterMBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallFunctionStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallFunctionStatValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallProviderStatLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallProviderStatLoggerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallProviderStatLoggerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallProviderStatValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSQLException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSqlFunctionStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSqlStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSqlStatValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSqlTableStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallTableStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallTableStatValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallUpdateCheckHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallUpdateCheckItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/DB2WallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/DB2WallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/MySqlWallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/MySqlWallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/OracleWallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/OracleWallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/PGWallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/PGWallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/SQLServerWallProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/SQLServerWallVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/WallVisitorUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/violation/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/violation/IllegalSQLObjectViolation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/violation/SyntaxErrorViolation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/graphql/moshi.graphqls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sql/application.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sqlService/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/moshi/service/SqlSrvLearnerInterceptorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/interceptor/LoginSessionInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/interceptor/LoginSessionInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/BitKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/BitKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/EmailKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/EmailKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/ImageKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/ImageKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseArticle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseArticle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseArticleComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseArticleComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseAudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jboot.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jboot.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/all_sqls.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/all_sqls.sql" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/../../jfinal-club/target/" />
     <ignored path="$PROJECT_DIR$/../jboot/target/" />
+    <ignored path="$PROJECT_DIR$/../../graphql-java-db-example/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,34 +109,22 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="moshi@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/service/SqlService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../../jfinal-club/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -60,63 +134,95 @@
       <find>DataSource</find>
       <find>userName</find>
       <find>jfinal-club</find>
+      <find>toarray</find>
+      <find>config</find>
+      <find>init</find>
+      <find>init()</find>
+      <find>Filters</find>
+      <find>filter</find>
+      <find>filters</find>
+      <find>com.alibaba.druid.wall</find>
+      <find>checkvali</find>
+      <find>endVisit</find>
+      <find>parameters</find>
+      <find>parameters(</find>
+      <find>2006</find>
+      <find>isDenyTable</find>
+      <find>v_</find>
+      <find>CacheKit</find>
+      <find>findById</find>
     </findStrings>
     <replaceStrings>
       <replace>email</replace>
       <replace>moshi</replace>
+      <replace>config2</replace>
+      <replace>com.moshi.service.wall</replace>
+      <replace>cache</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\fuchu\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar!\com\mysql\cj</dir>
+      <dir>E:\code\java\jboot\moshi\src\main\java\com\moshi\service\wall</dir>
+      <dir>E:\code\java\jfinal-club\src\main\java\com\jfinal\club\project</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_JbootModelGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_Generator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/SensitiveWordsKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/account/AccountService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/authcode/AuthCodeService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/AuthCode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/safe/JsoupFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/safe/RestTime.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/Account.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegValidator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/EmailKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegController.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/moshi/common/authcode/AuthCodeServiceTests.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/interceptor/LoginSessionInterceptor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionDirective.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleDirective.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseRole.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/index/IndexController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/index/IndexController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/controller/BaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminValidator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/common/AdminRoutes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthInterceptor.java" />
         <option value="$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/permission/PermissionAdminService.java" />
         <option value="$PROJECT_DIR$/../../jfinal-club/src/main/resources/sql/all_sqls.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/sql/all_sqls.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/jboot.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionAdminController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionAdminService.java" />
         <option value="$PROJECT_DIR$/src/main/java/Demo1.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/moshi/SqlService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlService.java" />
         <option value="$PROJECT_DIR$/../../jfinal-club/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLExecutorImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLExecutor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLGetter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/graphql/moshi.graphqls" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/GraphQLGetterImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/App.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/moshi/service/SqlServiceInterceptorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallSqlTableStat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/WallFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/SQLServerWallVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceParams.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvTeacherInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvManagerInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/WallVisitorUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvLearnerInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/db_view_template.enjoy" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_db_view_template.enjoy" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_config_json.tpl" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_Generator.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/sqlService/config.json" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginValidator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/BitKit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/interceptor/LoginSessionInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/Account.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/reg/RegController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/login/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/sql/all_sqls.sql" />
+        <option value="$PROJECT_DIR$/src/main/resources/sql/application.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/model/_db_view.tpl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/common/kit/EmailKit.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/jboot.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyService.java" />
       </list>
     </option>
   </component>
@@ -128,23 +234,64 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="697" />
-    <option name="height" value="745" />
+    <option name="height" value="775" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
               <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -181,16 +328,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="club" type="462c0819:PsiDirectoryNode" />
               <item name="_admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="club" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="account" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
@@ -209,55 +346,90 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="club" type="462c0819:PsiDirectoryNode" />
+              <item name="reg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="sql" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="_admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
               <item name="_admin" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="club" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="permission" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jfinal-club" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
               <item name="moshi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="apply" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
@@ -266,6 +438,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
@@ -274,7 +447,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
@@ -283,28 +456,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="permission" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="moshi" type="462c0819:PsiDirectoryNode" />
-              <item name="_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
+              <item name="reg" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
@@ -320,43 +472,114 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="sql" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moshi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="sqlService" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+              <item name="jboot-2.0-rc.3.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+              <item name="jboot-2.0-rc.3.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+              <item name="jboot-2.0-rc.3.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+              <item name="jboot-2.0-rc.3.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moshi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: io.jboot:jboot:2.0-rc.3" type="70bed36:NamedLibraryElementNode" />
+              <item name="jboot-2.0-rc.3.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="jboot" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="annotation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547953978086" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548217110856" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/moshi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jboot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../graphql-java-db-example" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\nodejs\node_modules\prettier" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="debugger.hotswap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\code\java\jboot\moshi\src\main\java" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.moshi.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.moshi.common.model" />
+      <recent name="com.moshi.service" />
       <recent name="com.moshi._admin.auth" />
       <recent name="com.moshi.common.controller" />
       <recent name="com.moshi.reg" />
-      <recent name="com.moshi.common.authcode" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\code\java\jboot\moshi\src\main\java\com\moshi\common\model" />
+      <recent name="E:\code\java\jboot\moshi\src\main\java\com\moshi\service" />
       <recent name="E:\code\java\jboot\moshi\src\main\resources\sql" />
       <recent name="E:\code\java\jboot\moshi\src\main\java\com\moshi\_admin\auth" />
       <recent name="E:\code\java\jboot\moshi\src\main\java\com\moshi\_admin" />
-      <recent name="E:\code\java\jboot\moshi\src\main\java\com\moshi\common" />
-      <recent name="E:\code\java\jboot\moshi\src\main\resources" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\code\java\jboot\moshi" />
+      <recent name="E:\code\java\jboot\moshi\src\main\java" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -371,7 +594,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application._Generator">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.moshi.App" />
       <module name="moshi" />
@@ -385,9 +608,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Demo1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Demo1" />
+    <configuration name="EmailKit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.moshi.common.kit.EmailKit" />
       <module name="moshi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.moshi.common.kit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.moshi.login.LoginService" />
+      <module name="moshi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.moshi.login.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SqlSrvLearnerInterceptor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.moshi.service.SqlSrvLearnerInterceptor" />
+      <module name="moshi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.moshi.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -405,30 +660,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthCodeServiceTests.seeAuthCodeStyle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="moshi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.moshi.common.authcode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.moshi.common.authcode" />
-      <option name="MAIN_CLASS_NAME" value="com.moshi.common.authcode.AuthCodeServiceTests" />
-      <option name="METHOD_NAME" value="seeAuthCodeStyle" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application._Generator" />
-        <item itemvalue="Application.Demo1" />
-        <item itemvalue="JUnit.AuthCodeServiceTests.seeAuthCodeStyle" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.EmailKit" />
+        <item itemvalue="Application._Generator" />
+        <item itemvalue="Application.LoginService" />
+        <item itemvalue="Application.SqlSrvLearnerInterceptor" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_NON_PUBLIC" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -445,7 +688,14 @@
       <workItem from="1547638062824" duration="15533000" />
       <workItem from="1547904600453" duration="7408000" />
       <workItem from="1547914809701" duration="5350000" />
-      <workItem from="1547953181716" duration="752000" />
+      <workItem from="1547953181716" duration="5724000" />
+      <workItem from="1547965813613" duration="3508000" />
+      <workItem from="1547978130082" duration="931000" />
+      <workItem from="1547979238791" duration="461000" />
+      <workItem from="1547979923453" duration="920000" />
+      <workItem from="1547981517294" duration="15895000" />
+      <workItem from="1548040318375" duration="41214000" />
+      <workItem from="1548207851077" duration="5635000" />
     </task>
     <servers />
   </component>
@@ -456,29 +706,31 @@
     <history-entry file="AuthCodeServiceTests_seeAuthCodeStyle - 2019.01.19 at 21h 36m 29s.xml">
       <configuration name="AuthCodeServiceTests.seeAuthCodeStyle" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="SqlServiceInterceptorTest_sqlCheck - 2019.01.21 at 00h 11m 39s.xml">
+      <configuration name="SqlServiceInterceptorTest.sqlCheck" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43559000" />
+    <option name="totallyTimeSpent" value="117095000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4969231" visible="true" weight="0.2549168" />
-      <window_info id="Structure" order="1" sideWeight="0.5030769" side_tool="true" weight="0.2473525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.22196797" visible="true" weight="0.25567323" />
+      <window_info id="Structure" order="1" sideWeight="0.77803206" side_tool="true" weight="0.23827533" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32923076" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39938557" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.34153846" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30307692" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3723077" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32872504" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3276923" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3276923" />
@@ -486,13 +738,15 @@
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32923076" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
+      <window_info anchor="bottom" id="GraphQL" order="15" weight="0.32718894" />
+      <window_info anchor="bottom" id="Spring" order="16" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Maven" order="3" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32980332" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" />
@@ -501,401 +755,461 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.tpl" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/activerecord/generator/MetaBuilder.java</url>
           <line>90</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/activerecord/generator/MetaBuilder.java</url>
           <line>89</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.12/druid-1.1.12-sources.jar!/com/alibaba/druid/wall/spi/WallVisitorUtils.java</url>
+          <line>2221</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.12/druid-1.1.12-sources.jar!/com/alibaba/druid/wall/WallProvider.java</url>
+          <line>554</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.12/druid-1.1.12-sources.jar!/com/alibaba/druid/wall/spi/WallVisitorUtils.java</url>
+          <line>2239</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.12/druid-1.1.12-sources.jar!/com/alibaba/druid/wall/spi/MySqlWallVisitor.java</url>
+          <line>330</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.1.12/druid-1.1.12-sources.jar!/com/alibaba/druid/wall/spi/MySqlWallVisitor.java</url>
+          <line>327</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/moshi/service/wall/spi/WallVisitorUtils.java</url>
+          <line>2328</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/role/RoleAdminController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/service/SqlSrvLearnerInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        <state relative-caret-position="1236">
+          <caret line="137" column="11" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/common/model/Role.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/login/LoginValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="204">
+          <caret line="13" column="47" lean-forward="true" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/common/model/Permission.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/ehcache/CacheKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseAccount.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/kit/BitKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-777">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#92#93#0" expanded="true" />
+            <element signature="e#158#159#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseAudio.java">
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/reg/RegController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="255">
+          <caret line="52" selection-start-line="52" selection-end-line="58" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/db/model/JbootModel.java">
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/login/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="118" column="19" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="19" />
+        <state relative-caret-position="289">
+          <caret line="57" selection-start-line="57" selection-end-line="66" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/新添加的表.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/index/IndexController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/aop/Clear.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        <state relative-caret-position="430">
+          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/controller/BaseController.java">
+    <entry file="jar://D:/Java/jdk1.8.0_181/src.zip!/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="3081" selection-start-line="3081" selection-end-line="3081" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionDirective.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/interceptor/LoginSessionInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="23" column="46" lean-forward="true" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleDirective.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/common/AdminRoutes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/auth/AdminAuthInterceptor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/Account.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="e#787#788#0" expanded="true" />
+            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+            <element signature="e#945#946#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1035#1036#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1125#1126#0" expanded="true" />
+            <element signature="e#1177#1178#0" expanded="true" />
+            <element signature="e#2680#2681#0" expanded="true" />
+            <element signature="e#2729#2730#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/login/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="29" column="3" lean-forward="true" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/login/LoginService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="109" column="55" lean-forward="true" selection-start-line="109" selection-start-column="55" selection-end-line="109" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/auth/AdminAuthKit.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/reg/RegController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="221">
+          <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1545#1546#0" expanded="true" />
+            <element signature="e#1570#1571#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/permission/PermissionAdminController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/reg/RegService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/permission/PermissionAdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/index/IndexController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding>
-            <element signature="e#158#159#0" expanded="true" />
-            <element signature="e#188#189#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/common/AdminRoutes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/account/AccountAdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/account/AccountAdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/aop/Aop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/webapp/_view/_admin/account/admin_list.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/resources/sql/all_sqls.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/resources/sql/admin_auth.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/jboot.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="10" lean-forward="true" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthKit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sql/admin_auth.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="590">
+          <caret line="152" selection-start-line="152" selection-end-line="152" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/sql/all_sqls.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        <state relative-caret-position="85">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk1.8.0_181/src.zip!/java/util/concurrent/Future.java">
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/resources/sql/project.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
-          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+        <state relative-caret-position="51">
+          <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Demo1.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionAdminController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/activerecord/sql/SqlKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="-26">
+          <caret line="181" column="17" selection-start-line="181" selection-start-column="17" selection-end-line="181" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/activerecord/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="1008" selection-start-line="1008" selection-end-line="1008" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#28444#28445#0" expanded="true" />
+            <element signature="e#28505#28506#0" expanded="true" />
+            <element signature="e#28703#28704#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/IssueCommentHistory.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseIssueCommentHistory.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/Role.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/jfinal/jfinal/3.5/jfinal-3.5-sources.jar!/com/jfinal/plugin/activerecord/SqlPara.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        <state relative-caret-position="127">
+          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseRole.java">
+    <entry file="file://$PROJECT_DIR$/target/classes/sql/application.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/_db_view.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-            <element signature="e#617#618#0" expanded="true" />
-            <element signature="e#649#650#0" expanded="true" />
-            <element signature="e#690#691#0" expanded="true" />
-            <element signature="e#723#724#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="206">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/permission/PermissionAdminService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/_db_view.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jfinal-club.log" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/role/RoleAdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="54" column="43" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-8016">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/_Generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+        <state relative-caret-position="833">
+          <caret line="63" column="44" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/service/SqlServiceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sqlService/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/db/model/JbootModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="118" column="19" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/controller/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-310">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/permission/PermissionDirective.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/auth/AdminAuthKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../jfinal-club/src/main/java/com/jfinal/club/_admin/auth/AdminAuthInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="e#908#909#0" expanded="true" />
+            <element signature="e#939#940#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="47" column="7" lean-forward="true" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/auth/AdminAuthInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/_admin/common/AdminRoutes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sql/application.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/Jboot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="106" column="28" lean-forward="true" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/app/config/Prop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/app/config/annotation/ConfigModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/jboot/jboot/2.0-rc.3/jboot-2.0-rc.3-sources.jar!/io/jboot/app/config/JbootConfigManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jboot.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="26" column="31" lean-forward="true" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/kit/EmailKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-250">
+          <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
+          <folding>
+            <element signature="e#2314#2315#0" expanded="true" />
+            <element signature="e#2399#2400#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseArticle.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/apply/ApplyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="216">
+          <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/common/model/base/BaseCourse.java">
+    <entry file="file://$PROJECT_DIR$/../jboot/src/main/java/io/jboot/core/JbootCoreConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="408">
+          <caret line="181" column="52" selection-start-line="181" selection-start-column="52" selection-end-line="181" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/.classpath">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/moshi/service/SqlService.java">
+    <entry file="file://$PROJECT_DIR$/../jboot/src/main/java/io/jboot/db/JbootDbManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="102">
+          <caret line="156" column="55" lean-forward="true" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../jfinal-club/.gitignore">
+    <entry file="file://$PROJECT_DIR$/../jboot/src/main/java/io/jboot/db/datasource/DataSourceConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        <state relative-caret-position="85">
+          <caret line="44" column="24" lean-forward="true" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../jboot/src/main/java/io/jboot/db/datasource/HikariDataSourceFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" column="48" lean-forward="true" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Java/jdk1.8.0_181/src.zip!/java/util/concurrent/TimeUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="134" column="4" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/3.3.0/HikariCP-3.3.0-sources.jar!/com/zaxxer/hikari/HikariConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="56" column="50" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -951,7 +1265,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>jboot</last-edited>
+          <last-edited>graphql-db-example</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -964,7 +1278,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: cglib:cglib-nodep:3.2.5</last-edited>
+          <last-edited>Maven: backport-util-concurrent:backport-util-concurrent:3.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

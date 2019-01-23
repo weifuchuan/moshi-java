@@ -57,4 +57,12 @@ public abstract class BaseArticleComment<M extends BaseArticleComment<M>> extend
 		return getInt("status");
 	}
 
+	public void setReplyTo(java.lang.Integer replyTo) {
+		set("replyTo", replyTo);
+	}
+	
+	public java.lang.Integer getReplyTo() {
+		return getInt("replyTo");
+	}
+
 }

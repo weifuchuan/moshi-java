@@ -9,12 +9,12 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseAudio<M extends BaseAudio<M>> extends JbootModel<M> implements IBean {
 
-	public void setArticleId(java.lang.Integer articleId) {
-		set("articleId", articleId);
+	public void setId(java.lang.Integer id) {
+		set("id", id);
 	}
 	
-	public java.lang.Integer getArticleId() {
-		return getInt("articleId");
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
 	public void setResource(java.lang.String resource) {
@@ -25,12 +25,28 @@ public abstract class BaseAudio<M extends BaseAudio<M>> extends JbootModel<M> im
 		return getStr("resource");
 	}
 
-	public void setReader(java.lang.String reader) {
-		set("reader", reader);
+	public void setRecorder(java.lang.String recorder) {
+		set("recorder", recorder);
 	}
 	
-	public java.lang.String getReader() {
-		return getStr("reader");
+	public java.lang.String getRecorder() {
+		return getStr("recorder");
+	}
+
+	public void setAccountId(java.lang.Integer accountId) {
+		set("accountId", accountId);
+	}
+	
+	public java.lang.Integer getAccountId() {
+		return getInt("accountId");
+	}
+
+	public void setStatus(java.lang.Integer status) {
+		set("status", status);
+	}
+	
+	public java.lang.Integer getStatus() {
+		return getInt("status");
 	}
 
 }
