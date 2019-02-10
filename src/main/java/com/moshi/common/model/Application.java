@@ -13,6 +13,10 @@ public class Application extends BaseApplication<Application> {
 	public static final int STATUS_COMMIT = 0;
 	public static final int STATUS_SUCCESS = 1;
 	public static final int STATUS_FAIL = 2;
+
+	public static final int CATEGORY_TEACHER = 0;
+	public static final int CATEGORY_COURSE_COLUMN = 1;
+	public static final int CATEGORY_COURSE_VIDEO = 2;
 }
 
 

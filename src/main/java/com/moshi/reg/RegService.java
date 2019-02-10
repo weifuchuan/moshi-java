@@ -127,7 +127,16 @@ public class RegService {
   /** 发送账号激活授权邮件 */
   private boolean sendRegActivateAuthEmail(String authCode, Account reg) {
     String title = "默识 | 用户激活邮件";
-    String content = "激活码：\n\n" + authCode;
+    String activeUrl = Jboot.configValue("host").trim() + "/reg/activate?authcode=" + authCode;
+    String content =
+        "激活码：\n\n"
+            + authCode
+            + "\n\n"
+            + "点击链接激活：<a href=\""
+            + activeUrl
+            + "\">"
+            + activeUrl
+            + "</a>";
 
     String toEmail = reg.getStr("email");
     try {

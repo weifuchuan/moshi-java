@@ -153,4 +153,12 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends JbootModel<M
 		return getInt("status");
 	}
 
+	public void setRealPicture(java.lang.String realPicture) {
+		set("realPicture", realPicture);
+	}
+	
+	public java.lang.String getRealPicture() {
+		return getStr("realPicture");
+	}
+
 }

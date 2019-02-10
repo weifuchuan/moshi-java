@@ -6,31 +6,31 @@
 [ERROR]-[Thread: main]-[com.alibaba.druid.wall.WallFilter.checkInternal()]: sql injection violation, update not allow : update account set id=1 where nickName='aaa'
 
 2019-01-21 13:28:58
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, deny table : `role` : select id from `role`
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, deny table : `role` : select id from `role`
 
 2019-01-21 14:45:39
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
 
 2019-01-21 15:14:16
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
 
 2019-01-21 15:15:30
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
 
 2019-01-21 15:17:37
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, sql must parameterized : select email from `v_account` where id=1
 
 2019-01-21 15:18:10
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
 
 2019-01-21 15:18:48
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
 
 2019-01-21 15:19:34
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : `v_account` : select email from `v_account` where id=?
 
 2019-01-21 15:25:52
-[ERROR]-[Thread: main]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, deny table : role : select email from `v_account` a, role where a.id=? and role.id = a.id
+[ERROR]-[Thread: main]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, deny table : role : select email from `v_account` a, role where a.id=? and role.id = a.id
 
 2019-01-21 22:46:17
-[ERROR]-[Thread: XNIO-1 task-9]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : session_l : select id from session_l where accountId=?
+[ERROR]-[Thread: XNIO-1 task-9]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : session_l : select id from session_l where accountId=?

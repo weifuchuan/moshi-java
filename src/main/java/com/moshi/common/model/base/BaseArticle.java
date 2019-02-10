@@ -17,12 +17,12 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends JbootModel<M
 		return getInt("id");
 	}
 
-	public void setAccountId(java.lang.Integer accountId) {
-		set("accountId", accountId);
+	public void setCourseId(java.lang.Integer courseId) {
+		set("courseId", courseId);
 	}
 	
-	public java.lang.Integer getAccountId() {
-		return getInt("accountId");
+	public java.lang.Integer getCourseId() {
+		return getInt("courseId");
 	}
 
 	public void setTitle(java.lang.String title) {
@@ -39,6 +39,14 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends JbootModel<M
 	
 	public java.lang.String getContent() {
 		return getStr("content");
+	}
+
+	public void setPublishAt(java.lang.Long publishAt) {
+		set("publishAt", publishAt);
+	}
+	
+	public java.lang.Long getPublishAt() {
+		return getLong("publishAt");
 	}
 
 	public void setCreateAt(java.lang.Long createAt) {
@@ -63,6 +71,14 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends JbootModel<M
 	
 	public java.lang.Integer getAudioId() {
 		return getInt("audioId");
+	}
+
+	public void setContentType(java.lang.String contentType) {
+		set("contentType", contentType);
+	}
+	
+	public java.lang.String getContentType() {
+		return getStr("contentType");
 	}
 
 }

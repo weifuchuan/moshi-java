@@ -15,3 +15,7 @@
 log/
 target/
 
+cloudinary.yml
+
+src/main/webapp/static/media/
+

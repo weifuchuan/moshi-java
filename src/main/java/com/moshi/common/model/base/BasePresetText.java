@@ -25,4 +25,12 @@ public abstract class BasePresetText<M extends BasePresetText<M>> extends JbootM
 		return getStr("value");
 	}
 
+	public void setType(java.lang.String type) {
+		set("type", type);
+	}
+	
+	public java.lang.String getType() {
+		return getStr("type");
+	}
+
 }

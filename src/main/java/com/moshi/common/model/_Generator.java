@@ -3,7 +3,9 @@ package com.moshi.common.model;
 import cn.hutool.core.io.file.FileWriter;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.PathKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.generator.DataDictionaryGenerator;
+import com.jfinal.plugin.activerecord.generator.MappingKitGenerator;
 import com.jfinal.plugin.activerecord.generator.TableMeta;
 import com.jfinal.template.Engine;
 import com.jfinal.template.Template;
@@ -58,6 +60,29 @@ public class _Generator {
             Kv.by("tableMetas", tableMetas).set("suffixs", new String[] {"l", "t", "m"}));
     new FileWriter(PathKit.getWebRootPath() + "/src/main/java/com/moshi/common/model/_db_view.sql")
         .write(dbViewRaw);
+
+    Engine engine = Engine.create("form");
+
+    engine.addSharedMethod(new StrKit());
+
+    Template form =
+        engine.getTemplate(
+            PathKit.getWebRootPath() + "/src/main/java/com/moshi/common/model/_form.tpl");
+    for (TableMeta meta : tableMetas) {
+      String s =
+          form.renderToString(
+              Kv.by("name", StrKit.firstCharToUpperCase(StrKit.toCamelCase(meta.name)))
+                  .set("columns", meta.columnMetas));
+      new FileWriter(
+              PathKit.getWebRootPath()
+                  + "/src/main/java/com/moshi/common/model/_forms/"
+                  + StrKit.firstCharToUpperCase(StrKit.toCamelCase(meta.name))
+                  + "Form.tsx")
+          .write(s);
+    }
+
+    MappingKitGenerator mkgen = new MappingKitGenerator(modelPackageName, modelOutputDir);
+    mkgen.generate(tableMetas);
 
     // NOTE: ONLY IN DEV
     ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

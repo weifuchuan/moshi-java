@@ -13,10 +13,30 @@ public class Account extends BaseAccount<Account> {
 
   public static final String AVATAR_NO_AVATAR = ""; // 刚注册时使用默认头像
 
+  /*
+    explore: 7 6 5 4 3 2 1 0
+    bit:   0 0 0 0 0 0 0 0
+  */
   public static final int STATUS_REG = 0; // 注册、未激活
+  /*
+    explore: 7 6 5 4 3 2 1 0
+    bit:   _ _ _ _ _ _ _ 1
+  */
   public static final int STATUS_LOCK = 1 << 0; // 锁定账号，无法做任何事情
+  /*
+    explore: 7 6 5 4 3 2 1 0
+    bit:   _ _ _ _ _ _ 1 0
+  */
   public static final int STATUS_LEANER = 1 << 1; // 正常、学习者
+  /*
+    explore: 7 6 5 4 3 2 1 0
+    bit:   _ _ _ _ _ 1 _ 0
+  */
   public static final int STATUS_TEACHER = 1 << 2; // 正常、课程作者
+  /*
+    explore: 7 6 5 4 3 2 1 0
+    bit:   _ _ _ _ 1 _ _ 0
+  */
   public static final int STATUS_MANAGER = 1 << 3; // 正常、管理员
 
   public boolean isStatusReg() {

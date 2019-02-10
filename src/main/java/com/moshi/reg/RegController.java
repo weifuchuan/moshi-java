@@ -33,8 +33,7 @@ public class RegController extends JbootController {
     renderJson(ret);
   }
 
-  public void activate() {
-    String authcode = getPara("authcode");
+  public void activate(String authcode) {
     Ret ret = srv.activate(authcode);
     if (ret.isOk()) {
       Account account = getAttr(LoginService.loginAccountCacheName);

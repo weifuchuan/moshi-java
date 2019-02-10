@@ -6,20 +6,24 @@ import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.Application;
 import io.jboot.web.controller.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping("/apply")
 public class ApplyController extends BaseController {
   @Inject private ApplyService srv;
 
   public void my() {
-    Application application = srv.findByAccountId(getLoginAccountId());
-    renderJson(application == null ? Ret.fail() : Ret.ok("application", application));
+    int category = getParaToInt("category");
+    List<Application> applications = srv.findMy(getLoginAccountId(), category);
+    renderJson(applications);
   }
 
   public void commit() {
     int id = getParaToInt("id");
     String title = getPara("title");
     String content = getPara("content");
-    Ret ret = srv.commit(getLoginAccountId(), id, title, content);
+    int category = getParaToInt("category");
+    Ret ret = srv.commit(getLoginAccountId(), id, title, content, category, getLoginAccountId());
     renderJson(ret);
   }
 

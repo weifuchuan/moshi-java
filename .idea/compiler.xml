@@ -10,6 +10,7 @@
         <module name="jboot" />
         <module name="jfinal-club" />
         <module name="moshi" />
+        <module name="netty" />
       </profile>
     </annotationProcessing>
   </component>

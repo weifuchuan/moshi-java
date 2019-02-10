@@ -9,4 +9,10 @@ import com.moshi.common.model.base.BaseArticle;
 @Table(tableName = "article", primaryKey = "id")
 public class Article extends BaseArticle<Article> {
 	public static final Article dao = new Article().dao();
+
+	public static final int STATUS_INIT = 0; // 编辑中
+	public static final int STATUS_LOCK = 1; // 锁定
+	public static final int STATUS_PUBLISH = 1 << 1; // 发布
+
+
 }

@@ -25,12 +25,12 @@ public abstract class BaseCourse<M extends BaseCourse<M>> extends JbootModel<M> 
 		return getInt("accountId");
 	}
 
-	public void setColumnName(java.lang.String columnName) {
-		set("columnName", columnName);
+	public void setName(java.lang.String name) {
+		set("name", name);
 	}
 	
-	public java.lang.String getColumnName() {
-		return getStr("columnName");
+	public java.lang.String getName() {
+		return getStr("name");
 	}
 
 	public void setIntroduce(java.lang.String introduce) {
@@ -65,12 +65,12 @@ public abstract class BaseCourse<M extends BaseCourse<M>> extends JbootModel<M> 
 		return getLong("createAt");
 	}
 
-	public void setPublishAt(java.lang.Integer publishAt) {
+	public void setPublishAt(java.lang.Long publishAt) {
 		set("publishAt", publishAt);
 	}
 	
-	public java.lang.Integer getPublishAt() {
-		return getInt("publishAt");
+	public java.lang.Long getPublishAt() {
+		return getLong("publishAt");
 	}
 
 	public void setBuyerCount(java.lang.Integer buyerCount) {
@@ -119,6 +119,14 @@ public abstract class BaseCourse<M extends BaseCourse<M>> extends JbootModel<M> 
 	
 	public java.lang.Integer getStatus() {
 		return getInt("status");
+	}
+
+	public void setLectureCount(java.lang.Integer lectureCount) {
+		set("lectureCount", lectureCount);
+	}
+	
+	public java.lang.Integer getLectureCount() {
+		return getInt("lectureCount");
 	}
 
 }

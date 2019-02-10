@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/../../jfinal-club/pom.xml" />
         <option value="$PROJECT_DIR$/../jboot/pom.xml" />
         <option value="$PROJECT_DIR$/../../graphql-java-db-example/pom.xml" />
+        <option value="$PROJECT_DIR$/../../netty/pom.xml" />
       </list>
     </option>
   </component>

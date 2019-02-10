@@ -41,12 +41,28 @@ public abstract class BaseIssue<M extends BaseIssue<M>> extends JbootModel<M> im
 		return getStr("title");
 	}
 
-	public void setCreateAt(java.lang.Long createAt) {
-		set("createAt", createAt);
+	public void setOpenAt(java.lang.Long openAt) {
+		set("openAt", openAt);
 	}
 	
-	public java.lang.Long getCreateAt() {
-		return getLong("createAt");
+	public java.lang.Long getOpenAt() {
+		return getLong("openAt");
+	}
+
+	public void setCloserId(java.lang.Integer closerId) {
+		set("closerId", closerId);
+	}
+	
+	public java.lang.Integer getCloserId() {
+		return getInt("closerId");
+	}
+
+	public void setCloseAt(java.lang.Long closeAt) {
+		set("closeAt", closeAt);
+	}
+	
+	public java.lang.Long getCloseAt() {
+		return getLong("closeAt");
 	}
 
 	public void setStatus(java.lang.Integer status) {

@@ -73,4 +73,20 @@ public abstract class BaseApplication<M extends BaseApplication<M>> extends Jboo
 		return getStr("reply");
 	}
 
+	public void setRefId(java.lang.Integer refId) {
+		set("refId", refId);
+	}
+	
+	public java.lang.Integer getRefId() {
+		return getInt("refId");
+	}
+
+	public void setContentType(java.lang.String contentType) {
+		set("contentType", contentType);
+	}
+	
+	public java.lang.String getContentType() {
+		return getStr("contentType");
+	}
+
 }

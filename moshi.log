@@ -1,28 +1,7 @@
 
-2019-01-22 16:57:49
-[ERROR]-[Thread: XNIO-2 task-22]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : description : 
-        select `value` from description where `key` = ?
+2019-02-03 16:11:30
+[ERROR]-[Thread: XNIO-1 task-17]-[com.moshi.select.wall.WallFilter.checkInternal()]: sql injection violation, syntax error: ERROR. pos 147, line 4, column 34, token AND :
+        select a.*, u.nickName, u.avatar, c.name courseName
+        from article_m a, course_m c, account_m u
+        where a.courseId = ? and and a.courseId = c.id and u.id = c.accountId
       
-
-2019-01-22 16:59:19
-[ERROR]-[Thread: XNIO-1 task-3]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, deny table : description : 
-        select `value` from description where `key` = ?
-      
-
-2019-01-22 20:51:45
-[ERROR]-[Thread: XNIO-1 task-25]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `value` from preset_text_l where `key` = ?
-
-2019-01-22 20:52:09
-[ERROR]-[Thread: XNIO-1 task-31]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `value` from preset_text_l where `key` = ?
-
-2019-01-22 20:52:53
-[ERROR]-[Thread: XNIO-1 task-29]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `key`, `value` from preset_text_l where `key` = ? or `key` = ?
-
-2019-01-22 20:53:17
-[ERROR]-[Thread: XNIO-1 task-2]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `key`, `value` from preset_text_l where `key` = ? or `key` = ?
-
-2019-01-22 20:54:45
-[ERROR]-[Thread: XNIO-1 task-6]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `key`, `value` from preset_text_l where `key` = ? or `key` = ?
-
-2019-01-22 21:03:27
-[ERROR]-[Thread: XNIO-1 task-9]-[com.moshi.service.wall.WallFilter.checkInternal()]: sql injection violation, not in permit tables : preset_text_l : select `key`, `value` from preset_text_l where `key` = ? or `key` = ?

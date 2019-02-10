@@ -24,7 +24,8 @@ public class LoginController extends JbootController {
       setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
       Account account = (Account) ret.get(LoginService.loginAccountCacheName);
       setAttr(LoginService.loginAccountCacheName, account);
-      ret.set(LoginService.loginAccountCacheName, account.copyModel());
+      ret.set("account", account.copyModel());
+      ret.delete(LoginService.sessionIdName);
     }
     renderJson(ret);
   }

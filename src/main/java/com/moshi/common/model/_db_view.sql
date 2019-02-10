@@ -10,14 +10,17 @@
     "course", 
     "issue", 
     "issue_comment", 
+    "news", 
     "paragraph", 
     "paragraph_comment", 
     "permission", 
     "preset_text", 
+    "recommend", 
     "role", 
     "role_permission", 
     "section", 
     "session", 
+    "subscription", 
     "video"
 ]
 [
@@ -31,14 +34,17 @@
     "course_l", 
     "issue_l", 
     "issue_comment_l", 
+    "news_l", 
     "paragraph_l", 
     "paragraph_comment_l", 
     "permission_l", 
     "preset_text_l", 
+    "recommend_l", 
     "role_l", 
     "role_permission_l", 
     "section_l", 
     "session_l", 
+    "subscription_l", 
     "video_l"
 ]
 [
@@ -52,14 +58,17 @@
     "course_t", 
     "issue_t", 
     "issue_comment_t", 
+    "news_t", 
     "paragraph_t", 
     "paragraph_comment_t", 
     "permission_t", 
     "preset_text_t", 
+    "recommend_t", 
     "role_t", 
     "role_permission_t", 
     "section_t", 
     "session_t", 
+    "subscription_t", 
     "video_t"
 ]
 [
@@ -73,14 +82,17 @@
     "course_m", 
     "issue_m", 
     "issue_comment_m", 
+    "news_m", 
     "paragraph_m", 
     "paragraph_comment_m", 
     "permission_m", 
     "preset_text_m", 
+    "recommend_m", 
     "role_m", 
     "role_permission_m", 
     "section_m", 
     "session_m", 
+    "subscription_m", 
     "video_m"
 ]
 
@@ -109,7 +121,8 @@ CREATE OR REPLACE VIEW `moshi`.`account_l`
             `education`, 
             `profession`, 
             `createAt`, 
-            `status`
+            `status`, 
+            `realPicture`
     from `moshi`.`account`
 );
 
@@ -135,7 +148,9 @@ CREATE OR REPLACE VIEW `moshi`.`application_l`
             `content`, 
             `createAt`, 
             `status`, 
-            `reply`
+            `reply`, 
+            `refId`, 
+            `contentType`
     from `moshi`.`application`
 );
 
@@ -145,12 +160,14 @@ CREATE OR REPLACE VIEW `moshi`.`article_l`
 (
     SELECT
             `id`, 
-            `accountId`, 
+            `courseId`, 
             `title`, 
             `content`, 
+            `publishAt`, 
             `createAt`, 
             `status`, 
-            `audioId`
+            `audioId`, 
+            `contentType`
     from `moshi`.`article`
 );
 
@@ -178,7 +195,9 @@ CREATE OR REPLACE VIEW `moshi`.`audio_l`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`audio`
 );
 
@@ -201,7 +220,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_l`
     SELECT
             `id`, 
             `accountId`, 
-            `columnName`, 
+            `name`, 
             `introduce`, 
             `introduceImage`, 
             `note`, 
@@ -212,7 +231,8 @@ CREATE OR REPLACE VIEW `moshi`.`course_l`
             `price`, 
             `discountedPrice`, 
             `offerTo`, 
-            `status`
+            `status`, 
+            `lectureCount`
     from `moshi`.`course`
 );
 
@@ -225,7 +245,9 @@ CREATE OR REPLACE VIEW `moshi`.`issue_l`
             `courseId`, 
             `accountId`, 
             `title`, 
-            `createAt`, 
+            `openAt`, 
+            `closerId`, 
+            `closeAt`, 
             `status`
     from `moshi`.`issue`
 );
@@ -242,6 +264,23 @@ CREATE OR REPLACE VIEW `moshi`.`issue_comment_l`
             `content`, 
             `status`
     from `moshi`.`issue_comment`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`news_l`
+    AS
+(
+    SELECT
+            `id`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `publishAt`, 
+            `status`, 
+            `author`, 
+            `audioId`, 
+            `contentType`
+    from `moshi`.`news`
 );
 
 
@@ -292,8 +331,24 @@ CREATE OR REPLACE VIEW `moshi`.`preset_text_l`
 (
     SELECT
             `key`, 
-            `value`
+            `value`, 
+            `type`
     from `moshi`.`preset_text`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`recommend_l`
+    AS
+(
+    SELECT
+            `id`, 
+            `image`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `status`, 
+            `contentType`
+    from `moshi`.`recommend`
 );
 
 
@@ -343,6 +398,21 @@ CREATE OR REPLACE VIEW `moshi`.`session_l`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`subscription_l`
+    AS
+(
+    SELECT
+            `id`, 
+            `accountId`, 
+            `refId`, 
+            `subscribeType`, 
+            `createAt`, 
+            `cost`, 
+            `status`
+    from `moshi`.`subscription`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`video_l`
     AS
 (
@@ -351,7 +421,9 @@ CREATE OR REPLACE VIEW `moshi`.`video_l`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`video`
 );
 
@@ -379,7 +451,8 @@ CREATE OR REPLACE VIEW `moshi`.`account_t`
             `education`, 
             `profession`, 
             `createAt`, 
-            `status`
+            `status`, 
+            `realPicture`
     from `moshi`.`account`
 );
 
@@ -405,7 +478,9 @@ CREATE OR REPLACE VIEW `moshi`.`application_t`
             `content`, 
             `createAt`, 
             `status`, 
-            `reply`
+            `reply`, 
+            `refId`, 
+            `contentType`
     from `moshi`.`application`
 );
 
@@ -415,12 +490,14 @@ CREATE OR REPLACE VIEW `moshi`.`article_t`
 (
     SELECT
             `id`, 
-            `accountId`, 
+            `courseId`, 
             `title`, 
             `content`, 
+            `publishAt`, 
             `createAt`, 
             `status`, 
-            `audioId`
+            `audioId`, 
+            `contentType`
     from `moshi`.`article`
 );
 
@@ -448,7 +525,9 @@ CREATE OR REPLACE VIEW `moshi`.`audio_t`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`audio`
 );
 
@@ -471,7 +550,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_t`
     SELECT
             `id`, 
             `accountId`, 
-            `columnName`, 
+            `name`, 
             `introduce`, 
             `introduceImage`, 
             `note`, 
@@ -482,7 +561,8 @@ CREATE OR REPLACE VIEW `moshi`.`course_t`
             `price`, 
             `discountedPrice`, 
             `offerTo`, 
-            `status`
+            `status`, 
+            `lectureCount`
     from `moshi`.`course`
 );
 
@@ -495,7 +575,9 @@ CREATE OR REPLACE VIEW `moshi`.`issue_t`
             `courseId`, 
             `accountId`, 
             `title`, 
-            `createAt`, 
+            `openAt`, 
+            `closerId`, 
+            `closeAt`, 
             `status`
     from `moshi`.`issue`
 );
@@ -512,6 +594,23 @@ CREATE OR REPLACE VIEW `moshi`.`issue_comment_t`
             `content`, 
             `status`
     from `moshi`.`issue_comment`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`news_t`
+    AS
+(
+    SELECT
+            `id`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `publishAt`, 
+            `status`, 
+            `author`, 
+            `audioId`, 
+            `contentType`
+    from `moshi`.`news`
 );
 
 
@@ -562,8 +661,24 @@ CREATE OR REPLACE VIEW `moshi`.`preset_text_t`
 (
     SELECT
             `key`, 
-            `value`
+            `value`, 
+            `type`
     from `moshi`.`preset_text`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`recommend_t`
+    AS
+(
+    SELECT
+            `id`, 
+            `image`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `status`, 
+            `contentType`
+    from `moshi`.`recommend`
 );
 
 
@@ -613,6 +728,21 @@ CREATE OR REPLACE VIEW `moshi`.`session_t`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`subscription_t`
+    AS
+(
+    SELECT
+            `id`, 
+            `accountId`, 
+            `refId`, 
+            `subscribeType`, 
+            `createAt`, 
+            `cost`, 
+            `status`
+    from `moshi`.`subscription`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`video_t`
     AS
 (
@@ -621,7 +751,9 @@ CREATE OR REPLACE VIEW `moshi`.`video_t`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`video`
 );
 
@@ -649,7 +781,8 @@ CREATE OR REPLACE VIEW `moshi`.`account_m`
             `education`, 
             `profession`, 
             `createAt`, 
-            `status`
+            `status`, 
+            `realPicture`
     from `moshi`.`account`
 );
 
@@ -675,7 +808,9 @@ CREATE OR REPLACE VIEW `moshi`.`application_m`
             `content`, 
             `createAt`, 
             `status`, 
-            `reply`
+            `reply`, 
+            `refId`, 
+            `contentType`
     from `moshi`.`application`
 );
 
@@ -685,12 +820,14 @@ CREATE OR REPLACE VIEW `moshi`.`article_m`
 (
     SELECT
             `id`, 
-            `accountId`, 
+            `courseId`, 
             `title`, 
             `content`, 
+            `publishAt`, 
             `createAt`, 
             `status`, 
-            `audioId`
+            `audioId`, 
+            `contentType`
     from `moshi`.`article`
 );
 
@@ -718,7 +855,9 @@ CREATE OR REPLACE VIEW `moshi`.`audio_m`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`audio`
 );
 
@@ -741,7 +880,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_m`
     SELECT
             `id`, 
             `accountId`, 
-            `columnName`, 
+            `name`, 
             `introduce`, 
             `introduceImage`, 
             `note`, 
@@ -752,7 +891,8 @@ CREATE OR REPLACE VIEW `moshi`.`course_m`
             `price`, 
             `discountedPrice`, 
             `offerTo`, 
-            `status`
+            `status`, 
+            `lectureCount`
     from `moshi`.`course`
 );
 
@@ -765,7 +905,9 @@ CREATE OR REPLACE VIEW `moshi`.`issue_m`
             `courseId`, 
             `accountId`, 
             `title`, 
-            `createAt`, 
+            `openAt`, 
+            `closerId`, 
+            `closeAt`, 
             `status`
     from `moshi`.`issue`
 );
@@ -782,6 +924,23 @@ CREATE OR REPLACE VIEW `moshi`.`issue_comment_m`
             `content`, 
             `status`
     from `moshi`.`issue_comment`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`news_m`
+    AS
+(
+    SELECT
+            `id`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `publishAt`, 
+            `status`, 
+            `author`, 
+            `audioId`, 
+            `contentType`
+    from `moshi`.`news`
 );
 
 
@@ -832,8 +991,24 @@ CREATE OR REPLACE VIEW `moshi`.`preset_text_m`
 (
     SELECT
             `key`, 
-            `value`
+            `value`, 
+            `type`
     from `moshi`.`preset_text`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`recommend_m`
+    AS
+(
+    SELECT
+            `id`, 
+            `image`, 
+            `title`, 
+            `content`, 
+            `createAt`, 
+            `status`, 
+            `contentType`
+    from `moshi`.`recommend`
 );
 
 
@@ -883,6 +1058,21 @@ CREATE OR REPLACE VIEW `moshi`.`session_m`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`subscription_m`
+    AS
+(
+    SELECT
+            `id`, 
+            `accountId`, 
+            `refId`, 
+            `subscribeType`, 
+            `createAt`, 
+            `cost`, 
+            `status`
+    from `moshi`.`subscription`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`video_m`
     AS
 (
@@ -891,7 +1081,9 @@ CREATE OR REPLACE VIEW `moshi`.`video_m`
             `resource`, 
             `recorder`, 
             `accountId`, 
-            `status`
+            `status`, 
+            `name`, 
+            `uploadAt`
     from `moshi`.`video`
 );
 

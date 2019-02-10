@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="moshi@localhost" uuid="c256dadd-989b-4769-be38-b1f6d80c2de4">
+    <data-source source="LOCAL" name="moshi" uuid="333f204d-1719-404b-905e-3de435ca0349">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/moshi</jdbc-url>
+      <jdbc-url>jdbc:mysql://123.207.28.107:3306/moshi</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
@@ -15,13 +15,18 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="chinook" uuid="1d9d0788-2237-463b-87ee-9d4a8ad9bae1">
-      <driver-ref>sqlite.xerial</driver-ref>
+    <data-source source="LOCAL" name="jfinal club" uuid="66174f9d-5e85-4190-93f3-1603cc716802">
+      <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\code\java\graphql-java-db-example\src\main\resources\chinook.db</jdbc-url>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://123.207.28.107:3306/jfinal_club</jdbc-url>
       <driver-properties>
-        <property name="enable_load_extension" value="true" />
+        <property name="autoReconnect" value="true" />
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
   </component>

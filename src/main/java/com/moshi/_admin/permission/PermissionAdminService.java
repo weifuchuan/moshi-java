@@ -145,4 +145,8 @@ public class PermissionAdminService {
 
 		return Ret.ok("msg", "权限删除成功");
 	}
+
+	public static void main(String[] args){
+		PermissionAdminService.me.sync();
+	}
 }

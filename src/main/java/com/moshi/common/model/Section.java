@@ -9,4 +9,9 @@ import com.moshi.common.model.base.BaseSection;
 @Table(tableName = "section", primaryKey = "id")
 public class Section extends BaseSection<Section> {
 	public static final Section dao = new Section().dao();
+
+	public static final int STATUS_INIT = 0; // 编辑中
+	public static final int STATUS_LOCK = 1; // 锁定
+	public static final int STATUS_PUBLISH = 1 << 1; // 发布
+
 }

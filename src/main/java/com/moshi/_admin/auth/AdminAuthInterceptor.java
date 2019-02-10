@@ -1,17 +1,3 @@
-/**
- * 请勿将俱乐部专享资源复制给其他人，保护知识产权即是保护我们所在的行业，进而保护我们自己的利益
- * 即便是公司的同事，也请尊重 JFinal 作者的努力与付出，不要复制给同事
- * <p>
- * 如果你尚未加入俱乐部，请立即删除该项目，或者现在加入俱乐部：http://jfinal.com/club
- * <p>
- * 俱乐部将提供 jfinal-club 项目文档与设计资源、专用 QQ 群，以及作者在俱乐部定期的分享与答疑，
- * 价值远比仅仅拥有 jfinal club 项目源代码要大得多
- * <p>
- * JFinal 俱乐部是五年以来首次寻求外部资源的尝试，以便于有资源创建更加
- * 高品质的产品与服务，为大家带来更大的价值，所以请大家多多支持，不要将
- * 首次的尝试扼杀在了摇篮之中
- */
-
 package com.moshi._admin.auth;
 
 import com.jfinal.aop.Inject;
@@ -21,17 +7,12 @@ import com.jfinal.kit.Ret;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
 
-/**
- * 后台管理员授权拦截器
- */
+/** 后台管理员授权拦截器 */
 public class AdminAuthInterceptor implements Interceptor {
 
-  @Inject
-  AdminAuthService srv;
+  @Inject AdminAuthService srv;
 
-  /**
-   * 用于 sharedObject、sharedMethod 扩展中使用
-   */
+  /** 用于 sharedObject、sharedMethod 扩展中使用 */
   private static final ThreadLocal<Account> threadLocal = new ThreadLocal<>();
 
   public static Account getThreadLocalAccount() {
@@ -45,8 +26,8 @@ public class AdminAuthInterceptor implements Interceptor {
       threadLocal.set(loginAccount);
 
       // 如果是超级管理员或者拥有对当前 action 的访问权限则放行
-      if (srv.isSuperAdmin(loginAccount.getId()) ||
-          srv.hasPermission(loginAccount.getId(), inv.getActionKey())) {
+      if (srv.isSuperAdmin(loginAccount.getId())
+          || srv.hasPermission(loginAccount.getId(), inv.getActionKey())) {
         inv.invoke();
         return;
       }
@@ -62,4 +43,3 @@ public class AdminAuthInterceptor implements Interceptor {
     }
   }
 }
-

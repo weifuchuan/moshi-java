@@ -49,4 +49,20 @@ public abstract class BaseAudio<M extends BaseAudio<M>> extends JbootModel<M> im
 		return getInt("status");
 	}
 
+	public void setName(java.lang.String name) {
+		set("name", name);
+	}
+	
+	public java.lang.String getName() {
+		return getStr("name");
+	}
+
+	public void setUploadAt(java.lang.Long uploadAt) {
+		set("uploadAt", uploadAt);
+	}
+	
+	public java.lang.Long getUploadAt() {
+		return getLong("uploadAt");
+	}
+
 }

@@ -9,4 +9,10 @@ import com.moshi.common.model.base.BaseParagraph;
 @Table(tableName = "paragraph", primaryKey = "id")
 public class Paragraph extends BaseParagraph<Paragraph> {
 	public static final Paragraph dao = new Paragraph().dao();
+
+
+	public static final int STATUS_INIT = 0; // 编辑中
+	public static final int STATUS_LOCK = 1; // 锁定
+	public static final int STATUS_PUBLISH = 1 << 1; // 发布
+
 }

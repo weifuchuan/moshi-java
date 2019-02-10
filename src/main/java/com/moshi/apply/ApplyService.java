@@ -5,27 +5,25 @@ import com.jfinal.plugin.activerecord.SqlPara;
 import com.moshi.common.model.Application;
 
 import java.util.Date;
+import java.util.List;
 
 public class ApplyService {
   public static final ApplyService me = new ApplyService();
 
   private static final Application dao = Application.dao;
 
-  public Application findByAccountId(int id) {
-    return dao.findFirst(dao.getSqlPara("application.findByAccountId", id));
-  }
-
-  public Ret commit(int accountId, int id, String title, String content) {
+  public Ret commit(int accountId, int id, String title, String content, int category, int refId) {
     if (id == 0) {
       Application application = new Application();
       application.setAccountId(accountId);
-      application.setCategory(0);
+      application.setCategory(category);
       application.setCreateAt(new Date().getTime());
       application.setTitle(title);
       application.setContent(content);
       application.setStatus(Application.STATUS_COMMIT);
+      application.setRefId(refId);
       if (application.save()) {
-        return Ret.ok();
+        return Ret.ok("application", application);
       } else {
         return Ret.fail("msg", "申请提交失败");
       }
@@ -63,5 +61,12 @@ public class ApplyService {
     } else {
       return Ret.fail("msg", "申请不存在");
     }
+  }
+
+  public List<Application> findMy(int accountId, int category) {
+    List<Application> list =
+        dao.find(
+            "select * from application where accountId = ? and category = ?", accountId, category);
+    return list;
   }
 }

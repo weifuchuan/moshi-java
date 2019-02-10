@@ -13,7 +13,7 @@ import com.moshi.login.LoginService;
  * 界面上的权限控制功能
  * 用来控制界面上的菜单、按钮等等元素的显示
  *
- * 使用示例见模板文件： /_view/_admin/common/_menu.html 或者 /_view/_admin/permission/index.html
+ * 使用示例见模板文件： /_view/_admin/common/_menu.html 或者 /_view/_admin/permission/explore.html
  * #role("权限管理员", "CEO", "CTO")
  * 	...
  * #end
