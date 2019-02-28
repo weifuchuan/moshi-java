@@ -48,19 +48,21 @@ Table: application
 -------------+-------------+------+-----+---------+---------
 
 Table: article
--------------+-------------+------+-----+---------+---------
- Field       | Type        | Null | Key | Default | Remarks 
--------------+-------------+------+-----+---------+---------
- id          | INT(10)     | NO   | PRI |         |         
- courseId    | INT(10)     | NO   |     |         |         
- title       | TEXT(65535) | NO   |     |         |         
- content     | TEXT(65535) | NO   |     |         |         
- publishAt   | BIGINT(19)  | YES  |     |         |         
- createAt    | BIGINT(19)  | NO   |     |         |         
- status      | INT(10)     | NO   |     | 0       |         
- audioId     | INT(10)     | NO   |     | 0       |         
- contentType | VARCHAR(50) | NO   |     | html    |         
--------------+-------------+------+-----+---------+---------
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         |         
+ courseId    | INT(10)      | NO   |     |         |         
+ title       | TEXT(65535)  | NO   |     |         |         
+ content     | TEXT(65535)  | NO   |     |         |         
+ publishAt   | BIGINT(19)   | YES  |     |         |         
+ createAt    | BIGINT(19)   | NO   |     |         |         
+ status      | INT(10)      | NO   |     | 0       |         
+ audioId     | INT(10)      | NO   |     | 0       |         
+ contentType | VARCHAR(50)  | NO   |     | html    |         
+ summary     | VARCHAR(200) | NO   |     |         |         
+ coverImage  | VARCHAR(200) | YES  |     |         |         
+-------------+--------------+------+-----+---------+---------
 
 Table: article_comment
 -----------+-------------+------+-----+---------+---------
@@ -98,26 +100,42 @@ Table: auth_code
  type      | INT(10)     | NO   |     |         |         
 -----------+-------------+------+-----+---------+---------
 
+Table: coupon
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | VARCHAR(50) | NO   | PRI |         | id      
+ value     | DOUBLE(22)  | NO   |     |         | 价值      
+ valueType | INT(10)     | NO   |     | 0       | 折扣或金额券  
+ accountId | INT(10)     | NO   |     |         | 所属人     
+ refId     | INT(10)     | YES  |     |         | 可用于实体，null则通用
+ refType   | INT(10)     | NO   |     | 0       | 可用于的实体的类型，course、通用
+ createAt  | BIGINT(19)  | NO   |     |         | 创建时间    
+ offerTo   | BIGINT(19)  | NO   |     |         | 过期时间    
+ status    | INT(10)     | NO   |     | 0       | 状态      
+-----------+-------------+------+-----+---------+---------
+
 Table: course
------------------+-------------+------+-----+---------+---------
- Field           | Type        | Null | Key | Default | Remarks 
------------------+-------------+------+-----+---------+---------
- id              | INT(10)     | NO   | PRI |         |         
- accountId       | INT(10)     | NO   |     |         | 作者id    
- name            | VARCHAR(64) | NO   |     |         | 专栏名     
- introduce       | TEXT(65535) | NO   |     |         | 专栏简介    
- introduceImage  | TEXT(65535) | YES  |     |         |         
- note            | TEXT(65535) | YES  |     |         | 订阅须知    
- createAt        | BIGINT(19)  | NO   |     |         | 创建时间    
- publishAt       | BIGINT(19)  | YES  |     |         | 发布时间    
- buyerCount      | INT(10)     | NO   |     | 0       | 购买人数    
- courseType      | INT(10)     | NO   |     |         | 课程类型（1：专栏；2：视频）
- price           | DOUBLE(22)  | YES  |     |         | 标准价格    
- discountedPrice | DOUBLE(22)  | YES  |     |         | 优惠价格    
- offerTo         | BIGINT(19)  | YES  |     |         | 优惠到某时间  
- status          | INT(10)     | NO   |     | 0       |         
- lectureCount    | INT(10)     | NO   |     | 0       |         
------------------+-------------+------+-----+---------+---------
+-----------------+--------------+------+-----+---------+---------
+ Field           | Type         | Null | Key | Default | Remarks 
+-----------------+--------------+------+-----+---------+---------
+ id              | INT(10)      | NO   | PRI |         |         
+ accountId       | INT(10)      | NO   |     |         | 作者id    
+ name            | VARCHAR(64)  | NO   |     |         | 专栏名     
+ introduce       | TEXT(65535)  | NO   |     |         | 专栏简介    
+ shortIntro      | VARCHAR(100) | NO   |     |         |         
+ introduceImage  | TEXT(65535)  | YES  |     |         |         
+ note            | TEXT(65535)  | YES  |     |         | 订阅须知    
+ createAt        | BIGINT(19)   | NO   |     |         | 创建时间    
+ publishAt       | BIGINT(19)   | YES  |     |         | 发布时间    
+ buyerCount      | INT(10)      | NO   |     | 0       | 购买人数    
+ courseType      | INT(10)      | NO   |     |         | 课程类型（1：专栏；2：视频）
+ price           | DOUBLE(22)   | YES  |     |         | 标准价格    
+ discountedPrice | DOUBLE(22)   | YES  |     |         | 优惠价格    
+ offerTo         | BIGINT(19)   | YES  |     |         | 优惠到某时间  
+ status          | INT(10)      | NO   |     | 0       |         
+ lectureCount    | INT(10)      | NO   |     | 0       |         
+-----------------+--------------+------+-----+---------+---------
 
 Table: issue
 -----------+-------------+------+-----+---------+---------
@@ -260,13 +278,14 @@ Table: subscription
 ---------------+--------------+------+-----+---------+---------
  Field         | Type         | Null | Key | Default | Remarks 
 ---------------+--------------+------+-----+---------+---------
- id            | INT(10)      | NO   | PRI |         |         
+ id            | VARCHAR(50)  | NO   | PRI |         |         
  accountId     | INT(10)      | NO   |     |         |         
  refId         | INT(10)      | NO   |     |         |         
  subscribeType | VARCHAR(100) | NO   |     | course  |         
  createAt      | BIGINT(19)   | NO   |     |         |         
  cost          | DOUBLE(22)   | NO   |     |         |         
  status        | INT(10)      | NO   |     | 0       |         
+ payWay        | INT(10)      | NO   |     | 0       |         
 ---------------+--------------+------+-----+---------+---------
 
 Table: video

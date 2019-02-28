@@ -132,7 +132,7 @@ public class SqlSrvTeacherInterceptor implements Interceptor {
     config2.setConditionOpBitwseAllow(true);
     config2.setConstArithmeticAllow(true);
     config2.setMustParameterized(true);
-    config2.setSelectLimit(Integer.parseInt(Jboot.configValue("sqlService.selectLimit").trim()));
+//    config2.setSelectLimit(Integer.parseInt(Jboot.configValue("sqlService.selectLimit").trim()));
 
     return config2;
   }

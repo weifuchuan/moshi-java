@@ -81,4 +81,20 @@ public abstract class BaseArticle<M extends BaseArticle<M>> extends JbootModel<M
 		return getStr("contentType");
 	}
 
+	public void setSummary(java.lang.String summary) {
+		set("summary", summary);
+	}
+	
+	public java.lang.String getSummary() {
+		return getStr("summary");
+	}
+
+	public void setCoverImage(java.lang.String coverImage) {
+		set("coverImage", coverImage);
+	}
+	
+	public java.lang.String getCoverImage() {
+		return getStr("coverImage");
+	}
+
 }

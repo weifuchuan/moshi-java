@@ -40,10 +40,6 @@ public class AccountAdminService {
 
   /** 注意要验证 nickName 与 userName 是否存在 */
   public Ret update(Account account) {
-    //    Account account1 = Account.dao.findById(account.getId());
-    //    if (account1 == null) {
-    //      return Ret.fail("msg", "用户不存在");
-    //    }
     Kv items =
         Kv.by("nickName", account.getNickName())
             .set("age", account.getAge())

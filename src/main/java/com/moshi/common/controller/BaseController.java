@@ -8,27 +8,20 @@ import io.jboot.web.controller.JbootController;
 /**
  * 基础控制器，方便获取登录信息
  *
- * 警告：由于 BaseController 中声明了 Account loginAccount 属性，
- *      所以不能使用 FastControllerFactory 这类回收 Controller 的用法
- *      在 jfinal 3.5 发布以后，可以通过继承 _clear_() 方法来清除属性中的值
- *      才能使用 FastControllerFactory
- *      用户自己的 Controller 也是同样的道理
+ * <p>警告：由于 BaseController 中声明了 Account loginAccount 属性， 所以不能使用 FastControllerFactory 这类回收
+ * Controller 的用法 在 jfinal 3.5 发布以后，可以通过继承 _clear_() 方法来清除属性中的值 才能使用 FastControllerFactory 用户自己的
+ * Controller 也是同样的道理
  *
- * 注意：
- * 需要 LoginSessionInterceptor 配合，该拦截器使用
- * setAttr("loginAccount", ...) 事先注入了登录账户
+ * <p>注意： 需要 LoginSessionInterceptor 配合，该拦截器使用 setAttr("loginAccount", ...) 事先注入了登录账户
  * 否则即便已经登录，该控制器也会认为没有登录
- *
  */
 public class BaseController extends JbootController {
 
   /**
-   * 警告：由于这个属性的存在，不能直接使用 FastControllerFactory，除非使用 jfinal 3.5
-   *      并覆盖父类中的 _clear_() 方法清除本类中与父类中的属性值，详情见本类中的
-   *      protected void _clear_() 方法
+   * 警告：由于这个属性的存在，不能直接使用 FastControllerFactory，除非使用 jfinal 3.5 并覆盖父类中的 _clear_()
+   * 方法清除本类中与父类中的属性值，详情见本类中的 protected void _clear_() 方法
    *
-   *      原因是 FastControllerFactory 是回收使用 controller 对象的，所以要在 _clear()_
-   *      中清除上次使用时的属性值
+   * <p>原因是 FastControllerFactory 是回收使用 controller 对象的，所以要在 _clear()_ 中清除上次使用时的属性值
    */
   private Account loginAccount = null;
 
@@ -58,13 +51,10 @@ public class BaseController extends JbootController {
     return !isLogin();
   }
 
-  /**
-   * 获取登录账户id
-   * 确保在 FrontAuthInterceptor 之下使用，或者 isLogin() 为 true 时使用
-   * 也即确定已经是在登录后才可调用
-   */
+  /** 获取登录账户id notLogin -> null */
   @NotAction
-  public int getLoginAccountId() {
+  public Integer getLoginAccountId() {
+    if (notLogin()) return null;
     return getLoginAccount().getId();
   }
 
@@ -78,5 +68,3 @@ public class BaseController extends JbootController {
     return "XMLHttpRequest".equalsIgnoreCase(getHeader("X-Requested-With"));
   }
 }
-
-

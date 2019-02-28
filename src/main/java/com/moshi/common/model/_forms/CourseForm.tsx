@@ -63,6 +63,12 @@ class CourseForm extends React.Component<FormComponentProps & {
           })(<Input />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="">
+          {getFieldDecorator("shortIntro", {
+            initialValue: course.shortIntro,
+            rules: []
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="">
           {getFieldDecorator("introduceImage", {
             initialValue: course.introduceImage,
             rules: []

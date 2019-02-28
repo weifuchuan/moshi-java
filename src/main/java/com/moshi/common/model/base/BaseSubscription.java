@@ -9,12 +9,12 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 public abstract class BaseSubscription<M extends BaseSubscription<M>> extends JbootModel<M> implements IBean {
 
-	public void setId(java.lang.Integer id) {
+	public void setId(java.lang.String id) {
 		set("id", id);
 	}
 	
-	public java.lang.Integer getId() {
-		return getInt("id");
+	public java.lang.String getId() {
+		return getStr("id");
 	}
 
 	public void setAccountId(java.lang.Integer accountId) {
@@ -63,6 +63,14 @@ public abstract class BaseSubscription<M extends BaseSubscription<M>> extends Jb
 	
 	public java.lang.Integer getStatus() {
 		return getInt("status");
+	}
+
+	public void setPayWay(java.lang.Integer payWay) {
+		set("payWay", payWay);
+	}
+	
+	public java.lang.Integer getPayWay() {
+		return getInt("payWay");
 	}
 
 }

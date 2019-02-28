@@ -92,6 +92,18 @@ class ArticleForm extends React.Component<FormComponentProps & {
             rules: []
           })(<Input />)}
         </Form.Item>
+        <Form.Item {...formItemLayout} label="">
+          {getFieldDecorator("summary", {
+            initialValue: article.summary,
+            rules: []
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="">
+          {getFieldDecorator("coverImage", {
+            initialValue: article.coverImage,
+            rules: []
+          })(<Input />)}
+        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             确定

@@ -4,6 +4,7 @@ import com.jfinal.kit.Ret;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.Application;
 import com.moshi.common.model.Course;
+import com.moshi.login.LoginService;
 
 public class ApplyAdminService {
 
@@ -18,6 +19,7 @@ public class ApplyAdminService {
         Account account = Account.dao.findById(application.getRefId());
         account.toTeacher();
         account.update();
+        LoginService.me.reloadLoginAccount(account);
       } else if (application.getCategory() == Application.CATEGORY_COURSE_COLUMN) {
         Course course = Course.dao.findById(application.getRefId());
         course.toPassed();

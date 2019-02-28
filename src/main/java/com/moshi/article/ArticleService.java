@@ -27,13 +27,14 @@ public class ArticleService {
     return Ret.ok("article", article).set("comments", comments);
   }
 
-  public Ret create(String title, String content, int courseId, int audioId) {
+  public Ret create(String title, String summary, String content, int courseId, Integer audioId) {
     Course first = Course.dao.findFirst("select id from course where id = ? ", courseId);
     if (first == null) {
       return Ret.fail("msg", "课程不存在");
     }
     Article article = new Article();
     article.setTitle(title);
+    article.setSummary(summary);
     article.setContent(content);
     article.setCourseId(courseId);
     article.setCreateAt(new Date().getTime());

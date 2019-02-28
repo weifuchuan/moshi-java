@@ -7,6 +7,7 @@
     "article_comment", 
     "audio", 
     "auth_code", 
+    "coupon", 
     "course", 
     "issue", 
     "issue_comment", 
@@ -31,6 +32,7 @@
     "article_comment_l", 
     "audio_l", 
     "auth_code_l", 
+    "coupon_l", 
     "course_l", 
     "issue_l", 
     "issue_comment_l", 
@@ -55,6 +57,7 @@
     "article_comment_t", 
     "audio_t", 
     "auth_code_t", 
+    "coupon_t", 
     "course_t", 
     "issue_t", 
     "issue_comment_t", 
@@ -79,6 +82,7 @@
     "article_comment_m", 
     "audio_m", 
     "auth_code_m", 
+    "coupon_m", 
     "course_m", 
     "issue_m", 
     "issue_comment_m", 
@@ -167,7 +171,9 @@ CREATE OR REPLACE VIEW `moshi`.`article_l`
             `createAt`, 
             `status`, 
             `audioId`, 
-            `contentType`
+            `contentType`, 
+            `summary`, 
+            `coverImage`
     from `moshi`.`article`
 );
 
@@ -214,6 +220,23 @@ CREATE OR REPLACE VIEW `moshi`.`auth_code_l`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`coupon_l`
+    AS
+(
+    SELECT
+            `id`, 
+            `value`, 
+            `valueType`, 
+            `accountId`, 
+            `refId`, 
+            `refType`, 
+            `createAt`, 
+            `offerTo`, 
+            `status`
+    from `moshi`.`coupon`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`course_l`
     AS
 (
@@ -222,6 +245,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_l`
             `accountId`, 
             `name`, 
             `introduce`, 
+            `shortIntro`, 
             `introduceImage`, 
             `note`, 
             `createAt`, 
@@ -408,7 +432,8 @@ CREATE OR REPLACE VIEW `moshi`.`subscription_l`
             `subscribeType`, 
             `createAt`, 
             `cost`, 
-            `status`
+            `status`, 
+            `payWay`
     from `moshi`.`subscription`
 );
 
@@ -497,7 +522,9 @@ CREATE OR REPLACE VIEW `moshi`.`article_t`
             `createAt`, 
             `status`, 
             `audioId`, 
-            `contentType`
+            `contentType`, 
+            `summary`, 
+            `coverImage`
     from `moshi`.`article`
 );
 
@@ -544,6 +571,23 @@ CREATE OR REPLACE VIEW `moshi`.`auth_code_t`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`coupon_t`
+    AS
+(
+    SELECT
+            `id`, 
+            `value`, 
+            `valueType`, 
+            `accountId`, 
+            `refId`, 
+            `refType`, 
+            `createAt`, 
+            `offerTo`, 
+            `status`
+    from `moshi`.`coupon`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`course_t`
     AS
 (
@@ -552,6 +596,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_t`
             `accountId`, 
             `name`, 
             `introduce`, 
+            `shortIntro`, 
             `introduceImage`, 
             `note`, 
             `createAt`, 
@@ -738,7 +783,8 @@ CREATE OR REPLACE VIEW `moshi`.`subscription_t`
             `subscribeType`, 
             `createAt`, 
             `cost`, 
-            `status`
+            `status`, 
+            `payWay`
     from `moshi`.`subscription`
 );
 
@@ -827,7 +873,9 @@ CREATE OR REPLACE VIEW `moshi`.`article_m`
             `createAt`, 
             `status`, 
             `audioId`, 
-            `contentType`
+            `contentType`, 
+            `summary`, 
+            `coverImage`
     from `moshi`.`article`
 );
 
@@ -874,6 +922,23 @@ CREATE OR REPLACE VIEW `moshi`.`auth_code_m`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`coupon_m`
+    AS
+(
+    SELECT
+            `id`, 
+            `value`, 
+            `valueType`, 
+            `accountId`, 
+            `refId`, 
+            `refType`, 
+            `createAt`, 
+            `offerTo`, 
+            `status`
+    from `moshi`.`coupon`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`course_m`
     AS
 (
@@ -882,6 +947,7 @@ CREATE OR REPLACE VIEW `moshi`.`course_m`
             `accountId`, 
             `name`, 
             `introduce`, 
+            `shortIntro`, 
             `introduceImage`, 
             `note`, 
             `createAt`, 
@@ -1068,7 +1134,8 @@ CREATE OR REPLACE VIEW `moshi`.`subscription_m`
             `subscribeType`, 
             `createAt`, 
             `cost`, 
-            `status`
+            `status`, 
+            `payWay`
     from `moshi`.`subscription`
 );
 

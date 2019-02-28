@@ -9,11 +9,7 @@ public class CourseAdminService {
   public Ret lock(Integer id) {
     Course course = dao.findById(id);
     course.toLock();
-    if (course.update()) {
-      return Ret.ok();
-    } else {
-      return Ret.fail("msg", "更新失败");
-    }
+    return Ret.ok();
   }
 
   public Ret unlock(Integer id) {

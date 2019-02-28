@@ -5,10 +5,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/../../jfinal-club/pom.xml" />
         <option value="$PROJECT_DIR$/../jboot/pom.xml" />
-        <option value="$PROJECT_DIR$/../../graphql-java-db-example/pom.xml" />
         <option value="$PROJECT_DIR$/../../netty/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jfinal/pom.xml" />
+        <option value="$PROJECT_DIR$/../../netty-socketio-demo/server/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jfinal-club-1.9/jfinal-club/pom.xml" />
       </list>
     </option>
   </component>

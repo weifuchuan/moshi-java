@@ -14,5 +14,6 @@ public class Paragraph extends BaseParagraph<Paragraph> {
 	public static final int STATUS_INIT = 0; // 编辑中
 	public static final int STATUS_LOCK = 1; // 锁定
 	public static final int STATUS_PUBLISH = 1 << 1; // 发布
+	public static final int STATUS_OPEN = 1 << 2; // 试读
 
 }

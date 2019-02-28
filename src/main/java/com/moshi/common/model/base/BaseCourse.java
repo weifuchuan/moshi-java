@@ -41,6 +41,14 @@ public abstract class BaseCourse<M extends BaseCourse<M>> extends JbootModel<M> 
 		return getStr("introduce");
 	}
 
+	public void setShortIntro(java.lang.String shortIntro) {
+		set("shortIntro", shortIntro);
+	}
+	
+	public java.lang.String getShortIntro() {
+		return getStr("shortIntro");
+	}
+
 	public void setIntroduceImage(java.lang.String introduceImage) {
 		set("introduceImage", introduceImage);
 	}

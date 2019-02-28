@@ -24,6 +24,7 @@ public class _MappingKit {
 		arp.addMapping("article_comment", "id", ArticleComment.class);
 		arp.addMapping("audio", "id", Audio.class);
 		arp.addMapping("auth_code", "id", AuthCode.class);
+		arp.addMapping("coupon", "id", Coupon.class);
 		arp.addMapping("course", "id", Course.class);
 		arp.addMapping("issue", "id", Issue.class);
 		arp.addMapping("issue_comment", "id", IssueComment.class);

@@ -1,5 +1,6 @@
 package com.moshi.index;
 
+import io.jboot.Jboot;
 import io.jboot.web.controller.JbootController;
 import io.jboot.web.controller.annotation.RequestMapping;
 
@@ -12,5 +13,6 @@ public class IndexController extends JbootController {
   public void teacher() {
     render("teacher.html");    
   }
+
 
 }

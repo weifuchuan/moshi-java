@@ -80,6 +80,12 @@ class SubscriptionForm extends React.Component<FormComponentProps & {
             rules: []
           })(<Input />)}
         </Form.Item>
+        <Form.Item {...formItemLayout} label="">
+          {getFieldDecorator("payWay", {
+            initialValue: subscription.payWay,
+            rules: []
+          })(<Input />)}
+        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             确定

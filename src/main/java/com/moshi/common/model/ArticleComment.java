@@ -13,28 +13,30 @@ public class ArticleComment extends BaseArticleComment<ArticleComment> {
   public static final int STATUS_ORDINARY = 0;
   public static final int STATUS_TOP = 1;
 
-  public int getLikeCount() {
+  public long getLikeCount() {
     JbootRedis redis = Jboot.getRedis();
-    Integer cnt = redis.get(String.format("article:comment:like:%d", getId()));
+    Long cnt = redis.scard(String.format("like:article_comment:%d", getId()));
     return cnt == null ? 0 : cnt;
+  }
+
+  public boolean liked(int accountId) {
+    return Jboot.getRedis().sismember(String.format("like:article_comment:%d", getId()), accountId);
   }
 
   public boolean like(int accountId) {
     JbootRedis redis = Jboot.getRedis();
-    boolean has = redis.sismember(String.format("article:comment:liker:%d", getId()), accountId);
+    boolean has = redis.sismember(String.format("like:article_comment:%d", getId()), accountId);
     if (!has) {
-      redis.incr(String.format("article:comment:like:%d", getId()));
-      redis.sadd(String.format("article:comment:liker:%d", getId()), accountId);
+      redis.sadd(String.format("like:article_comment:%d", getId()), accountId);
     }
     return !has;
   }
 
-  public boolean unlike(int accountId){
+  public boolean unlike(int accountId) {
     JbootRedis redis = Jboot.getRedis();
-    boolean has = redis.sismember(String.format("article:comment:liker:%d", getId()), accountId);
+    boolean has = redis.sismember(String.format("like:article_comment:%d", getId()), accountId);
     if (has) {
-      redis.decr(String.format("article:comment:like:%d", getId()));
-      redis.srem(String.format("article:comment:liker:%d", getId()), accountId);
+      redis.srem(String.format("like:article_comment:%d", getId()), accountId);
     }
     return has;
   }

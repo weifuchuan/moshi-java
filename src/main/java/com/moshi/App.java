@@ -13,32 +13,41 @@ import com.moshi._admin.common.AdminRoutes;
 import com.moshi.common.interceptor.LoginSessionInterceptor;
 
 import com.moshi.common.model._MappingKit;
+import com.moshi.common.plugin.LetturePlugin;
+import com.moshi.common.socketio.MoshiSocketIOServer;
 import com.moshi.srv.v1.SrvV1Routes;
+import io.jboot.Jboot;
 import io.jboot.aop.jfinal.JfinalPlugins;
 import io.jboot.app.JbootApplication;
 import io.jboot.core.listener.JbootAppListenerBase;
+import io.jboot.utils.ClassScanner;
+import io.lettuce.core.RedisURI;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class App extends JbootAppListenerBase {
+  private MoshiSocketIOServer server;
+
   public static void main(String[] args) {
     JbootApplication.run(args);
   }
 
   @Override
-  public void onJfinalConstantConfig(Constants me) {
+  public void onConstantConfig(Constants me) {
     me.setJsonFactory(MixedJsonFactory.me());
     me.setBaseUploadPath("static/media");
   }
 
   @Override
-  public void onJfinalRouteConfig(Routes routes) {
+  public void onRouteConfig(Routes routes) {
     routes.add(new AdminRoutes());
     routes.add(new SrvV1Routes());
   }
 
   @Override
-  public void onJfinalEngineConfig(Engine me) {}
+  public void onEngineConfig(Engine me) {}
 
   @Override
   public void onInterceptorConfig(Interceptors interceptors) {
@@ -46,7 +55,7 @@ public class App extends JbootAppListenerBase {
   }
 
   @Override
-  public void onJfinalPluginConfig(JfinalPlugins plugins) {
+  public void onPluginConfig(JfinalPlugins plugins) {
     Plugins plugins1 = (Plugins) ReflectUtil.getFieldValue(plugins, "plugins");
     plugins1
         .getPluginList()
@@ -59,5 +68,18 @@ public class App extends JbootAppListenerBase {
                 _MappingKit.mapping(arp);
               }
             });
+    RedisURI uri = Jboot.config(RedisURI.class, "letture");
+    plugins.add(new LetturePlugin(uri));
+  }
+
+  @Override
+  public void onStart() {
+    server = new MoshiSocketIOServer();
+    server.start();
+  }
+
+  @Override
+  public void onStop() {
+    server.stop();
   }
 }

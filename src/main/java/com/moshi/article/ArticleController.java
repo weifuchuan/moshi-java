@@ -22,7 +22,11 @@ public class ArticleController extends BaseController {
   public void create() {
     Ret ret =
         srv.create(
-            getPara("title"), getPara("content"), getParaToInt("courseId"), getParaToInt("audioId"));
+            getPara("title"),
+            getPara("summary"),
+            getPara("content"),
+            getParaToInt("courseId"),
+            getParaToInt("audioId"));
     renderJson(ret);
   }
 
@@ -31,6 +35,8 @@ public class ArticleController extends BaseController {
     Kv items = Kv.create();
     String title = getPara("title");
     if (title != null) items.set("title", title);
+    String summary = getPara("summary");
+    if (summary != null) items.set("summary", summary);
     String content = getPara("content");
     if (content != null) items.set("content", content);
     Integer audioId = getParaToInt("audioId");

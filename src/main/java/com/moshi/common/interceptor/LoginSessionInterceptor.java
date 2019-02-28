@@ -14,8 +14,6 @@ import com.moshi.login.LoginService;
  */
 public class LoginSessionInterceptor implements Interceptor {
 
-  public static final String remindKey = "_remind";
-
   public void intercept(Invocation inv) {
     Account loginAccount = null;
     Controller c = inv.getController();

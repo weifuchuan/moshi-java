@@ -3,9 +3,11 @@ package com.moshi._admin.common;
 import com.jfinal.config.Routes;
 import com.moshi._admin.account.AccountAdminController;
 import com.moshi._admin.apply.ApplyAdminController;
+import com.moshi._admin.article.ArticleAdminController;
 import com.moshi._admin.auth.AdminAuthInterceptor;
 import com.moshi._admin.course.CourseAdminController;
 import com.moshi._admin.index.IndexController;
+import com.moshi._admin.news.NewsAdminController;
 import com.moshi._admin.permission.PermissionAdminController;
 import com.moshi._admin.preset_text.PresetTextAdminController;
 import com.moshi._admin.role.RoleAdminController;
@@ -25,5 +27,7 @@ public class AdminRoutes extends Routes {
     add("/admin/course", CourseAdminController.class);
     add("/admin/preset-text", PresetTextAdminController.class);
     add("/admin/subscription", SubscriptionController.class);
+    add("/admin/article", ArticleAdminController.class);
+    add("/admin/news", NewsAdminController.class);
   }
 }

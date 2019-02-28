@@ -1,5 +1,6 @@
 package com.moshi.common.model;
 
+import com.jfinal.kit.Kv;
 import com.moshi.common.safe.JsoupFilter;
 import io.jboot.db.annotation.Table;
 
@@ -140,5 +141,9 @@ public class Account extends BaseAccount<Account> {
     setPassword(null);
     setIdentityNumber(null);
     setRealName(null);
+  }
+
+  public Kv necessary() {
+    return Kv.by("id", getId()).set("nickName", getNickName()).set("avatar", getAvatar());
   }
 }
