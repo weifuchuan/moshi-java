@@ -16,10 +16,16 @@ import io.reactivex.subjects.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ImServerEndPoint implements SocketIOServerEndPoint<Action> {
+  static final ConcurrentMap<UUID, SessionState> onlineClients = new ConcurrentHashMap<>();
+
   @Override
   public String getNamespace() {
     return "/srv/v1/im";
@@ -44,11 +50,19 @@ public class ImServerEndPoint implements SocketIOServerEndPoint<Action> {
 
   @Override
   public List<ConnectListener> getConnectListeners() {
-    return Stream.<ConnectListener>of(client -> {}).collect(Collectors.toList());
+    return Stream.<ConnectListener>of(
+            client -> {
+              onlineClients.put(client.getSessionId(), new SessionState());
+            })
+        .collect(Collectors.toList());
   }
 
   @Override
   public List<DisconnectListener> getDisconnectListener() {
-    return Stream.<DisconnectListener>of(client -> {}).collect(Collectors.toList());
+    return Stream.<DisconnectListener>of(
+            client -> {
+              onlineClients.remove(client.getSessionId());
+            })
+        .collect(Collectors.toList());
   }
 }

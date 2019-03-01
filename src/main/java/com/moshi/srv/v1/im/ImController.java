@@ -9,10 +9,12 @@ import com.moshi.common.plugin.Letture;
 import io.jboot.Jboot;
 import io.lettuce.core.SetArgs;
 
+import java.util.Date;
+
 public class ImController extends BaseController {
   @Before(UnlockInterceptor.class)
   public void index() {
-    String key = HashKit.generateSalt(16);
+    String key = HashKit.sha256(new Date().getTime() + "" + Math.random()).substring(0,12);
     Letture.sync().set(key, getLoginAccount(), SetArgs.Builder.ex(60 * 5));
     renderJson(
         Ret.ok("key", key)
