@@ -41,7 +41,7 @@ public class LoginService {
     account.removeSensitiveInfo();
 
     // 暂定过期时间为 3 年
-    long liveSeconds = 3 * 365 * 24 * 60 * 60;
+    long liveSeconds  = 3 * 365 * 24 * 60 * 60;
     // 传递给控制层的 cookie
     int maxAgeInSeconds = (int) (liveSeconds);
     // expireAt 用于设置 session 的过期时间点，需要转换成毫秒

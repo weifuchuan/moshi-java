@@ -1,8 +1,10 @@
 package com.moshi.common.plugin;
 
+import com.jfinal.kit.Kv;
 import io.jboot.components.serializer.FstSerializer;
 import io.jboot.components.serializer.JbootSerializer;
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisFuture;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -11,6 +13,8 @@ import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Letture {
   static RedisClient client;
@@ -73,5 +77,16 @@ public class Letture {
 
   public static StatefulRedisPubSubConnection<String, Object> subConn() {
     return subClient.connectPubSub(codec);
+  }
+
+  public static List<RedisFuture<Boolean>> setHash(
+      RedisAsyncCommands<String, Object> async, String key, Kv data) {
+    List<RedisFuture<Boolean>> futures = new ArrayList<>();
+    data.forEach(
+        (k, v) -> {
+          RedisFuture<Boolean> future = async.hset(key, String.valueOf(k), v);
+          futures.add(future);
+        });
+    return futures;
   }
 }

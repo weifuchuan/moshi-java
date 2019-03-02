@@ -39,6 +39,7 @@ public class ImListener implements DataListener<Action> {
     SessionState state = ImServerEndPoint.onlineClients.get(client.getSessionId());
     RedisAsyncCommands<String, Object> async = state.getAsync();
     RedisCommands<String, Object> sync = state.getSync();
+    // 验证登录
     if (data.getType().equals("verify")) {
       // payload: { key: [key string] }
       if (!verify(client, data, ackSender, async, sync)) return;
@@ -48,12 +49,28 @@ public class ImListener implements DataListener<Action> {
       client.disconnect();
       return;
     }
+    // 发送给单个用户
     if (data.getType().equals("sendToOne")) {
       // payload: { to: [other side id], message: [message string] }
       sendToOne(client, data);
     }
-    if (data.getType().equals("send")) {
+    // 发送到群聊
+    if (data.getType().equals("sendToGroup")) {
       // TODO
+    }
+    // 加群
+    if(data.getType().equals("joinGroup")){
+      // TODO
+    }
+    // 退群
+    if(data.getType().equals("leaveGroup")){
+      // TODO
+    }
+    // 建群
+    if(data.getType().equals("createGroup")){
+      JSONObject payload = JSON.parseObject(data.getPayload());
+      String name = payload.getString("name");
+//      payload.getString()
     }
   }
 
@@ -84,6 +101,10 @@ public class ImListener implements DataListener<Action> {
           roomKeys.stream()
               .map(roomKey -> async.lindex(K.mq((String) roomKey), 0))
               .collect(Collectors.toList());
+      List<RedisFuture<Object>> offlineRemindCountFutures =
+          roomKeys.stream()
+              .map(k -> async.get(K.offlineRemindCount(k)))
+              .collect(Collectors.toList());
       async.exec().get();
       List<Map<String, Object>> roomInfos =
           roomInfoFutures.stream()
@@ -110,8 +131,25 @@ public class ImListener implements DataListener<Action> {
                     return Kv.create();
                   })
               .collect(Collectors.toList());
+      List<Integer> offlineRemindCounts =
+          offlineRemindCountFutures.stream()
+              .map(
+                  future -> {
+                    try {
+                      Object count = future.get();
+                      if (count == null) return 0;
+                      return (Integer) count;
+                    } catch (InterruptedException | ExecutionException e) {
+                      e.printStackTrace();
+                    }
+                    return 0;
+                  })
+              .collect(Collectors.toList());
       ackSender.sendAckData(
-          Ret.ok("roomKeys", roomKeys).set("roomInfos", roomInfos).set("lastMsgs", lastMsgs));
+          Ret.ok("roomKeys", roomKeys)
+              .set("roomInfos", roomInfos)
+              .set("lastMsgs", lastMsgs)
+              .set("offlineRemindCounts", offlineRemindCounts));
       subscribeRemind(client, roomKeys);
       StatefulRedisPubSubConnection<String, Object> subConn = state.getSubConn();
       subConn.addListener(
@@ -120,6 +158,7 @@ public class ImListener implements DataListener<Action> {
                 client.sendEvent("remind", remind);
               }));
       idToSessionId.put(me.getId(), client.getSessionId());
+
       return true;
     }
   }
@@ -169,6 +208,7 @@ public class ImListener implements DataListener<Action> {
     SessionState state = ImServerEndPoint.onlineClients.get(client.getSessionId());
     Account me = state.getMe();
     RedisAsyncCommands<String, Object> async = state.getAsync();
+    RedisCommands<String, Object> sync = state.getSync();
     StatefulRedisPubSubConnection<String, Object> pubConn = state.getPubConn();
     JSONObject payload = JSON.parseObject(data.getPayload());
     int to = payload.getIntValue("to");
@@ -183,6 +223,10 @@ public class ImListener implements DataListener<Action> {
     async.lpush(K.mq(roomKey), msg);
     async.sadd(K.joinedRoomKeys(me.getId()), roomKey);
     async.sadd(K.joinedRoomKeys(to), roomKey);
+    if (!sync.hexists(K.roomInfo(roomKey), "type")) {
+      async.sadd(K.members(roomKey), to, me.getId());
+      Letture.setHash(async, K.roomInfo(roomKey), D.oneByOneRoomInfo(K.members(roomKey)));
+    }
     async.exec().get();
     // 在线
     if (isOnline(to)) {
@@ -198,7 +242,8 @@ public class ImListener implements DataListener<Action> {
       // 离线
       System.out.printf("\t%d is offline\n", to);
 
-      async.lpush(K.offlineReminds(roomKey), msg);
+      // async.lpush(K.offlineReminds(roomKey), msg);
+      async.incr(K.offlineRemindCount(roomKey));
     }
   }
 

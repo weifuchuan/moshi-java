@@ -15,4 +15,21 @@ public class D {
         .set("sendAt", sendAt)
         .set("sender", sender);
   }
+
+  public static Kv roomInfo(
+      String type, // groupChat | oneByOne
+      Kv info // necessary info
+      ) {
+    return Kv.by("type", type).set(info);
+  }
+
+  public static Kv groupChatRoomInfo(String name, String avatar, int master, String members) {
+    return roomInfo(
+        "groupChat",
+        Kv.by("name", name).set("avatar", avatar).set("members", members).set("master", master));
+  }
+
+  public static Kv oneByOneRoomInfo(String members) {
+    return roomInfo("oneByOne", Kv.create().set("members", members));
+  }
 }
