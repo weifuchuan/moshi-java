@@ -11,7 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: io.jboot:jboot:2.0-rc.11" level="project" />
+    <orderEntry type="library" name="Maven: io.jboot:jboot:2.0-rc.12" level="project" />
     <orderEntry type="library" name="Maven: com.jfinal:jfinal:3.6" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib-nodep:3.2.5" level="project" />
     <orderEntry type="library" name="Maven: com.jfinal:cos:2017.5" level="project" />

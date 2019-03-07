@@ -27,8 +27,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static java.awt.SystemColor.info;
-
 public class ImListener implements DataListener<Action> {
   private static final ConcurrentMap<Integer, UUID> idToSessionId = new ConcurrentHashMap<>();
   private static final ConcurrentMap<Integer, Account> accountCache =
@@ -68,6 +66,7 @@ public class ImListener implements DataListener<Action> {
     }
     // 建群
     if(data.getType().equals("createGroup")){
+      // TODO
       JSONObject payload = JSON.parseObject(data.getPayload());
       String name = payload.getString("name");
 //      payload.getString()

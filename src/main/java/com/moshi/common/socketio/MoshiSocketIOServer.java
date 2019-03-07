@@ -54,5 +54,11 @@ public class MoshiSocketIOServer {
 
   public void stop() {
     server.stop();
+    // sleep 5 seconds for real stop the server
+    try {
+      Thread.sleep(1000*5);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }
