@@ -9,6 +9,7 @@ import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.Ret;
+import com.moshi.common.plugin.Letture;
 import com.moshi.common.socketio.Action;
 import com.moshi.common.socketio.SocketIOServerEndPoint;
 import com.moshi.common.socketio.SocketIOServerEventListener;
@@ -49,7 +50,7 @@ public class SubscribeConfirmServerEndPoint implements SocketIOServerEndPoint {
                     JSONObject payload = JSON.parseObject(data.getPayload());
                     String key = payload.getString("key");
                     String id = payload.getString("id");
-                    String idByStore = Jboot.getRedis().get("subscribe:" + key);
+                    String idByStore = (String) Letture.sync().get("subscribe:" + key);
                     if (id.equals(idByStore)) {
                       client.sendEvent("verify", (Ret.ok()));
                     } else {

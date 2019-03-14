@@ -18,20 +18,6 @@ public class Remind implements Serializable {
   private Long createAt;
   private Integer status;
 
-  public Remind() {
-//    JbootRedis redis = Jboot.getRedis();
-//    lock.lock();
-//    Integer nextId = redis.get("remind:nextId");
-//    if (nextId == null) {
-//      nextId = 1;
-//      redis.set("remind:nextId", nextId);
-//    } else {
-//      nextId++;
-//      redis.incr("remind:nextId");
-//    }
-//    lock.unlock();
-//    id = nextId;
-  }
 
   public Integer getAccountId() {
     return accountId;

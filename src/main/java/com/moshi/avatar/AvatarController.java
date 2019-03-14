@@ -7,6 +7,7 @@ import com.jfinal.kit.Ret;
 import com.jfinal.upload.UploadFile;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.Audio;
+import com.moshi.common.plugin.Letture;
 import io.jboot.Jboot;
 import io.jboot.web.controller.annotation.RequestMapping;
 
@@ -17,7 +18,7 @@ import java.util.function.Function;
 @RequestMapping("/avatar")
 public class AvatarController extends BaseController {
   private static long getNextId() {
-    return Jboot.getRedis().incr("file:nextId");
+    return Letture.sync().incr("file:nextId");
   }
 
   public void upload() {

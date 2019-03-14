@@ -11,6 +11,7 @@ import com.moshi.common.model.Account;
 import com.moshi.common.model.Article;
 import com.moshi.common.model.ArticleComment;
 import com.moshi.common.model.Audio;
+import com.moshi.common.plugin.Letture;
 import com.moshi.srv.v1.statistics.StatisticsService;
 import com.moshi.subscription.SubscriptionService;
 import io.jboot.Jboot;
@@ -114,25 +115,21 @@ public class ArticleService {
   }
 
   public Ret like(int id, int accountId) {
-    JbootRedis redis = Jboot.getRedis();
-    redis.sadd("like:article:" + id, accountId);
+    Letture.async().sadd("like:article:" + id, accountId);
     return Ret.ok();
   }
 
   public boolean liked(int id, int accountId) {
-    JbootRedis redis = Jboot.getRedis();
-    return redis.sismember("like:article:" + id, accountId);
+    return Letture.sync().sismember("like:article:" + id, accountId);
   }
 
   public long likeCount(int id) {
-    JbootRedis redis = Jboot.getRedis();
-    Long scard = redis.scard("like:article:" + id);
+    Long scard = Letture.sync().scard("like:article:" + id);
     return scard == null ? 0 : scard;
   }
 
   public Ret unlike(int id, int accountId) {
-    JbootRedis redis = Jboot.getRedis();
-    redis.srem("like:article:" + id, accountId);
+    Letture.async().srem("like:article:" + id, accountId);
     return Ret.ok();
   }
 

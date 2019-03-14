@@ -15,6 +15,7 @@ import com.moshi.common.interceptor.UnlockInterceptor;
 import com.moshi.common.model.Coupon;
 import com.moshi.common.model.Course;
 import com.moshi.common.model.Subscription;
+import com.moshi.common.plugin.Letture;
 import com.moshi.srv.v1.coupon.CouponService;
 import com.moshi.srv.v1.course.CourseService;
 import io.jboot.Jboot;
@@ -112,7 +113,7 @@ public class SubscribeController extends BaseController {
     Subscription subscription = Subscription.dao.findById(id);
     if (subscription != null && subscription.getAccountId() == getLoginAccountId()) {
       String key = AesKit.genAesKey();
-      Jboot.getRedis().setex("subscribe:" + key, 60 * 60, id);
+      Letture.async().setex("subscribe:" + key, 60 * 60, id);
       renderJson(
           Kv.by("key", key)
               .set(

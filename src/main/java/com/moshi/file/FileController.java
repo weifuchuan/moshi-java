@@ -11,6 +11,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
+import com.moshi.common.plugin.Letture;
 import io.jboot.Jboot;
 import io.jboot.web.controller.annotation.RequestMapping;
 import org.yaml.snakeyaml.Yaml;
@@ -38,7 +39,7 @@ public class FileController extends BaseController {
   private static final Cloudinary cloudinary = new Cloudinary(FileController.configGetter.get());
 
   private static long getNextId() {
-    return Jboot.getRedis().incr("file:nextId");
+    return Letture.sync().incr("file:nextId");
   }
 
   @Clear
@@ -118,16 +119,4 @@ public class FileController extends BaseController {
     renderJson(kv);
   }
 
-  public static void main(String[] args) {
-    Long id = Jboot.getRedis().incr("file:nextId");
-    System.out.println(id);
-    id = Jboot.getRedis().incr("file:nextId");
-    System.out.println(id);
-    id = Jboot.getRedis().incr("file:nextId");
-    System.out.println(id);
-    id = Jboot.getRedis().incr("file:nextId");
-    System.out.println(id);
-    id = Jboot.getRedis().incr("file:nextId");
-    System.out.println(id);
-  }
 }

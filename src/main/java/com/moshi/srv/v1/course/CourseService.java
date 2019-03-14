@@ -9,15 +9,20 @@ import com.jfinal.plugin.activerecord.SqlPara;
 import com.moshi.common.model.Article;
 import com.moshi.common.model.Course;
 import com.moshi.common.model.Subscription;
+import com.moshi.common.plugin.Letture;
 import com.moshi.srv.v1.article.ArticleService;
 import com.moshi.srv.v1.statistics.StatisticsService;
 import com.moshi.subscription.SubscriptionService;
 import io.jboot.Jboot;
 import io.jboot.support.redis.JbootRedis;
+import io.lettuce.core.TransactionResult;
+import io.lettuce.core.api.async.RedisAsyncCommands;
+import io.lettuce.core.api.sync.RedisCommands;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,17 +38,24 @@ public class CourseService {
   private ArticleService articleService = new ArticleService();
   private StatisticsService statisticsService = new StatisticsService();
 
-  private JbootRedis redis = Jboot.getRedis();
-
-  public List<Record> hot(int maxCount, int courseType) {
+  public List<Record> hot(int maxCount, int courseType)
+      throws ExecutionException, InterruptedException {
+    RedisAsyncCommands<String, Object> async = Letture.async();
     SqlPara sqlPara = Db.getSqlPara("course.allSimpleByType", courseType);
     List<Record> list =
         Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara());
+    async.multi();
+    list.forEach(
+        item -> {
+          async.zscore("visit:course", item.getInt("id"));
+        });
+    TransactionResult result = async.exec().get();
+    int i = 0;
     for (Record item : list) {
-      int id = item.getInt("id");
-      Double score = redis.zscore("visit:course", id);
+      Double score = result.get(i);
       score = score == null ? 0 : score;
       item.set("score", score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount"));
+      i++;
     }
     list.sort(
         (a, b) -> {
@@ -61,7 +73,8 @@ public class CourseService {
     return list.subList(0, maxCount);
   }
 
-  public List<Record> hot(int maxCount, int courseType, Integer accountId) {
+  public List<Record> hot(int maxCount, int courseType, Integer accountId)
+      throws ExecutionException, InterruptedException {
     if (accountId == null) return hot(maxCount, courseType);
     List<Subscription> subscriptionList = subsSrv.findByAccountId(accountId);
     SqlPara sqlPara = Db.getSqlPara("course.allSimpleByType", courseType);
@@ -75,17 +88,26 @@ public class CourseService {
                         && s.getStatus() == Subscription.STATUS_SUCCESS)
             .map(Subscription::getRefId)
             .collect(Collectors.toSet());
+    RedisAsyncCommands<String, Object> async = Letture.async();
+    async.multi();
+    list.forEach(
+      item -> {
+        async.zscore("visit:course", item.getInt("id"));
+      });
+    TransactionResult result = async.exec().get();
+    int i=0;
     for (Record item : list) {
       int id = item.getInt("id");
-      Double score = redis.zscore("visit:course", id);
+      Double score = result.get(i);
       score = score == null ? 0 : score;
-      if (subscribed.contains(item.getInt("id"))) {
+      if (subscribed.contains(id)) {
         item.set(
             "score", -(score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount")));
       } else
         item.set(
             "score", score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount"));
       item.set("subscribed", subscribed.contains(item.getInt("id")));
+      i++;
     }
     list.sort(
         (a, b) -> {
@@ -262,7 +284,8 @@ public class CourseService {
                 course.set("subscribed", true);
                 if (courseIdToArticleIdList.get(course.getInt("id")) != null) {
                   AtomicInteger count = new AtomicInteger(0);
-                  courseIdToArticleIdList.get(course.getInt("id"))
+                  courseIdToArticleIdList
+                      .get(course.getInt("id"))
                       .parallelStream()
                       .forEach(
                           id -> {

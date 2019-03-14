@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.moshi.common.model.Issue;
 import com.moshi.common.model.IssueComment;
+import com.moshi.common.plugin.Letture;
 import io.jboot.Jboot;
 import io.jboot.support.redis.JbootRedis;
 
@@ -15,7 +16,6 @@ import java.util.List;
 public class IssueService {
   Issue dao = new Issue().dao();
   IssueComment icDao = new IssueComment().dao();
-  JbootRedis redis = Jboot.getRedis();
 
   public Ret findById(int id) {
     Issue issue = dao.findFirst(dao.getSqlPara("issue.findById", id));
@@ -68,7 +68,7 @@ public class IssueService {
             now,
             id);
     if (update > 0) {
-      redis.lpush(
+      Letture.async().lpush(
           "issue:close:" + id + ":reason",
           Kv.by("reason", reason).set("closeAt", now).set("accountId", accountId));
       return Ret.ok();
@@ -86,7 +86,7 @@ public class IssueService {
         Db.update(
             "update issue set status = ?, openAt = ? where id = ?", Issue.STATUS_OPEN, now, id);
     if (update > 0) {
-      redis.lpush(
+      Letture.async().lpush(
           "issue:open:" + id + ":reason",
           Kv.by("reason", reason).set("openAt", now).set("accountId", accountId));
       return Ret.ok();

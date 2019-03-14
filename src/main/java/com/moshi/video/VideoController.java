@@ -11,6 +11,7 @@ import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.IsTeacherOrManagerInterceptor;
 import com.moshi.common.interceptor.UnlockInterceptor;
 import com.moshi.common.model.Video;
+import com.moshi.common.plugin.Letture;
 import io.jboot.Jboot;
 import io.jboot.web.controller.annotation.RequestMapping;
 
@@ -22,7 +23,7 @@ import java.util.function.Function;
 @RequestMapping("/video")
 public class VideoController extends BaseController {
   private static long getNextId() {
-    return Jboot.getRedis().incr("file:nextId");
+    return Letture.sync().incr("file:nextId");
   }
 
   public void index() {
