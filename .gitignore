@@ -19,3 +19,5 @@ cloudinary.yml
 
 src/main/webapp/static/media/
 
+*.log*
+

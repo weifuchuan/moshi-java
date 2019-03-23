@@ -12,6 +12,7 @@ import com.jfinal.kit.Ret;
 import com.jfinal.render.QrCodeRender;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
+import com.moshi.common.kit.ConfigKit;
 import com.moshi.common.model.Coupon;
 import com.moshi.common.model.Course;
 import com.moshi.common.model.Subscription;
@@ -101,11 +102,9 @@ public class SubscribeController extends BaseController {
     }
     String params = JSON.toJSONString(Kv.by("id", id).set("accountId", getLoginAccountId()));
     params = HexUtil.encodeHexStr(AesKit.encrypt(params, aesKey));
-    renderQrCode(
-        Jboot.configValue("hostPort").trim() + "/srv/v1/subscribe/callback?params=" + params,
-        200,
-        200);
-    System.out.println("\n\n\t"+Jboot.configValue("hostPort").trim() + "/srv/v1/subscribe/callback?params=" + params);
+    renderQrCode(ConfigKit.HOST_PORT + "/srv/v1/subscribe/callback?params=" + params, 200, 200);
+    System.out.println(
+        "\n\n\t" + ConfigKit.HOST_PORT + "/srv/v1/subscribe/callback?params=" + params);
   }
 
   @Before(UnlockInterceptor.class)

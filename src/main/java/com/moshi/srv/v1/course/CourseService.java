@@ -14,11 +14,11 @@ import com.moshi.srv.v1.article.ArticleService;
 import com.moshi.srv.v1.statistics.StatisticsService;
 import com.moshi.subscription.SubscriptionService;
 import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
+import io.jboot.components.cache.annotation.Cacheable;
 import io.lettuce.core.TransactionResult;
 import io.lettuce.core.api.async.RedisAsyncCommands;
-import io.lettuce.core.api.sync.RedisCommands;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,39 +38,37 @@ public class CourseService {
   private ArticleService articleService = new ArticleService();
   private StatisticsService statisticsService = new StatisticsService();
 
+  private static int compareScore(Record a, Record b) {
+    if (a.getDouble("score") > b.getDouble("score")) {
+      return -1;
+    } else if (a.getDouble("score") < b.getDouble("score")) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   public List<Record> hot(int maxCount, int courseType)
       throws ExecutionException, InterruptedException {
-    RedisAsyncCommands<String, Object> async = Letture.async();
     SqlPara sqlPara = Db.getSqlPara("course.allSimpleByType", courseType);
     List<Record> list =
-        Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara());
-    async.multi();
-    list.forEach(
-        item -> {
-          async.zscore("visit:course", item.getInt("id"));
-        });
-    TransactionResult result = async.exec().get();
-    int i = 0;
-    for (Record item : list) {
+        new ArrayList<>(
+            Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara()));
+    TransactionResult result =
+        Letture.multi(
+                redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))))
+            .get();
+    for (int i = 0; i < list.size(); i++) {
+      Record item = list.get(i);
       Double score = result.get(i);
       score = score == null ? 0 : score;
       item.set("score", score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount"));
-      i++;
     }
-    list.sort(
-        (a, b) -> {
-          if (a.getDouble("score") > b.getDouble("score")) {
-            return -1;
-          } else if (a.getDouble("score") < b.getDouble("score")) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+    list.sort(CourseService::compareScore);
     if (list.size() < maxCount) {
       maxCount = list.size();
     }
-    return list.subList(0, maxCount);
+    return new ArrayList<>(list.subList(0, maxCount));
   }
 
   public List<Record> hot(int maxCount, int courseType, Integer accountId)
@@ -79,7 +77,8 @@ public class CourseService {
     List<Subscription> subscriptionList = subsSrv.findByAccountId(accountId);
     SqlPara sqlPara = Db.getSqlPara("course.allSimpleByType", courseType);
     List<Record> list =
-        Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara());
+        new ArrayList<>(
+            Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara()));
     Set<Integer> subscribed =
         subscriptionList.stream()
             .filter(
@@ -88,15 +87,12 @@ public class CourseService {
                         && s.getStatus() == Subscription.STATUS_SUCCESS)
             .map(Subscription::getRefId)
             .collect(Collectors.toSet());
-    RedisAsyncCommands<String, Object> async = Letture.async();
-    async.multi();
-    list.forEach(
-      item -> {
-        async.zscore("visit:course", item.getInt("id"));
-      });
-    TransactionResult result = async.exec().get();
-    int i=0;
-    for (Record item : list) {
+    TransactionResult result =
+        Letture.multi(
+                redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))))
+            .get();
+    for (int i = 0; i < list.size(); i++) {
+      Record item = list.get(i);
       int id = item.getInt("id");
       Double score = result.get(i);
       score = score == null ? 0 : score;
@@ -107,22 +103,12 @@ public class CourseService {
         item.set(
             "score", score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount"));
       item.set("subscribed", subscribed.contains(item.getInt("id")));
-      i++;
     }
-    list.sort(
-        (a, b) -> {
-          if (a.getDouble("score") > b.getDouble("score")) {
-            return -1;
-          } else if (a.getDouble("score") < b.getDouble("score")) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+    list.sort(CourseService::compareScore);
     if (list.size() < maxCount) {
       maxCount = list.size();
     }
-    return list.subList(0, maxCount);
+    return new ArrayList<>(list.subList(0, maxCount));
   }
 
   // TODO: cache result by better way
@@ -265,25 +251,31 @@ public class CourseService {
 
   public List<Record> subscribedCourses(int accountId) {
     SqlPara sqlPara = Db.getSqlPara("course.subscribedCourses", accountId);
-    List<Record> list =
-        Db.findByCache(cacheName, "subscribedCourses", sqlPara.getSql(), sqlPara.getPara());
-    if (list.size() > 0) {
+    List<Record> subscribedCourses =
+        new ArrayList<>(
+            Db.findByCache(
+                cacheName, "subscribedCourses:" + accountId, sqlPara.getSql(), sqlPara.getPara()));
+    if (subscribedCourses.size() > 0) {
       List<Record> idList =
           Db.find(
               Db.getSqlPara(
                   "course.allIdWithCourses",
                   Kv.by(
                       "courseIdList",
-                      list.stream().map(x -> x.getInt("id")).collect(Collectors.toList()))));
+                      subscribedCourses.stream()
+                          .map(x -> x.getInt("id"))
+                          .collect(Collectors.toList()))));
       Map<Integer, List<Record>> courseIdToArticleIdList =
           idList.stream()
               .collect(Collectors.groupingBy((Record item) -> item.getInt(("courseId"))));
-      list.parallelStream()
+      subscribedCourses
+          .parallelStream()
           .forEach(
               course -> {
                 course.set("subscribed", true);
                 if (courseIdToArticleIdList.get(course.getInt("id")) != null) {
                   AtomicInteger count = new AtomicInteger(0);
+
                   courseIdToArticleIdList
                       .get(course.getInt("id"))
                       .parallelStream()
@@ -302,7 +294,7 @@ public class CourseService {
                 }
               });
     }
-    return list;
+    return subscribedCourses;
   }
 
   public void clearHotCache(int courseType) {
@@ -310,7 +302,7 @@ public class CourseService {
   }
 
   public void clearSubscribedCoursesCache(int accountId) {
-    Jboot.getCache().remove(cacheName, "subscribedCourses");
+    Jboot.getCache().remove(cacheName, "subscribedCourses:" + accountId);
   }
 
   public void clearCache() {

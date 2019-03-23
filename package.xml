@@ -21,7 +21,7 @@
     </fileSet>
 
     <fileSet>
-      <directory>${basedir}/target/classes/webapp</directory>
+      <directory>${basedir}/src/main/webapp</directory>
       <outputDirectory>webapp</outputDirectory>
     </fileSet>
 

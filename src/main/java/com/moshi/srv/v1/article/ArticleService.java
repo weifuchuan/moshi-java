@@ -17,6 +17,7 @@ import com.moshi.subscription.SubscriptionService;
 import io.jboot.Jboot;
 import io.jboot.support.redis.JbootRedis;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class ArticleService {
   public List<Article> trialReading(int courseId) {
     SqlPara sqlPara = dao.getSqlPara("article.trialReading", courseId);
     List<Article> articles =
-        dao.findByCache(
-            CACHE_NAME, "trialReading:" + courseId, sqlPara.getSql(), sqlPara.getPara());
+        new ArrayList<>(
+            dao.findByCache(
+                CACHE_NAME, "trialReading:" + courseId, sqlPara.getSql(), sqlPara.getPara()));
     return articles;
   }
 

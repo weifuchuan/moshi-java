@@ -5,6 +5,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.moshi.common.model.Subscription;
 import io.jboot.Jboot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubscriptionService {
@@ -16,11 +17,12 @@ public class SubscriptionService {
 
   public List<Subscription> findByAccountId(int accountId) {
     List<Subscription> subscriptionList =
-        dao.findByCache(
-            SubscriptionService.cacheName,
-            "" + accountId,
-            "select * from subscription where accountId = ?",
-            accountId);
+        new ArrayList<>(
+            dao.findByCache(
+                SubscriptionService.cacheName,
+                "" + accountId,
+                "select * from subscription where accountId = ?",
+                accountId));
     return subscriptionList;
   }
 

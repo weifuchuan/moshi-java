@@ -3,6 +3,7 @@ package com.moshi.reg;
 import com.jfinal.kit.*;
 import com.jfinal.plugin.activerecord.Db;
 import com.moshi.common.authcode.AuthCodeService;
+import com.moshi.common.kit.ConfigKit;
 import com.moshi.common.kit.EmailKit;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.AuthCode;
@@ -127,7 +128,7 @@ public class RegService {
   /** 发送账号激活授权邮件 */
   private boolean sendRegActivateAuthEmail(String authCode, Account reg) {
     String title = "默识 | 用户激活邮件";
-    String activeUrl = Jboot.configValue("hostPort").trim() + "/reg/activate?authcode=" + authCode;
+    String activeUrl = ConfigKit.HOST_PORT + "/reg/activate?authcode=" + authCode;
     String content =
         "激活码：\n\n"
             + authCode

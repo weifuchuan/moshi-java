@@ -22,13 +22,13 @@ CP=${APP_BASE_PATH}/config:${APP_BASE_PATH}/lib/*
 function start()
 {
     # 运行为后台进程，并在控制台输出信息
-    java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} &
+    # java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} &
 
     # 运行为后台进程，并且不在控制台输出信息
     # nohup java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} >/dev/null 2>&1 &
 
     # 运行为后台进程，并且将信息输出到 output.log 文件
-    # nohup java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} > output.log &
+    nohup java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS} > output.log &
 
     # 运行为非后台进程，多用于开发阶段，快捷键 ctrl + c 可停止服务
     # java -Xverify:none ${JAVA_OPTS} -cp ${CP} ${MAIN_CLASS}

@@ -7,6 +7,7 @@ import com.moshi.srv.v1.explore.ExploreController;
 import com.moshi.srv.v1.im.ImController;
 import com.moshi.srv.v1.issue.IssueController;
 import com.moshi.srv.v1.news.NewsController;
+import com.moshi.srv.v1.rcsys.RcsysController;
 import com.moshi.srv.v1.statistics.StatisticsController;
 import com.moshi.srv.v1.subscribe.SubscribeController;
 
@@ -21,5 +22,6 @@ public class SrvV1Routes extends Routes {
     add("/srv/v1/issue", IssueController.class);
     add("/srv/v1/news", NewsController.class);
     add("/srv/v1/im", ImController.class);
+    add("/srv/v1/rcsys", RcsysController.class);
   }
 }

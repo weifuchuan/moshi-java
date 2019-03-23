@@ -55,7 +55,8 @@ WHERE ac.id = #para(commentId) AND
 #sql("trialReading")
 select a.id, a.courseId, a.title, a.summary, a.publishAt, a.audioId
 from article a
-where a.courseId = #para(0) and (a.status & (1 << 2)) != 0
+where a.courseId = #para(0)
+  and (a.status & (1 << 2)) != 0
 #end
 
 #sql("list")

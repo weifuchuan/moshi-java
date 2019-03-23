@@ -14,9 +14,7 @@ public class LetturePlugin implements IPlugin {
   @Override
   public boolean start() {
     try {
-      Letture.client = RedisClient.create(uri);
-      Letture.pubClient = RedisClient.create(uri);
-      Letture.subClient = RedisClient.create(uri);
+      Letture.init(uri);
       return true;
     } catch (Exception ex) {
       return false;
@@ -25,7 +23,7 @@ public class LetturePlugin implements IPlugin {
 
   @Override
   public boolean stop() {
-    Letture.pubClient.shutdown();
+    Letture.close();
     return true;
   }
 }

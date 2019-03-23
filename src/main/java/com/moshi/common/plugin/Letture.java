@@ -5,6 +5,9 @@ import io.jboot.components.serializer.FstSerializer;
 import io.jboot.components.serializer.JbootSerializer;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.TransactionResult;
+import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -15,11 +18,18 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 public class Letture {
-  static RedisClient client;
-  static RedisClient pubClient; // for pub
-  static RedisClient subClient; // for sub
+  private static RedisClient client;
+  private static RedisClient pubClient; // for pub
+  private static RedisClient subClient; // for sub
+  private static StatefulRedisConnection<String, Object> conn;
 
   private static final RedisCodec<String, Object> codec =
       new RedisCodec<String, Object>() {
@@ -32,12 +42,9 @@ public class Letture {
 
         @Override
         public Object decodeValue(ByteBuffer buf) {
-          if (!buf.hasArray()) {
-            ByteBuffer buf2 = ByteBuffer.allocate(buf.remaining());
-            buf2.put(buf);
-            buf = buf2;
-          }
-          return serializer.deserialize(buf.array());
+          byte[] array = new byte[buf.remaining()];
+          buf.get(array);
+          return serializer.deserialize(array);
         }
 
         @Override
@@ -51,6 +58,20 @@ public class Letture {
         }
       };
 
+  static void init(RedisURI uri) {
+    client = RedisClient.create(uri);
+    pubClient = RedisClient.create(uri);
+    subClient = RedisClient.create(uri);
+
+    conn = client.connect(codec);
+  }
+
+  static void close() {
+    client.shutdown();
+    pubClient.shutdown();
+    subClient.shutdown();
+  }
+
   public static RedisClient getClient() {
     return client;
   }
@@ -59,16 +80,30 @@ public class Letture {
     return client;
   }
 
+  public static StatefulRedisConnection<String, Object> connect() {
+    return conn;
+    //    return client.connect(codec);
+  }
+
   public static RedisAsyncCommands<String, Object> async() {
-    return client.connect(codec).async();
+    return connect().async();
   }
 
   public static RedisCommands<String, Object> sync() {
-    return client.connect(codec).sync();
+    return connect().sync();
+  }
+
+  public static RedisFuture<TransactionResult> multi(
+      Consumer<RedisAsyncCommands<String, Object>> consumer)
+      throws ExecutionException, InterruptedException {
+    RedisAsyncCommands<String, Object> async = client.connect(codec).async();
+    async.multi();
+    consumer.accept(async);
+    return async.exec();
   }
 
   public static RedisReactiveCommands<String, Object> reactive() {
-    return client.connect(codec).reactive();
+    return connect().reactive();
   }
 
   public static StatefulRedisPubSubConnection<String, Object> pubConn() {
@@ -88,5 +123,19 @@ public class Letture {
           futures.add(future);
         });
     return futures;
+  }
+
+  //  private static final ConcurrentLinkedQueue<StatefulRedisConnection<String, Object>>
+  //      CONNECTION_QUEUE = new ConcurrentLinkedQueue<>();
+  //  private static final AtomicInteger index = new AtomicInteger(0);
+  //
+  //  public static StatefulRedisConnection<String, Object> getConnection() {
+  //    if (CONNECTION_QUEUE.isEmpty()) {
+  //      return conn;
+  //    }
+  //  }
+  public static Future<StatefulRedisConnection<String, Object>> getConnection() {
+    // TODO
+    return null;
   }
 }
