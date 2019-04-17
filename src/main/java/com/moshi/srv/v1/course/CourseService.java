@@ -14,9 +14,6 @@ import com.moshi.srv.v1.article.ArticleService;
 import com.moshi.srv.v1.statistics.StatisticsService;
 import com.moshi.subscription.SubscriptionService;
 import io.jboot.Jboot;
-import io.jboot.components.cache.annotation.Cacheable;
-import io.lettuce.core.TransactionResult;
-import io.lettuce.core.api.async.RedisAsyncCommands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +51,12 @@ public class CourseService {
     List<Record> list =
         new ArrayList<>(
             Db.findByCache(cacheName, "hot:" + courseType, sqlPara.getSql(), sqlPara.getPara()));
-    TransactionResult result =
-        Letture.multi(
-                redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))))
-            .get();
+    List result =
+      Letture.pipe(
+        redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))));
     for (int i = 0; i < list.size(); i++) {
       Record item = list.get(i);
-      Double score = result.get(i);
+      Double score = (Double) result.get(i);
       score = score == null ? 0 : score;
       item.set("score", score + 5 * item.getInt("buyerCount") + 0.5 * item.getInt("lectureCount"));
     }
@@ -87,14 +83,13 @@ public class CourseService {
                         && s.getStatus() == Subscription.STATUS_SUCCESS)
             .map(Subscription::getRefId)
             .collect(Collectors.toSet());
-    TransactionResult result =
-        Letture.multi(
-                redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))))
-            .get();
+    List result =
+      Letture.pipe(
+                redis -> list.forEach(item -> redis.zscore("visit:course", item.getInt("id"))));
     for (int i = 0; i < list.size(); i++) {
       Record item = list.get(i);
       int id = item.getInt("id");
-      Double score = result.get(i);
+      Double score = (Double) result.get(i);
       score = score == null ? 0 : score;
       if (subscribed.contains(id)) {
         item.set(

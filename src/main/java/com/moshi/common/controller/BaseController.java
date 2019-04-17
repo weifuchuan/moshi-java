@@ -1,9 +1,12 @@
 package com.moshi.common.controller;
 
 import com.jfinal.core.NotAction;
+import com.moshi.common.kit.FstKit;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
 import io.jboot.web.controller.JbootController;
+
+import java.util.ConcurrentModificationException;
 
 /**
  * 基础控制器，方便获取登录信息
@@ -66,5 +69,13 @@ public class BaseController extends JbootController {
   @NotAction
   public boolean isAjaxRequest() {
     return "XMLHttpRequest".equalsIgnoreCase(getHeader("X-Requested-With"));
+  }
+
+  public void renderJsonThreadSafe(Object ret) {
+    try {
+      renderJson(ret);
+    } catch (ConcurrentModificationException ex) {
+      renderJson(FstKit.deserialize(FstKit.serialize(ret)));
+    }
   }
 }

@@ -1,14 +1,13 @@
 package com.moshi.reg;
 
-import com.jfinal.kit.*;
+import com.jfinal.kit.HashKit;
+import com.jfinal.kit.Ret;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.moshi.common.authcode.AuthCodeService;
-import com.moshi.common.kit.ConfigKit;
-import com.moshi.common.kit.EmailKit;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.AuthCode;
 import com.moshi.common.model.Session;
-import com.moshi.login.LoginService;
 import io.jboot.Jboot;
 import io.jboot.components.cache.JbootCache;
 
@@ -113,12 +112,14 @@ public class RegService {
         return Ret.ok("msg", "注册成功，激活邮件已发送，请查收并激活账号：" + email)
             .set(sessionIdName, sessionId)
             .set(loginAccountCacheName, account)
-            .set("maxAgeInSeconds", maxAgeInSeconds);
+          .set("maxAgeInSeconds", maxAgeInSeconds)
+          .set("authCode", authCode);
       } else {
         return Ret.ok("msg", "注册成功，但是激活邮件发送失败")
             .set(sessionIdName, sessionId)
             .set(loginAccountCacheName, account)
-            .set("maxAgeInSeconds", maxAgeInSeconds);
+          .set("maxAgeInSeconds", maxAgeInSeconds)
+          .set("authCode", authCode);
       }
     } else {
       return Ret.fail("msg", "注册失败，account 保存失败，请告知管理员");
@@ -127,25 +128,26 @@ public class RegService {
 
   /** 发送账号激活授权邮件 */
   private boolean sendRegActivateAuthEmail(String authCode, Account reg) {
-    String title = "默识 | 用户激活邮件";
-    String activeUrl = ConfigKit.HOST_PORT + "/reg/activate?authcode=" + authCode;
-    String content =
-        "激活码：\n\n"
-            + authCode
-            + "\n\n"
-            + "点击链接激活：<a href=\""
-            + activeUrl
-            + "\">"
-            + activeUrl
-            + "</a>";
-
-    String toEmail = reg.getStr("email");
-    try {
-      EmailKit.sendEmail(toEmail, title, content);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+//    String title = "默识 | 用户激活邮件";
+//    String activeUrl = ConfigKit.HOST_PORT + "/reg/activate?authcode=" + authCode;
+//    String content =
+//        "激活码：\n\n"
+//            + authCode
+//            + "\n\n"
+//            + "点击链接激活：<a href=\""
+//            + activeUrl
+//            + "\">"
+//            + activeUrl
+//            + "</a>";
+//
+//    String toEmail = reg.getStr("email");
+//    try {
+//      EmailKit.sendEmail(toEmail, title, content);
+//      return true;
+//    } catch (Exception e) {
+//      return false;
+//    }
+    return true;
   }
 
   /** 激活账号，返回 false 表示激活码已过期或者不存在 激活账号不要去自动登录，激活邮件如果发错到了别人的邮箱，会有别人冒用的可能 并且登录功能还有额外有选择过期时间的功能 */

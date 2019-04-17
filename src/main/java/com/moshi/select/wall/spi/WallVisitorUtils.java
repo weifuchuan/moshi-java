@@ -40,9 +40,9 @@ import com.alibaba.druid.util.FnvHash;
 import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.ServletPathMatcher;
 import com.alibaba.druid.util.StringUtils;
+import com.moshi.select.wall.*;
 import com.moshi.select.wall.WallConfig.TenantCallBack;
 import com.moshi.select.wall.WallConfig.TenantCallBack.StatementType;
-import com.moshi.select.wall.*;
 import com.moshi.select.wall.violation.ErrorCode;
 import com.moshi.select.wall.violation.IllegalSQLObjectViolation;
 
@@ -124,7 +124,7 @@ public class WallVisitorUtils {
   }
 
   public static void check(WallVisitor visitor, SQLCreateTableStatement x) {
-    String tableName = ((SQLName) x.getName()).getSimpleName();
+    String tableName = x.getName().getSimpleName();
     WallContext context = WallContext.current();
     if (context != null) {
       WallSqlTableStat tableStat = context.getTableStat(tableName);
@@ -135,7 +135,7 @@ public class WallVisitorUtils {
   }
 
   public static void check(WallVisitor visitor, SQLAlterTableStatement x) {
-    String tableName = ((SQLName) x.getName()).getSimpleName();
+    String tableName = x.getName().getSimpleName();
     WallContext context = WallContext.current();
     if (context != null) {
       WallSqlTableStat tableStat = context.getTableStat(tableName);
@@ -255,7 +255,7 @@ public class WallVisitorUtils {
     boolean hasUsing = false;
 
     if (x instanceof MySqlDeleteStatement) {
-      hasUsing = ((MySqlDeleteStatement) x).getUsing() != null;
+      hasUsing = x.getUsing() != null;
     }
 
     boolean isJoinTableSource = x.getTableSource() instanceof SQLJoinTableSource;
@@ -415,12 +415,9 @@ public class WallVisitorUtils {
       return false;
     }
 
-    parent = ((SQLSelect) parent).getParent();
-    if (parent instanceof SQLSelectStatement) {
-      return true;
-    }
+    parent = parent.getParent();
+    return parent instanceof SQLSelectStatement;
 
-    return false;
   }
 
   private static void checkSelectForMultiTenant(WallVisitor visitor, SQLSelectQueryBlock x) {
@@ -618,9 +615,9 @@ public class WallVisitorUtils {
     List<ValuesClause> valuesClauses = null;
     ValuesClause valuesClause = null;
     if (x instanceof MySqlInsertStatement) {
-      valuesClauses = ((MySqlInsertStatement) x).getValuesList();
+      valuesClauses = x.getValuesList();
     } else if (x instanceof SQLServerInsertStatement) {
-      valuesClauses = ((MySqlInsertStatement) x).getValuesList();
+      valuesClauses = x.getValuesList();
     } else {
       valuesClause = x.getValues();
     }
@@ -1315,29 +1312,17 @@ public class WallVisitorUtils {
 
       if (parent instanceof SQLDeleteStatement) {
         SQLDeleteStatement delete = (SQLDeleteStatement) parent;
-        if (delete.getWhere() == x) {
-          return true;
-        } else {
-          return false;
-        }
+        return delete.getWhere() == x;
       }
 
       if (parent instanceof SQLUpdateStatement) {
         SQLUpdateStatement update = (SQLUpdateStatement) parent;
-        if (update.getWhere() == x) {
-          return true;
-        } else {
-          return false;
-        }
+        return update.getWhere() == x;
       }
 
       if (parent instanceof SQLSelectGroupByClause) {
         SQLSelectGroupByClause groupBy = (SQLSelectGroupByClause) parent;
-        if (x == groupBy.getHaving()) {
-          return true;
-        } else {
-          return false;
-        }
+        return x == groupBy.getHaving();
       }
 
       x = parent;
@@ -1670,9 +1655,7 @@ public class WallVisitorUtils {
         }
       }
 
-      if (allawTrueWhere && simpleCount) {
-        return true;
-      }
+      return allawTrueWhere && simpleCount;
     }
 
     return false;
@@ -1704,9 +1687,7 @@ public class WallVisitorUtils {
         }
       }
 
-      if (allawTrueWhere && simpleCase) {
-        return true;
-      }
+      return allawTrueWhere && simpleCase;
     }
 
     return false;
@@ -1965,10 +1946,7 @@ public class WallVisitorUtils {
       }
     }
 
-    if (x instanceof SQLExprTableSource) {
-      return true;
-    }
-    return false;
+    return x instanceof SQLExprTableSource;
   }
 
   private static boolean isFirstInSubQuery(SQLObject x) {
@@ -2112,9 +2090,7 @@ public class WallVisitorUtils {
       if (fromExpr instanceof SQLName) {
         String name = fromExpr.toString();
         name = form(name);
-        if (name.equalsIgnoreCase("DUAL")) {
-          return false;
-        }
+        return !name.equalsIgnoreCase("DUAL");
       }
       return true;
     } else if (x instanceof SQLJoinTableSource) {
@@ -2142,9 +2118,7 @@ public class WallVisitorUtils {
 
       if (x instanceof SQLStatement) {
         x = x.getParent();
-        if (x == null) {
-          return true;
-        }
+        return x == null;
       }
     }
     return false;
@@ -2381,11 +2355,7 @@ public class WallVisitorUtils {
             break;
           }
         }
-        if (itemIsConst && !itemHasAlias) {
-          return true;
-        } else {
-          return false;
-        }
+        return itemIsConst && !itemHasAlias;
       }
 
       if (from instanceof SQLExprTableSource) {
@@ -2423,9 +2393,7 @@ public class WallVisitorUtils {
                 break;
               }
             }
-            if (allIsConst) {
-              return true;
-            }
+            return allIsConst;
           }
         }
       }
@@ -2542,7 +2510,7 @@ public class WallVisitorUtils {
       errorCode = ErrorCode.UPDATE_NOT_ALLOW;
     } else if (x instanceof OracleMultiInsertStatement) {
       allow = true;
-      denyMessage = "multi-insert not allow";
+      denyMessage = "pipe-insert not allow";
       errorCode = ErrorCode.INSERT_NOT_ALLOW;
     } else if (x instanceof SQLMergeStatement) {
       allow = config.isMergeAllow();

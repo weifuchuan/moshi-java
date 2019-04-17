@@ -1,6 +1,5 @@
 package com.moshi.srv.v1.im;
 
-import cn.hutool.cache.impl.LRUCache;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
@@ -19,16 +18,16 @@ import io.lettuce.core.api.async.RedisAsyncCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 import io.lettuce.core.pubsub.api.async.RedisPubSubAsyncCommands;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ImListener implements DataListener<Action> {
-  private static final ConcurrentMap<Integer, UUID> idToSessionId = new ConcurrentHashMap<>();
+  private static final ConcurrentMap<Integer, UUID> idToSessionId = new NonBlockingHashMap<>();
   private static final ConcurrentMap<Integer, Account> accountCache =
       new ConcurrentLRUCache<>(10000);
 

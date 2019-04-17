@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+// import "google/protobuf/any.proto";
+
+option java_multiple_files = true;
+option java_package = "com.moshi.im.common";
+option java_outer_classname = "ImGrpc";
+option objc_class_prefix = "CS";
+
+package com.moshi.im.common;
+
+enum Command {
+    COMMAND_UNKNOW = 0;
+
+    COMMAND_JOIN_GROUP_REQ = 5; // 申请进入群组
+    COMMAND_JOIN_GROUP_RESP = 6; // 申请进入群组响应
+
+    COMMAND_JOIN_GROUP_NOTIFY_RESP = 7; // 进入群组通知
+    COMMAND_EXIT_GROUP_NOTIFY_RESP = 8; // 退出群组通知
+
+    COMMAND_CHAT_REQ = 9; // 聊天请求
+    COMMAND_CHAT_RESP = 10; // 聊天响应
+
+    COMMAND_HEARTBEAT_REQ = 15; // 心跳请求
+    COMMAND_HEARTBEAT_RESP = 16; // 心跳响应
+
+    COMMAND_REMIND_PUSH = 26; // 提醒 推送
+
+    COMMAND_ONLINE_PUSH = 28; // 上线 推送
+    COMMAND_OFFLINE_PUSH = 29; // 离线 推送
+
+    COMMAND_CLEAR_REMIND_REQ = 27; // 清除某room的remind
+
+    COMMAND_ONLINE_NOTIFY_SUBSCRIBE_REQ = 30; // 订阅 上线通知
+
+    COMMAND_CALL_REQ = 31;
+    COMMAND_CALL_RESP = 32;
+}
+
+enum Code {
+    OK = 0;
+    FAIL = -1;
+}
+
+enum Role {
+    CUSTOMER = 0; // 客户
+    WAITER = 1; // 客服
+}
+
+message AccountBaseInfo {
+    string id = 2;
+    string nickName = 3;
+    string avatar = 4;
+}
+
+message AccountBaseInfoReq {
+    string id = 1;
+}
+
+message AccountBaseInfoReply {
+    Code code = 1;
+    AccountBaseInfo account = 2;
+    Role role = 3;
+}
+
+message FetchAccountListBaseInfoReq {
+    repeated string id = 1;
+}
+
+message FetchAccountListBaseInfoReply {
+    repeated AccountBaseInfo account = 1;
+}
+
+message Waiters {
+    repeated AccountBaseInfo account = 1;
+}
+
+message WaitersReq {
+}
+
+service AccountService {
+    rpc FetchBaseInfo (AccountBaseInfoReq) returns (AccountBaseInfoReply);
+    rpc FetchAccountListBaseInfo (FetchAccountListBaseInfoReq) returns (FetchAccountListBaseInfoReply);
+    rpc FetchWaiters (WaitersReq) returns (Waiters);
+}
+
+message AuthReq {
+    string id = 1;
+    string token = 2;
+}
+
+message AuthReply {
+    Code code = 1;
+    string msg = 2;
+}
+
+service AuthService {
+    rpc Auth (AuthReq) returns (AuthReply);
+}

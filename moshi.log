@@ -4,7 +4,7 @@
 java.lang.ExceptionInInitializerError
 	at com.moshi.srv.v1.im.ImServerEndPoint$1.getListener(ImServerEndPoint.java:45)
 	at com.moshi.common.socketio.MoshiSocketIOServer.start(MoshiSocketIOServer.java:31)
-	at com.moshi.App.onStart(App.java:78)
+	at com.moshi._App.onStart(App.java:78)
 	at io.jboot.core.listener.JbootAppListenerManager.onStart(JbootAppListenerManager.java:170)
 	at io.jboot.core.JbootCoreConfig.onStart(JbootCoreConfig.java:234)
 	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:71)
@@ -20,7 +20,7 @@ java.lang.ExceptionInInitializerError
 	at com.jfinal.server.undertow.UndertowServer.start(UndertowServer.java:152)
 	at io.jboot.app.JbootApplication.start(JbootApplication.java:40)
 	at io.jboot.app.JbootApplication.run(JbootApplication.java:36)
-	at com.moshi.App.main(App.java:34)
+	at com.moshi._App.main(App.java:34)
 Caused by: java.lang.IllegalStateException: refreshAfterWrite requires a LoadingCache
 	at com.github.benmanes.caffeine.cache.Caffeine.requireState(Caffeine.java:194)
 	at com.github.benmanes.caffeine.cache.Caffeine.requireNonLoadingCache(Caffeine.java:1059)
@@ -33,7 +33,7 @@ Caused by: java.lang.IllegalStateException: refreshAfterWrite requires a Loading
 java.lang.NullPointerException
 	at com.corundumstudio.socketio.SocketIOServer.stop(SocketIOServer.java:192)
 	at com.moshi.common.socketio.MoshiSocketIOServer.stop(MoshiSocketIOServer.java:57)
-	at com.moshi.App.onStop(App.java:83)
+	at com.moshi._App.onStop(App.java:83)
 	at io.jboot.core.listener.JbootAppListenerManager.onStop(JbootAppListenerManager.java:181)
 	at io.jboot.core.JbootCoreConfig.onStop(JbootCoreConfig.java:250)
 	at com.jfinal.core.JFinalFilter.destroy(JFinalFilter.java:107)

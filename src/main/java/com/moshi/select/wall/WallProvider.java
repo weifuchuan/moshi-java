@@ -360,7 +360,7 @@ public abstract class WallProvider {
             lock.readLock().unlock();
         }
 
-        return Collections.<String> unmodifiableSet(hashSet);
+      return Collections.unmodifiableSet(hashSet);
     }
 
     public Set<String> getSqlList() {
@@ -378,7 +378,7 @@ public abstract class WallProvider {
             lock.readLock().unlock();
         }
 
-        return Collections.<String> unmodifiableSet(hashSet);
+      return Collections.unmodifiableSet(hashSet);
     }
 
     public Set<String> getBlackList() {
@@ -392,7 +392,7 @@ public abstract class WallProvider {
             lock.readLock().unlock();
         }
 
-        return Collections.<String> unmodifiableSet(hashSet);
+      return Collections.unmodifiableSet(hashSet);
     }
 
     public void clearCache() {
@@ -636,7 +636,7 @@ public abstract class WallProvider {
         }
 
         if (statementList.size() > 1 && !config.isMultiStatementAllow()) {
-            violations.add(new IllegalSQLObjectViolation(ErrorCode.MULTI_STATEMENT, "multi-statement not allow", sql));
+          violations.add(new IllegalSQLObjectViolation(ErrorCode.MULTI_STATEMENT, "pipe-statement not allow", sql));
         }
 
         WallVisitor visitor = createWallVisitor();

@@ -1,19 +1,16 @@
 package com.moshi.file;
 
-import cn.hutool.core.io.FileUtil;
 import com.jfinal.kit.Kv;
 import io.jboot.components.event.JbootEvent;
 import io.jboot.components.event.JbootEventListener;
 import io.jboot.components.event.annotation.EventConfig;
-import io.reactivex.Observable;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 @EventConfig(action = {"file/upload"})
 public class FileEventListener implements JbootEventListener {
-  public static final ConcurrentHashMap<String, Boolean> removableUploadedPath =
-      new ConcurrentHashMap<>();
+  public static final NonBlockingHashMap<String, Boolean> removableUploadedPath =
+    new NonBlockingHashMap<>();
 
   @Override
   public void onEvent(JbootEvent event) {

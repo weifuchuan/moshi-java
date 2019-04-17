@@ -7,7 +7,6 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.Kv;
-import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
@@ -16,11 +15,11 @@ import io.jboot.Jboot;
 import io.jboot.web.controller.annotation.RequestMapping;
 import org.yaml.snakeyaml.Yaml;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 @RequestMapping("/file")
 @Before(UnlockInterceptor.class)
@@ -29,7 +28,7 @@ public class FileController extends BaseController {
       () -> {
         String raw = FileUtil.readUtf8String("cloudinary.yml");
         Yaml yaml = new Yaml();
-        Map<String, Map<String, Object>> config = yaml.load(raw);
+        Map<String, Map<String, Object>> config = yaml.loadAs(raw, Map.class);
         if (Jboot.isDevMode()) {
           return config.get("development");
         } else {

@@ -1,16 +1,14 @@
 package com.moshi.srv.v1.im;
 
-import com.jfinal.kit.Kv;
 import com.moshi.common.model.Account;
 import com.moshi.common.plugin.Letture;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import io.lettuce.core.api.reactive.RedisReactiveCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 
-import java.util.concurrent.ConcurrentHashMap;
-
-public class SessionState extends ConcurrentHashMap<String, Object> {
+public class SessionState extends NonBlockingHashMap<String, Object> {
 
   private Account me = null;
 

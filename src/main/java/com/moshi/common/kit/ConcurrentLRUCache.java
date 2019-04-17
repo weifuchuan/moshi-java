@@ -1,9 +1,10 @@
 package com.moshi.common.kit;
 
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
+
 import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
 
 /**
@@ -13,7 +14,7 @@ import java.util.function.BiFunction;
  *
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
-public class ConcurrentLRUCache<K, V> extends ConcurrentHashMap<K, V> {
+public class ConcurrentLRUCache<K, V> extends NonBlockingHashMap<K, V> {
 
   private int maxSize;
   private final Queue<K> queue = new ArrayDeque<>();
@@ -29,27 +30,6 @@ public class ConcurrentLRUCache<K, V> extends ConcurrentHashMap<K, V> {
     checkSize();
   }
 
-  public ConcurrentLRUCache(Map<? extends K, ? extends V> m, int maxSize) {
-    super(m);
-    this.maxSize = maxSize;
-    checkSize();
-    for (K k: m.keySet()) {
-      entryAdded(k);
-    }
-    checkRemoveOldest();
-  }
-
-  public ConcurrentLRUCache(int initialCapacity, float loadFactor, int maxSize) {
-    super(initialCapacity, loadFactor);
-    this.maxSize = maxSize;
-    checkSize();
-  }
-
-  public ConcurrentLRUCache(int initialCapacity, float loadFactor, int concurrencyLevel, int maxSize) {
-    super(initialCapacity, loadFactor, concurrencyLevel);
-    this.maxSize = maxSize;
-    checkSize();
-  }
 
   public void setMaxSize(int maxSize) {
     this.maxSize = maxSize;

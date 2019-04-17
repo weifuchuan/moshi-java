@@ -1,30 +1,21 @@
 package com.moshi.srv.v1.im;
 
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
-import com.jfinal.kit.Kv;
 import com.moshi.common.socketio.Action;
 import com.moshi.common.socketio.SocketIOServerEndPoint;
 import com.moshi.common.socketio.SocketIOServerEventListener;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.Subject;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ImServerEndPoint implements SocketIOServerEndPoint<Action> {
-  static final ConcurrentMap<UUID, SessionState> onlineClients = new ConcurrentHashMap<>();
+  static final ConcurrentMap<UUID, SessionState> onlineClients = new NonBlockingHashMap<>();
 
   @Override
   public String getNamespace() {

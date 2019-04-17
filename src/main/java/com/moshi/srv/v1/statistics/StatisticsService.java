@@ -2,10 +2,6 @@ package com.moshi.srv.v1.statistics;
 
 import com.jfinal.kit.Ret;
 import com.moshi.common.plugin.Letture;
-import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
-import io.lettuce.core.TransactionResult;
-import io.lettuce.core.api.async.RedisAsyncCommands;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -36,7 +32,7 @@ public class StatisticsService {
     if (!filterVisitTypeSet.contains(type)) {
       return Ret.fail("msg", "Unsupport type: " + type);
     }
-    Letture.multi(
+    Letture.pipe(
         redis -> {
           redis.zadd("visit:" + type, 1, refId);
           redis.sadd("visit:" + type + ":" + refId, accountId);
@@ -63,16 +59,16 @@ public class StatisticsService {
 
   public List<Integer> visitCountForRefIdList(List<Integer> refIdList, String type) {
     try {
-      TransactionResult result =
-          Letture.multi(
-                  redis -> {
-                    refIdList.forEach(
-                        refId -> {
-                          redis.zscore("visit:" + type, refId);
-                        });
-                  })
-              .get();
-      return result.stream().map(c -> c == null ? 0 : (Integer) c).collect(Collectors.toList());
+      List result =
+        Letture.pipe(
+          redis -> {
+            refIdList.forEach(
+              refId -> {
+                redis.zscore("visit:" + type, refId);
+              });
+          });
+      return (List<Integer>)
+        result.stream().map(c -> c == null ? 0 : c).collect(Collectors.toList());
     } catch (Exception e) {
       return new ArrayList<>(refIdList.size()).stream().map(c -> 0).collect(Collectors.toList());
     }
