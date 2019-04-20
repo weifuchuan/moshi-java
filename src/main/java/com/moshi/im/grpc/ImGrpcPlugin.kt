@@ -15,6 +15,7 @@ class ImGrpcPlugin : IPlugin {
       .forPort(prop["grpc.port"].toInt())
       .addService(AccountServiceImpl())
       .addService(AuthServiceImpl())
+      .addService(CourseServiceImpl())
       .build()
   }
 

@@ -9,7 +9,7 @@
     <version>0.1</version>
 
     <properties>
-        <jboot.version>2.0.6</jboot.version>
+        <jboot.version>2.0.7</jboot.version>
         <tio.version>3.2.9.v20190401-RELEASE</tio.version>
         <grpc.version>1.19.0</grpc.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +42,19 @@
             <artifactId>feather</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.zbus</groupId>
+            <artifactId>zbus</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.10.6</version>
+        </dependency>
+
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>

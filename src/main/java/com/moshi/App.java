@@ -15,11 +15,13 @@ import com.moshi.common.interceptor.LoginSessionInterceptor;
 import com.moshi.common.kit.ConfigKit;
 import com.moshi.common.model._MappingKit;
 import com.moshi.common.plugin.LetturePlugin;
+import com.moshi.common.socketio.MoshiSocketIOPlugin;
 import com.moshi.common.socketio.MoshiSocketIOServer;
 import com.moshi.im.ImPlugin;
 import com.moshi.im.grpc.ImGrpcPlugin;
 import com.moshi.reg.AccountGenerator;
 import com.moshi.srv.v1.SrvV1Routes;
+import io.jboot.Jboot;
 import io.jboot.aop.jfinal.JfinalPlugins;
 import io.jboot.app.JbootApplication;
 import io.jboot.core.listener.JbootAppListenerBase;
@@ -30,7 +32,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class App extends JbootAppListenerBase {
-  private MoshiSocketIOServer server;
 
   public static void main(String[] args) {
     JbootApplication.run(args);
@@ -74,23 +75,9 @@ public class App extends JbootAppListenerBase {
       ConfigKit.createConfigObject(
         new Prop("jboot.properties").getProperties(), RedisURI.class, "letture");
     plugins.add(new LetturePlugin(uri));
-    plugins.add(new ImPlugin());
+    plugins.add(new MoshiSocketIOPlugin());
     plugins.add(new ImGrpcPlugin());
+    plugins.add(new ImPlugin());
   }
 
-  @Override
-  public void onStart() {
-    server = new MoshiSocketIOServer();
-    server.start();
-
-    Observable.timer(10, TimeUnit.SECONDS).subscribe((t) -> {
-      System.out.println("start generate accounts");
-      AccountGenerator.Companion.gen();
-    });
-  }
-
-  @Override
-  public void onStop() {
-    server.stop();
-  }
 }
