@@ -48,14 +48,9 @@ public interface CourseOrBuilder extends
       getIntroduceImageBytes();
 
   /**
-   * <code>string courseType = 6;</code>
+   * <code>int32 courseType = 6;</code>
    */
-  java.lang.String getCourseType();
-  /**
-   * <code>string courseType = 6;</code>
-   */
-  com.google.protobuf.ByteString
-      getCourseTypeBytes();
+  int getCourseType();
 
   /**
    * <code>int32 status = 7;</code>

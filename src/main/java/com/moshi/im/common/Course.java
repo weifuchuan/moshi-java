@@ -21,7 +21,7 @@ private static final long serialVersionUID = 0L;
     name_ = "";
     shortIntro_ = "";
     introduceImage_ = "";
-    courseType_ = "";
+    courseType_ = 0;
     status_ = 0;
   }
 
@@ -77,10 +77,9 @@ private static final long serialVersionUID = 0L;
             introduceImage_ = s;
             break;
           }
-          case 50: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 48: {
 
-            courseType_ = s;
+            courseType_ = input.readInt32();
             break;
           }
           case 56: {
@@ -241,37 +240,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int COURSETYPE_FIELD_NUMBER = 6;
-  private volatile java.lang.Object courseType_;
+  private int courseType_;
   /**
-   * <code>string courseType = 6;</code>
+   * <code>int32 courseType = 6;</code>
    */
-  public java.lang.String getCourseType() {
-    java.lang.Object ref = courseType_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      courseType_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string courseType = 6;</code>
-   */
-  public com.google.protobuf.ByteString
-      getCourseTypeBytes() {
-    java.lang.Object ref = courseType_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      courseType_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getCourseType() {
+    return courseType_;
   }
 
   public static final int STATUS_FIELD_NUMBER = 7;
@@ -312,8 +286,8 @@ private static final long serialVersionUID = 0L;
     if (!getIntroduceImageBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, introduceImage_);
     }
-    if (!getCourseTypeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, courseType_);
+    if (courseType_ != 0) {
+      output.writeInt32(6, courseType_);
     }
     if (status_ != 0) {
       output.writeInt32(7, status_);
@@ -344,8 +318,9 @@ private static final long serialVersionUID = 0L;
     if (!getIntroduceImageBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, introduceImage_);
     }
-    if (!getCourseTypeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, courseType_);
+    if (courseType_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(6, courseType_);
     }
     if (status_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -377,8 +352,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getShortIntro());
     result = result && getIntroduceImage()
         .equals(other.getIntroduceImage());
-    result = result && getCourseType()
-        .equals(other.getCourseType());
+    result = result && (getCourseType()
+        == other.getCourseType());
     result = result && (getStatus()
         == other.getStatus());
     result = result && unknownFields.equals(other.unknownFields);
@@ -403,7 +378,7 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + INTRODUCEIMAGE_FIELD_NUMBER;
     hash = (53 * hash) + getIntroduceImage().hashCode();
     hash = (37 * hash) + COURSETYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getCourseType().hashCode();
+    hash = (53 * hash) + getCourseType();
     hash = (37 * hash) + STATUS_FIELD_NUMBER;
     hash = (53 * hash) + getStatus();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -549,7 +524,7 @@ private static final long serialVersionUID = 0L;
 
       introduceImage_ = "";
 
-      courseType_ = "";
+      courseType_ = 0;
 
       status_ = 0;
 
@@ -652,9 +627,8 @@ private static final long serialVersionUID = 0L;
         introduceImage_ = other.introduceImage_;
         onChanged();
       }
-      if (!other.getCourseType().isEmpty()) {
-        courseType_ = other.courseType_;
-        onChanged();
+      if (other.getCourseType() != 0) {
+        setCourseType(other.getCourseType());
       }
       if (other.getStatus() != 0) {
         setStatus(other.getStatus());
@@ -947,71 +921,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object courseType_ = "";
+    private int courseType_ ;
     /**
-     * <code>string courseType = 6;</code>
+     * <code>int32 courseType = 6;</code>
      */
-    public java.lang.String getCourseType() {
-      java.lang.Object ref = courseType_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        courseType_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getCourseType() {
+      return courseType_;
     }
     /**
-     * <code>string courseType = 6;</code>
+     * <code>int32 courseType = 6;</code>
      */
-    public com.google.protobuf.ByteString
-        getCourseTypeBytes() {
-      java.lang.Object ref = courseType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        courseType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string courseType = 6;</code>
-     */
-    public Builder setCourseType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setCourseType(int value) {
+      
       courseType_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string courseType = 6;</code>
+     * <code>int32 courseType = 6;</code>
      */
     public Builder clearCourseType() {
       
-      courseType_ = getDefaultInstance().getCourseType();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string courseType = 6;</code>
-     */
-    public Builder setCourseTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      courseType_ = value;
+      courseType_ = 0;
       onChanged();
       return this;
     }

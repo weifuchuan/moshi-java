@@ -15,6 +15,7 @@ import com.moshi.common.interceptor.LoginSessionInterceptor;
 import com.moshi.common.kit.ConfigKit;
 import com.moshi.common.model._MappingKit;
 import com.moshi.common.plugin.LetturePlugin;
+import com.moshi.common.plugin.RedisMQPlugin;
 import com.moshi.common.socketio.MoshiSocketIOPlugin;
 import com.moshi.common.socketio.MoshiSocketIOServer;
 import com.moshi.im.ImPlugin;
@@ -78,6 +79,7 @@ public class App extends JbootAppListenerBase {
     plugins.add(new MoshiSocketIOPlugin());
     plugins.add(new ImGrpcPlugin());
     plugins.add(new ImPlugin());
+    plugins.add(new RedisMQPlugin(uri));
   }
 
 }

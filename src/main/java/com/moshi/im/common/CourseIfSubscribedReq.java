@@ -4,18 +4,19 @@
 package com.moshi.im.common;
 
 /**
- * Protobuf type {@code com.moshi.im.common.SubscribedCourseListReq}
+ * Protobuf type {@code com.moshi.im.common.CourseIfSubscribedReq}
  */
-public  final class SubscribedCourseListReq extends
+public  final class CourseIfSubscribedReq extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:com.moshi.im.common.SubscribedCourseListReq)
-    SubscribedCourseListReqOrBuilder {
+    // @@protoc_insertion_point(message_implements:com.moshi.im.common.CourseIfSubscribedReq)
+    CourseIfSubscribedReqOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use SubscribedCourseListReq.newBuilder() to construct.
-  private SubscribedCourseListReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use CourseIfSubscribedReq.newBuilder() to construct.
+  private CourseIfSubscribedReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private SubscribedCourseListReq() {
+  private CourseIfSubscribedReq() {
+    courseId_ = 0;
     accountId_ = 0;
   }
 
@@ -24,7 +25,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private SubscribedCourseListReq(
+  private CourseIfSubscribedReq(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -44,6 +45,11 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 8: {
+
+            courseId_ = input.readInt32();
+            break;
+          }
+          case 16: {
 
             accountId_ = input.readInt32();
             break;
@@ -69,21 +75,30 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_SubscribedCourseListReq_descriptor;
+    return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_SubscribedCourseListReq_fieldAccessorTable
+    return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_CourseIfSubscribedReq_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.moshi.im.common.SubscribedCourseListReq.class, com.moshi.im.common.SubscribedCourseListReq.Builder.class);
+            com.moshi.im.common.CourseIfSubscribedReq.class, com.moshi.im.common.CourseIfSubscribedReq.Builder.class);
   }
 
-  public static final int ACCOUNTID_FIELD_NUMBER = 1;
+  public static final int COURSEID_FIELD_NUMBER = 1;
+  private int courseId_;
+  /**
+   * <code>int32 courseId = 1;</code>
+   */
+  public int getCourseId() {
+    return courseId_;
+  }
+
+  public static final int ACCOUNTID_FIELD_NUMBER = 2;
   private int accountId_;
   /**
-   * <code>int32 accountId = 1;</code>
+   * <code>int32 accountId = 2;</code>
    */
   public int getAccountId() {
     return accountId_;
@@ -103,8 +118,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (courseId_ != 0) {
+      output.writeInt32(1, courseId_);
+    }
     if (accountId_ != 0) {
-      output.writeInt32(1, accountId_);
+      output.writeInt32(2, accountId_);
     }
     unknownFields.writeTo(output);
   }
@@ -115,9 +133,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (courseId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, courseId_);
+    }
     if (accountId_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, accountId_);
+        .computeInt32Size(2, accountId_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -129,12 +151,14 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.moshi.im.common.SubscribedCourseListReq)) {
+    if (!(obj instanceof com.moshi.im.common.CourseIfSubscribedReq)) {
       return super.equals(obj);
     }
-    com.moshi.im.common.SubscribedCourseListReq other = (com.moshi.im.common.SubscribedCourseListReq) obj;
+    com.moshi.im.common.CourseIfSubscribedReq other = (com.moshi.im.common.CourseIfSubscribedReq) obj;
 
     boolean result = true;
+    result = result && (getCourseId()
+        == other.getCourseId());
     result = result && (getAccountId()
         == other.getAccountId());
     result = result && unknownFields.equals(other.unknownFields);
@@ -148,6 +172,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + COURSEID_FIELD_NUMBER;
+    hash = (53 * hash) + getCourseId();
     hash = (37 * hash) + ACCOUNTID_FIELD_NUMBER;
     hash = (53 * hash) + getAccountId();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -155,69 +181,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(byte[] data)
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(java.io.InputStream input)
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseDelimitedFrom(java.io.InputStream input)
+  public static com.moshi.im.common.CourseIfSubscribedReq parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseDelimitedFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.moshi.im.common.SubscribedCourseListReq parseFrom(
+  public static com.moshi.im.common.CourseIfSubscribedReq parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -230,7 +256,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.moshi.im.common.SubscribedCourseListReq prototype) {
+  public static Builder newBuilder(com.moshi.im.common.CourseIfSubscribedReq prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -246,26 +272,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code com.moshi.im.common.SubscribedCourseListReq}
+   * Protobuf type {@code com.moshi.im.common.CourseIfSubscribedReq}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:com.moshi.im.common.SubscribedCourseListReq)
-      com.moshi.im.common.SubscribedCourseListReqOrBuilder {
+      // @@protoc_insertion_point(builder_implements:com.moshi.im.common.CourseIfSubscribedReq)
+      com.moshi.im.common.CourseIfSubscribedReqOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_SubscribedCourseListReq_descriptor;
+      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_SubscribedCourseListReq_fieldAccessorTable
+      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_CourseIfSubscribedReq_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.moshi.im.common.SubscribedCourseListReq.class, com.moshi.im.common.SubscribedCourseListReq.Builder.class);
+              com.moshi.im.common.CourseIfSubscribedReq.class, com.moshi.im.common.CourseIfSubscribedReq.Builder.class);
     }
 
-    // Construct using com.moshi.im.common.SubscribedCourseListReq.newBuilder()
+    // Construct using com.moshi.im.common.CourseIfSubscribedReq.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -283,6 +309,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      courseId_ = 0;
+
       accountId_ = 0;
 
       return this;
@@ -291,17 +319,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_SubscribedCourseListReq_descriptor;
+      return com.moshi.im.common.ImGrpc.internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor;
     }
 
     @java.lang.Override
-    public com.moshi.im.common.SubscribedCourseListReq getDefaultInstanceForType() {
-      return com.moshi.im.common.SubscribedCourseListReq.getDefaultInstance();
+    public com.moshi.im.common.CourseIfSubscribedReq getDefaultInstanceForType() {
+      return com.moshi.im.common.CourseIfSubscribedReq.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.moshi.im.common.SubscribedCourseListReq build() {
-      com.moshi.im.common.SubscribedCourseListReq result = buildPartial();
+    public com.moshi.im.common.CourseIfSubscribedReq build() {
+      com.moshi.im.common.CourseIfSubscribedReq result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -309,8 +337,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.moshi.im.common.SubscribedCourseListReq buildPartial() {
-      com.moshi.im.common.SubscribedCourseListReq result = new com.moshi.im.common.SubscribedCourseListReq(this);
+    public com.moshi.im.common.CourseIfSubscribedReq buildPartial() {
+      com.moshi.im.common.CourseIfSubscribedReq result = new com.moshi.im.common.CourseIfSubscribedReq(this);
+      result.courseId_ = courseId_;
       result.accountId_ = accountId_;
       onBuilt();
       return result;
@@ -350,16 +379,19 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.moshi.im.common.SubscribedCourseListReq) {
-        return mergeFrom((com.moshi.im.common.SubscribedCourseListReq)other);
+      if (other instanceof com.moshi.im.common.CourseIfSubscribedReq) {
+        return mergeFrom((com.moshi.im.common.CourseIfSubscribedReq)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.moshi.im.common.SubscribedCourseListReq other) {
-      if (other == com.moshi.im.common.SubscribedCourseListReq.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.moshi.im.common.CourseIfSubscribedReq other) {
+      if (other == com.moshi.im.common.CourseIfSubscribedReq.getDefaultInstance()) return this;
+      if (other.getCourseId() != 0) {
+        setCourseId(other.getCourseId());
+      }
       if (other.getAccountId() != 0) {
         setAccountId(other.getAccountId());
       }
@@ -378,11 +410,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.moshi.im.common.SubscribedCourseListReq parsedMessage = null;
+      com.moshi.im.common.CourseIfSubscribedReq parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.moshi.im.common.SubscribedCourseListReq) e.getUnfinishedMessage();
+        parsedMessage = (com.moshi.im.common.CourseIfSubscribedReq) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -392,15 +424,41 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private int courseId_ ;
+    /**
+     * <code>int32 courseId = 1;</code>
+     */
+    public int getCourseId() {
+      return courseId_;
+    }
+    /**
+     * <code>int32 courseId = 1;</code>
+     */
+    public Builder setCourseId(int value) {
+      
+      courseId_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 courseId = 1;</code>
+     */
+    public Builder clearCourseId() {
+      
+      courseId_ = 0;
+      onChanged();
+      return this;
+    }
+
     private int accountId_ ;
     /**
-     * <code>int32 accountId = 1;</code>
+     * <code>int32 accountId = 2;</code>
      */
     public int getAccountId() {
       return accountId_;
     }
     /**
-     * <code>int32 accountId = 1;</code>
+     * <code>int32 accountId = 2;</code>
      */
     public Builder setAccountId(int value) {
       
@@ -409,7 +467,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 accountId = 1;</code>
+     * <code>int32 accountId = 2;</code>
      */
     public Builder clearAccountId() {
       
@@ -430,41 +488,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:com.moshi.im.common.SubscribedCourseListReq)
+    // @@protoc_insertion_point(builder_scope:com.moshi.im.common.CourseIfSubscribedReq)
   }
 
-  // @@protoc_insertion_point(class_scope:com.moshi.im.common.SubscribedCourseListReq)
-  private static final com.moshi.im.common.SubscribedCourseListReq DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:com.moshi.im.common.CourseIfSubscribedReq)
+  private static final com.moshi.im.common.CourseIfSubscribedReq DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.moshi.im.common.SubscribedCourseListReq();
+    DEFAULT_INSTANCE = new com.moshi.im.common.CourseIfSubscribedReq();
   }
 
-  public static com.moshi.im.common.SubscribedCourseListReq getDefaultInstance() {
+  public static com.moshi.im.common.CourseIfSubscribedReq getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<SubscribedCourseListReq>
-      PARSER = new com.google.protobuf.AbstractParser<SubscribedCourseListReq>() {
+  private static final com.google.protobuf.Parser<CourseIfSubscribedReq>
+      PARSER = new com.google.protobuf.AbstractParser<CourseIfSubscribedReq>() {
     @java.lang.Override
-    public SubscribedCourseListReq parsePartialFrom(
+    public CourseIfSubscribedReq parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new SubscribedCourseListReq(input, extensionRegistry);
+      return new CourseIfSubscribedReq(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<SubscribedCourseListReq> parser() {
+  public static com.google.protobuf.Parser<CourseIfSubscribedReq> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<SubscribedCourseListReq> getParserForType() {
+  public com.google.protobuf.Parser<CourseIfSubscribedReq> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.moshi.im.common.SubscribedCourseListReq getDefaultInstanceForType() {
+  public com.moshi.im.common.CourseIfSubscribedReq getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

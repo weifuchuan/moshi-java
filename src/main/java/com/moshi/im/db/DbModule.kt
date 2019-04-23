@@ -1,16 +1,26 @@
 package com.moshi.im.db
 
+import com.moshi.im.common.CourseServiceGrpc
 import com.moshi.im.kit.ConfigKit
 import io.lettuce.core.RedisClient
 import io.lettuce.core.RedisURI
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.codec.RedisCodec
 import org.codejargon.feather.Provides
+import org.redisson.Redisson
+import org.redisson.api.RedissonClient
+import org.redisson.config.Config
 import org.tio.utils.jfinal.Prop
 
 import javax.inject.Singleton
 
 class DbModule {
+
+  @Provides
+  @Singleton
+  fun redisURI(config: Prop): RedisURI {
+    return ConfigKit.createConfigObject(config.properties, RedisURI::class.java, "redis")
+  }
 
   @Provides
   @Singleton
@@ -37,7 +47,21 @@ class DbModule {
 
   @Provides
   @Singleton
-  fun dao(redisClient: RedisClient /* for exec R.init() */): IDao {
-    return DaoByRedis()
+  fun dao(
+    redisClient: RedisClient /* for exec R.init() */,
+    courseService: CourseServiceGrpc.CourseServiceBlockingStub,
+    redissonClient: RedissonClient
+  ): IDao {
+    return DaoByRedis(courseService, redissonClient)
+  }
+
+  @Provides
+  @Singleton
+  fun redissonClient(uri: RedisURI): RedissonClient {
+    val config = Config()
+    val singleServerConfig = config.useSingleServer()
+    singleServerConfig.setAddress("redis://" + uri.host + ":" + uri.port)
+    if (uri.password != null) singleServerConfig.password = String(uri.password)
+    return Redisson.create(config)
   }
 }

@@ -4,12 +4,13 @@ import com.moshi.im.common.model.MessageDetailModel
 import com.moshi.im.common.model.RoomInfoModel
 import com.moshi.im.common.payload.ChatReqPayload
 import com.jfinal.kit.Kv
+import com.jfinal.kit.Ret
 import org.tio.utils.page.Page
 import java.util.concurrent.ExecutionException
 
 interface IDao {
   @Throws(Exception::class)
-  fun sendChatMsg(payload: ChatReqPayload, from: String): Kv
+  fun sendChatMsg(payload: ChatReqPayload, from: String): Ret
 
   @Throws(Exception::class)
   fun saveMessage(msg: MessageDetailModel, roomKey: String)
@@ -40,11 +41,14 @@ interface IDao {
 
   fun nextId(): String
 
-   fun onlineCountForUserId(userId: String): Int
+  fun onlineCountForUserId(userId: String): Int
 
-   fun incrOnlineCount(userId: String)
+  fun incrOnlineCount(userId: String)
 
-   fun decrOnlineCount(userId: String)
+  fun decrOnlineCount(userId: String)
 
-   fun isOnline(userId: String): Boolean
+  fun isOnline(userId: String): Boolean
+
+  fun joinGroup(accountId: Int, groupId:Int):Ret
+
 }

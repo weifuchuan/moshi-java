@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RoomInfoModel extends HashMap {
-
+  
   // 群聊的id
   public RoomInfoModel setId(String id) {
     return set("id", id);

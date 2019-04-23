@@ -10,5 +10,8 @@
   "content": {
     "type": "string",
     "comment": "内容"
+  },
+  "uuid": {
+    "type": "string"
   }
 }

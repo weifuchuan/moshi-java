@@ -74,6 +74,26 @@ public final class ImGrpc {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_moshi_im_common_SubscribedCourseListReply_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_moshi_im_common_CourseIfSubscribedReq_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_moshi_im_common_CourseIfSubscribedReply_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_moshi_im_common_CourseIfSubscribedReply_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReq_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_moshi_im_common_SubscriberListOfCourseReq_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReply_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_moshi_im_common_SubscriberListOfCourseReply_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -101,38 +121,51 @@ public final class ImGrpc {
       "sg\030\002 \001(\t\"\205\001\n\006Course\022\n\n\002id\030\001 \001(\005\022\021\n\taccou" +
       "ntId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\022\n\nshortIntro\030\004" +
       " \001(\t\022\026\n\016introduceImage\030\005 \001(\t\022\022\n\ncourseTy" +
-      "pe\030\006 \001(\t\022\016\n\006status\030\007 \001(\005\",\n\027SubscribedCo" +
-      "urseListReq\022\021\n\taccountId\030\001 \001(\t\"H\n\031Subscr" +
+      "pe\030\006 \001(\005\022\016\n\006status\030\007 \001(\005\",\n\027SubscribedCo" +
+      "urseListReq\022\021\n\taccountId\030\001 \001(\005\"H\n\031Subscr" +
       "ibedCourseListReply\022+\n\006course\030\001 \003(\0132\033.co" +
-      "m.moshi.im.common.Course*\302\003\n\007Command\022\022\n\016" +
-      "COMMAND_UNKNOW\020\000\022\032\n\026COMMAND_JOIN_GROUP_R" +
-      "EQ\020\005\022\033\n\027COMMAND_JOIN_GROUP_RESP\020\006\022\"\n\036COM" +
-      "MAND_JOIN_GROUP_NOTIFY_RESP\020\007\022\"\n\036COMMAND" +
-      "_EXIT_GROUP_NOTIFY_RESP\020\010\022\024\n\020COMMAND_CHA" +
-      "T_REQ\020\t\022\025\n\021COMMAND_CHAT_RESP\020\n\022\031\n\025COMMAN" +
-      "D_HEARTBEAT_REQ\020\017\022\032\n\026COMMAND_HEARTBEAT_R" +
-      "ESP\020\020\022\027\n\023COMMAND_REMIND_PUSH\020\032\022\027\n\023COMMAN" +
-      "D_ONLINE_PUSH\020\034\022\030\n\024COMMAND_OFFLINE_PUSH\020" +
-      "\035\022\034\n\030COMMAND_CLEAR_REMIND_REQ\020\033\022\'\n#COMMA" +
-      "ND_ONLINE_NOTIFY_SUBSCRIBE_REQ\020\036\022\024\n\020COMM" +
-      "AND_CALL_REQ\020\037\022\025\n\021COMMAND_CALL_RESP\020 *!\n" +
-      "\004Code\022\006\n\002OK\020\000\022\021\n\004FAIL\020\377\377\377\377\377\377\377\377\377\001* \n\004Role" +
-      "\022\014\n\010CUSTOMER\020\000\022\n\n\006WAITER\020\0012\307\002\n\016AccountSe" +
-      "rvice\022c\n\rFetchBaseInfo\022\'.com.moshi.im.co" +
-      "mmon.AccountBaseInfoReq\032).com.moshi.im.c" +
-      "ommon.AccountBaseInfoReply\022\200\001\n\030FetchAcco" +
-      "untListBaseInfo\0220.com.moshi.im.common.Fe" +
-      "tchAccountListBaseInfoReq\0322.com.moshi.im" +
-      ".common.FetchAccountListBaseInfoReply\022M\n" +
-      "\014FetchWaiters\022\037.com.moshi.im.common.Wait" +
-      "ersReq\032\034.com.moshi.im.common.Waiters2S\n\013" +
-      "AuthService\022D\n\004Auth\022\034.com.moshi.im.commo" +
-      "n.AuthReq\032\036.com.moshi.im.common.AuthRepl" +
-      "y2\207\001\n\rCourseService\022v\n\026SubscribedCourseL" +
-      "istBy\022,.com.moshi.im.common.SubscribedCo" +
-      "urseListReq\032..com.moshi.im.common.Subscr" +
-      "ibedCourseListReplyB$\n\023com.moshi.im.comm" +
-      "onB\006ImGrpcP\001\242\002\002CSb\006proto3"
+      "m.moshi.im.common.Course\"<\n\025CourseIfSubs" +
+      "cribedReq\022\020\n\010courseId\030\001 \001(\005\022\021\n\taccountId" +
+      "\030\002 \001(\005\"o\n\027CourseIfSubscribedReply\022\'\n\004cod" +
+      "e\030\001 \001(\0162\031.com.moshi.im.common.Code\022+\n\006co" +
+      "urse\030\002 \001(\0132\033.com.moshi.im.common.Course\"" +
+      "\'\n\031SubscriberListOfCourseReq\022\n\n\002id\030\001 \001(\005" +
+      "\"T\n\033SubscriberListOfCourseReply\0225\n\007accou" +
+      "nt\030\001 \003(\0132$.com.moshi.im.common.AccountBa" +
+      "seInfo*\245\003\n\007Command\022\022\n\016COMMAND_UNKNOW\020\000\022\032" +
+      "\n\026COMMAND_JOIN_GROUP_REQ\020\005\022\"\n\036COMMAND_JO" +
+      "IN_GROUP_NOTIFY_PUSH\020\007\022\"\n\036COMMAND_EXIT_G" +
+      "ROUP_NOTIFY_PUSH\020\010\022\024\n\020COMMAND_CHAT_REQ\020\t" +
+      "\022\025\n\021COMMAND_CHAT_RESP\020\n\022\031\n\025COMMAND_HEART" +
+      "BEAT_REQ\020\017\022\032\n\026COMMAND_HEARTBEAT_RESP\020\020\022\027" +
+      "\n\023COMMAND_REMIND_PUSH\020\032\022\027\n\023COMMAND_ONLIN" +
+      "E_PUSH\020\034\022\030\n\024COMMAND_OFFLINE_PUSH\020\035\022\034\n\030CO" +
+      "MMAND_CLEAR_REMIND_REQ\020\033\022\'\n#COMMAND_ONLI" +
+      "NE_NOTIFY_SUBSCRIBE_REQ\020\036\022\024\n\020COMMAND_CAL" +
+      "L_REQ\020\037\022\025\n\021COMMAND_CALL_RESP\020 *!\n\004Code\022\006" +
+      "\n\002OK\020\000\022\021\n\004FAIL\020\377\377\377\377\377\377\377\377\377\001* \n\004Role\022\014\n\010CUS" +
+      "TOMER\020\000\022\n\n\006WAITER\020\0012\307\002\n\016AccountService\022c" +
+      "\n\rFetchBaseInfo\022\'.com.moshi.im.common.Ac" +
+      "countBaseInfoReq\032).com.moshi.im.common.A" +
+      "ccountBaseInfoReply\022\200\001\n\030FetchAccountList" +
+      "BaseInfo\0220.com.moshi.im.common.FetchAcco" +
+      "untListBaseInfoReq\0322.com.moshi.im.common" +
+      ".FetchAccountListBaseInfoReply\022M\n\014FetchW" +
+      "aiters\022\037.com.moshi.im.common.WaitersReq\032" +
+      "\034.com.moshi.im.common.Waiters2S\n\013AuthSer" +
+      "vice\022D\n\004Auth\022\034.com.moshi.im.common.AuthR" +
+      "eq\032\036.com.moshi.im.common.AuthReply2\363\002\n\rC" +
+      "ourseService\022v\n\026SubscribedCourseListBy\022," +
+      ".com.moshi.im.common.SubscribedCourseLis" +
+      "tReq\032..com.moshi.im.common.SubscribedCou" +
+      "rseListReply\022n\n\022CourseIfSubscribed\022*.com" +
+      ".moshi.im.common.CourseIfSubscribedReq\032," +
+      ".com.moshi.im.common.CourseIfSubscribedR" +
+      "eply\022z\n\026SubscriberListOfCourse\022..com.mos" +
+      "hi.im.common.SubscriberListOfCourseReq\0320" +
+      ".com.moshi.im.common.SubscriberListOfCou" +
+      "rseReplyB$\n\023com.moshi.im.commonB\006ImGrpcP" +
+      "\001\242\002\002CSb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -218,6 +251,30 @@ public final class ImGrpc {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_moshi_im_common_SubscribedCourseListReply_descriptor,
         new java.lang.String[] { "Course", });
+    internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_com_moshi_im_common_CourseIfSubscribedReq_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_moshi_im_common_CourseIfSubscribedReq_descriptor,
+        new java.lang.String[] { "CourseId", "AccountId", });
+    internal_static_com_moshi_im_common_CourseIfSubscribedReply_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_com_moshi_im_common_CourseIfSubscribedReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_moshi_im_common_CourseIfSubscribedReply_descriptor,
+        new java.lang.String[] { "Code", "Course", });
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReq_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReq_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_moshi_im_common_SubscriberListOfCourseReq_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReply_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_com_moshi_im_common_SubscriberListOfCourseReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_moshi_im_common_SubscriberListOfCourseReply_descriptor,
+        new java.lang.String[] { "Account", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

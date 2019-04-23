@@ -1,5 +1,6 @@
 package com.moshi.im.server
 
+import com.moshi.common.mq.RedisMQ
 import com.moshi.im.common.AccountServiceGrpc
 import com.moshi.im.common.AuthServiceGrpc
 import com.moshi.im.db.IDao
@@ -17,6 +18,7 @@ import com.moshi.im.server.websocket.server.WsServerAioListener
 import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
 import io.lettuce.core.RedisURI
 import org.redisson.Redisson
+import org.redisson.api.RedissonClient
 import org.redisson.config.Config
 import org.tio.cluster.TioClusterConfig
 import org.tio.cluster.redisson.RedissonTioClusterTopic
@@ -38,9 +40,10 @@ class ServerModule {
     handler: IWsMsgHandler,
     listener: WsServerAioListener,
     ipStatListener: IpStatListener,
-    tioClusterConfig: TioClusterConfig
+    tioClusterConfig: TioClusterConfig,
+    mq: RedisMQ
   ): ImServer {
-    return ImServer(config, handler, listener, ipStatListener, tioClusterConfig)
+    return ImServer(config, handler, listener, ipStatListener, tioClusterConfig, mq)
   }
 
   @Provides
@@ -49,9 +52,9 @@ class ServerModule {
     accountService: AccountServiceGrpc.AccountServiceBlockingStub,
     authService: AuthServiceGrpc.AuthServiceBlockingStub,
     realHandler: IActualHandler,
-    dao:IDao
+    dao: IDao
   ): IWsMsgHandler {
-    return MainHandler(accountService, authService, realHandler,dao)
+    return MainHandler(accountService, authService, realHandler, dao)
   }
 
   @Provides
@@ -75,13 +78,14 @@ class ServerModule {
 
   @Provides
   @Singleton
-  fun tioClusterConfig(uri: RedisURI): TioClusterConfig {
-    val config = Config()
-    val singleServerConfig = config.useSingleServer()
-    singleServerConfig.setAddress("redis://" + uri.host + ":" + uri.port)
-    if (uri.password != null) singleServerConfig.password = String(uri.password)
-    val client = Redisson.create(config)
+  fun tioClusterConfig(client: RedissonClient): TioClusterConfig {
     val topic = RedissonTioClusterTopic("moshi-im", client)
     return TioClusterConfig(topic)
+  }
+
+  @Provides
+  @Singleton
+  fun mq(uri: RedisURI): RedisMQ {
+    return RedisMQ(uri)
   }
 }

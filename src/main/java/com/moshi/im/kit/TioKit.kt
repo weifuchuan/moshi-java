@@ -5,8 +5,11 @@ import com.moshi.im.common.ImPacketCoder
 import com.moshi.im.server.websocket.common.WsResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.tio.cluster.TioClusterVo
 import org.tio.core.ChannelContext
+import org.tio.core.GroupContext
 import org.tio.core.Tio
+import org.tio.core.intf.Packet
 import org.tio.utils.lock.SetWithLock
 
 import java.util.Collections
@@ -27,6 +30,29 @@ object TioKit {
       userId,
       WsResponse.fromText(ImPacketCoder.encodeToString(packet), "UTF-8")
     )!!
+  }
+
+  fun notifyClusterForAll(groupContext: GroupContext, packet: Packet) {
+    val tioClusterConfig = groupContext.getTioClusterConfig()
+    val tioClusterVo = TioClusterVo(packet)
+    tioClusterVo.isToAll = true
+    tioClusterConfig.publish(tioClusterVo)
+  }
+
+  fun notifyClusterForAll(ctx: ChannelContext, packet: Packet) {
+    notifyClusterForAll(ctx.groupContext, packet)
+  }
+
+  fun notifyClusterForAll(ctx: ChannelContext, packet: ImPacket<*>) {
+    notifyClusterForAll(ctx, packImPacket(packet))
+  }
+
+  fun notifyClusterForAll(groupContext: GroupContext, packet: ImPacket<*>) {
+    notifyClusterForAll(groupContext, packImPacket(packet))
+  }
+
+  fun packImPacket(packet: ImPacket<*>): WsResponse {
+    return WsResponse.fromText(ImPacketCoder.encodeToString(packet), "UTF-8")
   }
 
 }

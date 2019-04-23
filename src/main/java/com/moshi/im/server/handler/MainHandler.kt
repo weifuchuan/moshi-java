@@ -26,7 +26,7 @@ class MainHandler(
   private val accountService: AccountServiceBlockingStub,
   private val authService: AuthServiceGrpc.AuthServiceBlockingStub,
   private val realHandler: IActualHandler,
-  private val dao :IDao
+  private val dao: IDao
 ) : IWsMsgHandler {
 
   @Throws(Exception::class)
@@ -64,6 +64,7 @@ class MainHandler(
           )
         )
         dao.incrOnlineCount(ctx.userid)
+        C.mq.publish("online", Kv.by("userId", ctx.userid))
       } else {
         Tio.close(ctx, "account not exists")
       }
@@ -77,13 +78,13 @@ class MainHandler(
   @Throws(Exception::class)
   override fun onBytes(req: WsRequest, bytes: ByteArray, ctx: ChannelContext): Any {
     val packet = ImPacketCoder.decode(bytes)
-    return realHandler.handle(packet, req, ctx)
+    return realHandler.handle(packet, req, ctx)!!
   }
 
   @Throws(Exception::class)
   override fun onText(req: WsRequest, text: String, ctx: ChannelContext): Any {
     val packet = ImPacketCoder.decodeFromString(text)
-    return realHandler.handle(packet, req, ctx)
+    return realHandler.handle(packet, req, ctx)!!
   }
 
   @Throws(Exception::class)
@@ -93,6 +94,7 @@ class MainHandler(
       Collections.unmodifiableMap(Kv.create().set(Kv.by("type", "close").set("ctx", ctx)))
     )
     dao.decrOnlineCount(ctx.userid)
+    C.mq.publish("offline", Kv.by("userId", ctx.userid))
     return null
   }
 

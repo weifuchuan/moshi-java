@@ -59,6 +59,70 @@ public final class CourseServiceGrpc {
      return getSubscribedCourseListByMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.moshi.im.common.CourseIfSubscribedReq,
+      com.moshi.im.common.CourseIfSubscribedReply> getCourseIfSubscribedMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CourseIfSubscribed",
+      requestType = com.moshi.im.common.CourseIfSubscribedReq.class,
+      responseType = com.moshi.im.common.CourseIfSubscribedReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.moshi.im.common.CourseIfSubscribedReq,
+      com.moshi.im.common.CourseIfSubscribedReply> getCourseIfSubscribedMethod() {
+    io.grpc.MethodDescriptor<com.moshi.im.common.CourseIfSubscribedReq, com.moshi.im.common.CourseIfSubscribedReply> getCourseIfSubscribedMethod;
+    if ((getCourseIfSubscribedMethod = CourseServiceGrpc.getCourseIfSubscribedMethod) == null) {
+      synchronized (CourseServiceGrpc.class) {
+        if ((getCourseIfSubscribedMethod = CourseServiceGrpc.getCourseIfSubscribedMethod) == null) {
+          CourseServiceGrpc.getCourseIfSubscribedMethod = getCourseIfSubscribedMethod = 
+              io.grpc.MethodDescriptor.<com.moshi.im.common.CourseIfSubscribedReq, com.moshi.im.common.CourseIfSubscribedReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "com.moshi.im.common.CourseService", "CourseIfSubscribed"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.moshi.im.common.CourseIfSubscribedReq.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.moshi.im.common.CourseIfSubscribedReply.getDefaultInstance()))
+                  .setSchemaDescriptor(new CourseServiceMethodDescriptorSupplier("CourseIfSubscribed"))
+                  .build();
+          }
+        }
+     }
+     return getCourseIfSubscribedMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.moshi.im.common.SubscriberListOfCourseReq,
+      com.moshi.im.common.SubscriberListOfCourseReply> getSubscriberListOfCourseMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SubscriberListOfCourse",
+      requestType = com.moshi.im.common.SubscriberListOfCourseReq.class,
+      responseType = com.moshi.im.common.SubscriberListOfCourseReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.moshi.im.common.SubscriberListOfCourseReq,
+      com.moshi.im.common.SubscriberListOfCourseReply> getSubscriberListOfCourseMethod() {
+    io.grpc.MethodDescriptor<com.moshi.im.common.SubscriberListOfCourseReq, com.moshi.im.common.SubscriberListOfCourseReply> getSubscriberListOfCourseMethod;
+    if ((getSubscriberListOfCourseMethod = CourseServiceGrpc.getSubscriberListOfCourseMethod) == null) {
+      synchronized (CourseServiceGrpc.class) {
+        if ((getSubscriberListOfCourseMethod = CourseServiceGrpc.getSubscriberListOfCourseMethod) == null) {
+          CourseServiceGrpc.getSubscriberListOfCourseMethod = getSubscriberListOfCourseMethod = 
+              io.grpc.MethodDescriptor.<com.moshi.im.common.SubscriberListOfCourseReq, com.moshi.im.common.SubscriberListOfCourseReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "com.moshi.im.common.CourseService", "SubscriberListOfCourse"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.moshi.im.common.SubscriberListOfCourseReq.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.moshi.im.common.SubscriberListOfCourseReply.getDefaultInstance()))
+                  .setSchemaDescriptor(new CourseServiceMethodDescriptorSupplier("SubscriberListOfCourse"))
+                  .build();
+          }
+        }
+     }
+     return getSubscriberListOfCourseMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -93,6 +157,20 @@ public final class CourseServiceGrpc {
       asyncUnimplementedUnaryCall(getSubscribedCourseListByMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void courseIfSubscribed(com.moshi.im.common.CourseIfSubscribedReq request,
+        io.grpc.stub.StreamObserver<com.moshi.im.common.CourseIfSubscribedReply> responseObserver) {
+      asyncUnimplementedUnaryCall(getCourseIfSubscribedMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void subscriberListOfCourse(com.moshi.im.common.SubscriberListOfCourseReq request,
+        io.grpc.stub.StreamObserver<com.moshi.im.common.SubscriberListOfCourseReply> responseObserver) {
+      asyncUnimplementedUnaryCall(getSubscriberListOfCourseMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -102,6 +180,20 @@ public final class CourseServiceGrpc {
                 com.moshi.im.common.SubscribedCourseListReq,
                 com.moshi.im.common.SubscribedCourseListReply>(
                   this, METHODID_SUBSCRIBED_COURSE_LIST_BY)))
+          .addMethod(
+            getCourseIfSubscribedMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.moshi.im.common.CourseIfSubscribedReq,
+                com.moshi.im.common.CourseIfSubscribedReply>(
+                  this, METHODID_COURSE_IF_SUBSCRIBED)))
+          .addMethod(
+            getSubscriberListOfCourseMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.moshi.im.common.SubscriberListOfCourseReq,
+                com.moshi.im.common.SubscriberListOfCourseReply>(
+                  this, METHODID_SUBSCRIBER_LIST_OF_COURSE)))
           .build();
     }
   }
@@ -131,6 +223,22 @@ public final class CourseServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSubscribedCourseListByMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void courseIfSubscribed(com.moshi.im.common.CourseIfSubscribedReq request,
+        io.grpc.stub.StreamObserver<com.moshi.im.common.CourseIfSubscribedReply> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCourseIfSubscribedMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void subscriberListOfCourse(com.moshi.im.common.SubscriberListOfCourseReq request,
+        io.grpc.stub.StreamObserver<com.moshi.im.common.SubscriberListOfCourseReply> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSubscriberListOfCourseMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -156,6 +264,20 @@ public final class CourseServiceGrpc {
     public com.moshi.im.common.SubscribedCourseListReply subscribedCourseListBy(com.moshi.im.common.SubscribedCourseListReq request) {
       return blockingUnaryCall(
           getChannel(), getSubscribedCourseListByMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.moshi.im.common.CourseIfSubscribedReply courseIfSubscribed(com.moshi.im.common.CourseIfSubscribedReq request) {
+      return blockingUnaryCall(
+          getChannel(), getCourseIfSubscribedMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.moshi.im.common.SubscriberListOfCourseReply subscriberListOfCourse(com.moshi.im.common.SubscriberListOfCourseReq request) {
+      return blockingUnaryCall(
+          getChannel(), getSubscriberListOfCourseMethod(), getCallOptions(), request);
     }
   }
 
@@ -184,9 +306,27 @@ public final class CourseServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getSubscribedCourseListByMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.moshi.im.common.CourseIfSubscribedReply> courseIfSubscribed(
+        com.moshi.im.common.CourseIfSubscribedReq request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCourseIfSubscribedMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.moshi.im.common.SubscriberListOfCourseReply> subscriberListOfCourse(
+        com.moshi.im.common.SubscriberListOfCourseReq request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSubscriberListOfCourseMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SUBSCRIBED_COURSE_LIST_BY = 0;
+  private static final int METHODID_COURSE_IF_SUBSCRIBED = 1;
+  private static final int METHODID_SUBSCRIBER_LIST_OF_COURSE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -208,6 +348,14 @@ public final class CourseServiceGrpc {
         case METHODID_SUBSCRIBED_COURSE_LIST_BY:
           serviceImpl.subscribedCourseListBy((com.moshi.im.common.SubscribedCourseListReq) request,
               (io.grpc.stub.StreamObserver<com.moshi.im.common.SubscribedCourseListReply>) responseObserver);
+          break;
+        case METHODID_COURSE_IF_SUBSCRIBED:
+          serviceImpl.courseIfSubscribed((com.moshi.im.common.CourseIfSubscribedReq) request,
+              (io.grpc.stub.StreamObserver<com.moshi.im.common.CourseIfSubscribedReply>) responseObserver);
+          break;
+        case METHODID_SUBSCRIBER_LIST_OF_COURSE:
+          serviceImpl.subscriberListOfCourse((com.moshi.im.common.SubscriberListOfCourseReq) request,
+              (io.grpc.stub.StreamObserver<com.moshi.im.common.SubscriberListOfCourseReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -271,6 +419,8 @@ public final class CourseServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new CourseServiceFileDescriptorSupplier())
               .addMethod(getSubscribedCourseListByMethod())
+              .addMethod(getCourseIfSubscribedMethod())
+              .addMethod(getSubscriberListOfCourseMethod())
               .build();
         }
       }

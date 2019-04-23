@@ -38,15 +38,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codejargon.feather</groupId>
-            <artifactId>feather</artifactId>
-            <version>1.0</version>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>1.2.0</version>
         </dependency>
 
         <dependency>
-            <groupId>io.zbus</groupId>
-            <artifactId>zbus</artifactId>
-            <version>0.11.5</version>
+            <groupId>org.codejargon.feather</groupId>
+            <artifactId>feather</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
@@ -109,12 +109,12 @@
             <version>1.1.15</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
         </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>

@@ -21,7 +21,3 @@
 #namespace("issue")
   #include("issue.sql")
 #end
-
-#namespace("subs")
-  #include("subs.sql")
-#end

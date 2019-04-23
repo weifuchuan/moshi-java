@@ -17,5 +17,8 @@
   },
   "msgKey": {
     "type": "string"
+  },
+  "type": {
+    "type": "int"
   }
 }

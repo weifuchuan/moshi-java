@@ -22,28 +22,20 @@ public enum Command
   COMMAND_JOIN_GROUP_REQ(5),
   /**
    * <pre>
-   * 申请进入群组响应
-   * </pre>
-   *
-   * <code>COMMAND_JOIN_GROUP_RESP = 6;</code>
-   */
-  COMMAND_JOIN_GROUP_RESP(6),
-  /**
-   * <pre>
    * 进入群组通知
    * </pre>
    *
-   * <code>COMMAND_JOIN_GROUP_NOTIFY_RESP = 7;</code>
+   * <code>COMMAND_JOIN_GROUP_NOTIFY_PUSH = 7;</code>
    */
-  COMMAND_JOIN_GROUP_NOTIFY_RESP(7),
+  COMMAND_JOIN_GROUP_NOTIFY_PUSH(7),
   /**
    * <pre>
    * 退出群组通知
    * </pre>
    *
-   * <code>COMMAND_EXIT_GROUP_NOTIFY_RESP = 8;</code>
+   * <code>COMMAND_EXIT_GROUP_NOTIFY_PUSH = 8;</code>
    */
-  COMMAND_EXIT_GROUP_NOTIFY_RESP(8),
+  COMMAND_EXIT_GROUP_NOTIFY_PUSH(8),
   /**
    * <pre>
    * 聊天请求
@@ -141,28 +133,20 @@ public enum Command
   public static final int COMMAND_JOIN_GROUP_REQ_VALUE = 5;
   /**
    * <pre>
-   * 申请进入群组响应
-   * </pre>
-   *
-   * <code>COMMAND_JOIN_GROUP_RESP = 6;</code>
-   */
-  public static final int COMMAND_JOIN_GROUP_RESP_VALUE = 6;
-  /**
-   * <pre>
    * 进入群组通知
    * </pre>
    *
-   * <code>COMMAND_JOIN_GROUP_NOTIFY_RESP = 7;</code>
+   * <code>COMMAND_JOIN_GROUP_NOTIFY_PUSH = 7;</code>
    */
-  public static final int COMMAND_JOIN_GROUP_NOTIFY_RESP_VALUE = 7;
+  public static final int COMMAND_JOIN_GROUP_NOTIFY_PUSH_VALUE = 7;
   /**
    * <pre>
    * 退出群组通知
    * </pre>
    *
-   * <code>COMMAND_EXIT_GROUP_NOTIFY_RESP = 8;</code>
+   * <code>COMMAND_EXIT_GROUP_NOTIFY_PUSH = 8;</code>
    */
-  public static final int COMMAND_EXIT_GROUP_NOTIFY_RESP_VALUE = 8;
+  public static final int COMMAND_EXIT_GROUP_NOTIFY_PUSH_VALUE = 8;
   /**
    * <pre>
    * 聊天请求
@@ -265,9 +249,8 @@ public enum Command
     switch (value) {
       case 0: return COMMAND_UNKNOW;
       case 5: return COMMAND_JOIN_GROUP_REQ;
-      case 6: return COMMAND_JOIN_GROUP_RESP;
-      case 7: return COMMAND_JOIN_GROUP_NOTIFY_RESP;
-      case 8: return COMMAND_EXIT_GROUP_NOTIFY_RESP;
+      case 7: return COMMAND_JOIN_GROUP_NOTIFY_PUSH;
+      case 8: return COMMAND_EXIT_GROUP_NOTIFY_PUSH;
       case 9: return COMMAND_CHAT_REQ;
       case 10: return COMMAND_CHAT_RESP;
       case 15: return COMMAND_HEARTBEAT_REQ;

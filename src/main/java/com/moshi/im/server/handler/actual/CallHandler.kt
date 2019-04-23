@@ -64,7 +64,6 @@ class CallHandler(dao: IDao) : BaseActualHandler(dao) {
 
   @Throws(Exception::class)
   private fun handle(action: String, payload: JSONObject, req: WsRequest, ctx: ChannelContext): Map<*, *> {
-    //    log.info("action = {}, payload = {}", action, JSON.toJSONString(payload));
     when (action) {
       "fetchMyAccountBaseInfo" -> {
         val account = ctx.getAttribute("account") as AccountBaseInfo

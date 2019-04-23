@@ -55,6 +55,16 @@ public class MessageDetailModel extends HashMap {
     return (String)get("to");
   }
   
+  
+  public MessageDetailModel setType(Integer type) {
+    return set("type", type);
+  }
+
+  
+  public Integer getType() {
+    return (Integer)get("type");
+  }
+  
 
   public MessageDetailModel set(String key, Object val) {
     put(key, val);

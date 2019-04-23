@@ -13,10 +13,9 @@ enum Command {
     COMMAND_UNKNOW = 0;
 
     COMMAND_JOIN_GROUP_REQ = 5; // 申请进入群组
-    COMMAND_JOIN_GROUP_RESP = 6; // 申请进入群组响应
 
-    COMMAND_JOIN_GROUP_NOTIFY_RESP = 7; // 进入群组通知
-    COMMAND_EXIT_GROUP_NOTIFY_RESP = 8; // 退出群组通知
+    COMMAND_JOIN_GROUP_NOTIFY_PUSH = 7; // 进入群组通知
+    COMMAND_EXIT_GROUP_NOTIFY_PUSH = 8; // 退出群组通知
 
     COMMAND_CHAT_REQ = 9; // 聊天请求
     COMMAND_CHAT_RESP = 10; // 聊天响应
@@ -104,18 +103,38 @@ message Course {
     string name = 3;
     string shortIntro = 4;
     string introduceImage = 5;
-    string courseType = 6;
+    int32 courseType = 6;
     int32 status = 7;
 }
 
 message SubscribedCourseListReq {
-    string accountId = 1;
+    int32 accountId = 1;
 }
 
 message SubscribedCourseListReply {
     repeated Course course = 1;
 }
 
+message CourseIfSubscribedReq {
+    int32 courseId = 1;
+    int32 accountId = 2;
+}
+
+message CourseIfSubscribedReply {
+    Code code = 1;
+    Course course = 2;
+}
+
+message SubscriberListOfCourseReq {
+    int32 id = 1;
+}
+
+message SubscriberListOfCourseReply {
+    repeated AccountBaseInfo account = 1;
+}
+
 service CourseService {
     rpc SubscribedCourseListBy (SubscribedCourseListReq) returns (SubscribedCourseListReply);
+    rpc CourseIfSubscribed (CourseIfSubscribedReq) returns (CourseIfSubscribedReply);
+    rpc SubscriberListOfCourse (SubscriberListOfCourseReq) returns (SubscriberListOfCourseReply);
 }

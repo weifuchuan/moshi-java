@@ -1,0 +1,8 @@
+{
+  "accountId": {
+    "type": "int"
+  },
+  "groupId": {
+    "type": "int"
+  }
+}

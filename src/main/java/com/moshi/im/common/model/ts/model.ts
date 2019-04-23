@@ -19,6 +19,9 @@ export interface IMessageDetailModel extends IModel {
     
     to: string;
     
+    
+    type: number;
+    
 }
 
 export interface IRoomInfoModel extends IModel {

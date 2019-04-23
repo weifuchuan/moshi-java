@@ -37,6 +37,17 @@ public class ChatReqPayload extends BasePayload {
     return (Integer)get("type");
   }
 
+  
+  public ChatReqPayload setUuid(String uuid) {
+    set("uuid", uuid);
+    return this;
+  }
+
+  
+  public String getUuid() {
+    return (String)get("uuid");
+  }
+
 
   public static ChatReqPayload from(Map obj) {
     ChatReqPayload model = new ChatReqPayload();

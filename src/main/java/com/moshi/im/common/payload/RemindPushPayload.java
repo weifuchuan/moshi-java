@@ -70,6 +70,17 @@ public class RemindPushPayload extends BasePayload {
     return (String)get("to");
   }
 
+  
+  public RemindPushPayload setType(Integer type) {
+    set("type", type);
+    return this;
+  }
+
+  
+  public Integer getType() {
+    return (Integer)get("type");
+  }
+
 
   public static RemindPushPayload from(Map obj) {
     RemindPushPayload model = new RemindPushPayload();

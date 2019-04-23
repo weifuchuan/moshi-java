@@ -19,7 +19,7 @@ import java.util.List;
 import static cn.hutool.core.util.BooleanUtil.isTrue;
 
 public class _ModelGenerator {
-  static String PAYLOAD_MODEL_DIR = "model";
+  static String PAYLOAD_MODEL_DIR = "im/model";
   static String OUTPUT_DIR = "com/moshi/im/common/model";
 
   public static void main(String[] args) {

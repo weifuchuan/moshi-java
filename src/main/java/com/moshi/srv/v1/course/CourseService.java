@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 public class CourseService {
   public static final CourseService me = new CourseService();
 
-  private static final String cacheName = "course";
+  public static final String cacheName = "course";
 
   private Course dao = new Course().dao();
 

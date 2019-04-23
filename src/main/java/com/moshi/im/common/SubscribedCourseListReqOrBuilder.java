@@ -8,12 +8,7 @@ public interface SubscribedCourseListReqOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string accountId = 1;</code>
+   * <code>int32 accountId = 1;</code>
    */
-  java.lang.String getAccountId();
-  /**
-   * <code>string accountId = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getAccountIdBytes();
+  int getAccountId();
 }

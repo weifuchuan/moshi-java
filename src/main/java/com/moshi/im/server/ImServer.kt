@@ -1,12 +1,23 @@
 package com.moshi.im.server
 
+import com.jfinal.kit.Kv
+import com.moshi.common.model.Subscription
+import com.moshi.common.mq.RedisMQ
+import com.moshi.im.common.Command
+import com.moshi.im.common.ImPacket
+import com.moshi.im.common.payload.JoinGroupPayload
+import com.moshi.im.kit.TioKit
 import com.moshi.im.server.config.ImServerConfig
 import org.tio.core.stat.IpStatListener
 import org.tio.server.ServerGroupContext
 import com.moshi.im.server.websocket.server.WsServerAioListener
 import com.moshi.im.server.websocket.server.WsServerStarter
 import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.tio.cluster.TioClusterConfig
+import org.tio.core.GroupContext
 
 import java.io.IOException
 
@@ -16,12 +27,13 @@ constructor(
   handler: IWsMsgHandler,
   listener: WsServerAioListener,
   ipStatListener: IpStatListener,
-  tioClusterConfig: TioClusterConfig
+  tioClusterConfig: TioClusterConfig,
+  private val mq: RedisMQ
 ) {
   val starter: WsServerStarter = WsServerStarter(config, handler)
+  val serverGroupContext: ServerGroupContext = starter.serverGroupContext
 
   init {
-    val serverGroupContext = starter.serverGroupContext
     serverGroupContext.name = config.protocolName
     serverGroupContext.serverAioListener = listener
 
@@ -41,6 +53,21 @@ constructor(
 
   @Throws(IOException::class)
   fun start() {
+    onStart()
     starter.start()
+  }
+
+  private fun onStart() {
+    GlobalScope.launch {
+      mq.onMessage<Subscription>("subscribed") {
+        if (it.subscribeType == Subscription.SUB_TYPE_COURSE)
+          TioKit.notifyClusterForAll(
+            serverGroupContext,
+            ImPacket<JoinGroupPayload>().setCommand(Command.COMMAND_JOIN_GROUP_REQ).setPayload(
+              JoinGroupPayload().setAccountId(it.accountId).setGroupId(it.refId)
+            )
+          )
+      }
+    }
   }
 }

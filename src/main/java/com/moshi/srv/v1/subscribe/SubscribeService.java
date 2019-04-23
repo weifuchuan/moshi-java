@@ -1,9 +1,13 @@
 package com.moshi.srv.v1.subscribe;
 
+import com.jfinal.kit.Kv;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.redis.RedisPlugin;
 import com.moshi.common.model.Course;
 import com.moshi.common.model.Subscription;
+import com.moshi.common.mq.RedisMQ;
+import com.moshi.common.plugin.RedisMQPlugin;
 import com.moshi.srv.v1.course.CourseService;
 import com.moshi.subscription.SubscriptionService;
 
@@ -12,6 +16,7 @@ import java.util.Date;
 public class SubscribeService {
 
   private Subscription dao = new Subscription().dao();
+  private RedisMQ mq = RedisMQPlugin.getMq();
 
   public Ret generate(int payWay, int refId, String type, int accountId, double cost) {
     Subscription subscription = new Subscription();
@@ -48,6 +53,7 @@ public class SubscribeService {
       SubscriptionService.me.clearCache(accountId);
       CourseService.me.clearHotCache(Course.TYPE_COLUMN);
       CourseService.me.clearHotCache(Course.TYPE_VIDEO);
+      mq.publish("subscribed", subscription);
       return Ret.ok();
     } else {
       return Ret.fail("msg", "data update fail");

@@ -4,38 +4,45 @@ import com.moshi.im.common.model.MessageDetailModel
 import com.moshi.im.common.model.RoomInfoModel
 import com.moshi.im.common.payload.ChatReqPayload
 import com.jfinal.kit.Kv
+import com.jfinal.kit.Ret
+import com.moshi.im.common.*
 import io.lettuce.core.RedisFuture
 import io.lettuce.core.api.async.RedisAsyncCommands
 import io.lettuce.core.api.sync.RedisCommands
+import org.redisson.api.RedissonClient
+import org.slf4j.LoggerFactory
 import org.tio.utils.page.Page
 
 import java.util.*
 import java.util.concurrent.ExecutionException
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.stream.Collector
 import java.util.stream.Collectors
 
-class DaoByRedis : IDao {
+class DaoByRedis(
+  private val courseService: CourseServiceGrpc.CourseServiceBlockingStub,
+  private val redisson: RedissonClient
+) : IDao {
 
   @Throws(Exception::class)
-  override fun sendChatMsg(payload: ChatReqPayload, from: String): Kv {
-    val ret = Kv.create()
-    //    RedisAsyncCommands<String, Object> async = R.async();
-    //    async.setAutoFlushCommands(false);
+  override fun sendChatMsg(payload: ChatReqPayload, from: String): Ret {
+    val sync = R.sync()
+    val ret = Ret.ok()
     R.pipe { async ->
-      var msg: MessageDetailModel? = null
+      val msg = MessageDetailModel()
+        .setMsgKey(nextId())
+        .setFrom(from)
+        .setTo(payload.to)
+        .setSendAt(Date().time)
+        .setContent(payload.content)
+        .setType(payload.type)
       var room: RoomInfoModel? = null
+      val to = payload.to
+      R.setHash(async, Db.K.message(msg.msgKey), msg)
       if (payload.type == 1) {
-        val to = payload.to
         // save message
         val roomKey = Db.K.roomKey(from, to)
-        msg = MessageDetailModel()
-          .setMsgKey(nextId())
-          .setFrom(from)
-          .setTo(to)
-          .setSendAt(Date().time)
-          .setContent(payload.content)
-        R.setHash(async, Db.K.message(msg!!.msgKey), msg)
         async.lpush(Db.K.messages(roomKey), msg.msgKey)
         // join room
         async.sadd(Db.K.joinedRooms(from), roomKey)
@@ -47,11 +54,18 @@ class DaoByRedis : IDao {
         // add remind
         async.lpush(Db.K.remind(roomKey, to), msg.msgKey)
       } else {
-        // TODO: 实现群聊
+        val roomKey = Db.K.roomKey(to)
+        async.lpush(Db.K.messages(roomKey), msg.msgKey)
+        async.sadd(Db.K.joinedRooms(from), roomKey)
+        val members = sync.smembers(Db.K.members(roomKey))
+        members.add(from)
+        members.forEach { id ->
+          async.lpush(Db.K.remind(roomKey, id), msg.msgKey)
+        }
+        ret.set("members", members)
       }
       ret.set("msg", msg).set("room", room)
     }
-    //    async.flushCommands();
     return ret
   }
 
@@ -67,7 +81,7 @@ class DaoByRedis : IDao {
   override fun saveRoomInfo(room: RoomInfoModel, roomKey: String, members: Set<String>) {
     val sync = R.sync()
     if (!sync.hexists(Db.K.roomInfo(roomKey), "roomKey")) {
-      R.pipeNotRetAsync { async ->
+      R.pipe { async ->
         R.setHash(async, Db.K.roomInfo(roomKey), room)
         async.sadd(Db.K.members(roomKey), *members.toTypedArray())
       }
@@ -87,6 +101,17 @@ class DaoByRedis : IDao {
   @Throws(Exception::class)
   override fun joinedRoomList(id: String): List<Map<*, *>> {
     val sync = R.sync()
+    if (sync.get(Db.K.isFirstFetchJoinedRoom(id)) == "yes") {
+      val reply =
+        courseService.subscribedCourseListBy(SubscribedCourseListReq.newBuilder().setAccountId(id.toInt()).build())
+      R.pipe { async ->
+        reply.courseList.forEach { course ->
+          setGroupRoomInfoIfNotExists(sync, Db.K.roomKey(course.id), course, async)
+          async.sadd(Db.K.members(Db.K.roomKey(course.id)), id)
+        }
+      }
+      sync.set(Db.K.isFirstFetchJoinedRoom(id), "yes")
+    }
     val roomKeyList = sync.smembers(Db.K.joinedRooms(id)).stream()
       .collect<List<Any>, Any>(Collectors.toList<Any>() as Collector<in Any, Any, List<Any>>?)
     var ret = R.pipe { async ->
@@ -229,5 +254,59 @@ class DaoByRedis : IDao {
 
   override fun isOnline(userId: String): Boolean {
     return onlineCountForUserId(userId) > 0
+  }
+
+  override fun joinGroup(accountId: Int, groupId: Int): Ret {
+    val roomKey = Db.K.roomKey(groupId.toString())
+
+    val ret = Ret.ok()
+
+    val sync = R.sync()
+
+    val lock = redisson.getLock("lock:joinGroup:$accountId:$groupId")
+    try {
+      lock.lock(30, TimeUnit.SECONDS)
+      if (!sync.sismember(Db.K.members(roomKey), accountId))
+        R.pipe { async ->
+          val reply = courseService.courseIfSubscribed(
+            CourseIfSubscribedReq.newBuilder().setCourseId(groupId).setAccountId(accountId).build()
+          )
+          if (reply.code == Code.OK) {
+            val course = reply.course
+            setGroupRoomInfoIfNotExists(sync, roomKey, course, async)
+            async.sadd(Db.K.members(roomKey), accountId)
+          } else {
+            ret.setFail().set("msg", "未订阅")
+          }
+        }
+      else {
+        ret.setFail().set("msg", "已加入")
+      }
+    } catch (ex: Exception) {
+      log.error("join group fail: {}", ex)
+      ret.setFail().set("msg", "出错")
+    } finally {
+      lock.unlock()
+    }
+
+    return if (ret.isOk) ret.set("members", sync.smembers(Db.K.members(roomKey))) else ret
+  }
+
+  private fun setGroupRoomInfoIfNotExists(
+    sync: RedisCommands<String, Any>,
+    roomKey: String,
+    course: Course,
+    async: RedisAsyncCommands<String, Any>?
+  ) {
+    if (!sync.hexists(Db.K.roomInfo(roomKey), "roomKey")) {
+      val room =
+        RoomInfoModel().setType(2).setRoomKey(roomKey).setName(course.name)
+          .setId(course.id.toString())
+      R.setHash(async, Db.K.roomInfo(roomKey), room)
+    }
+  }
+
+  companion object {
+    private val log = LoggerFactory.getLogger(DaoByRedis::class.java)
   }
 }

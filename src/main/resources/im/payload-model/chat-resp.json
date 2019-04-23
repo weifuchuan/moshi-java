@@ -1,0 +1,9 @@
+{
+  "uuid": {
+    "type": "string"
+  },
+  "state": {
+    "type": "string",
+    "comment": "ok | fail"
+  }
+}

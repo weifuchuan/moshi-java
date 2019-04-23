@@ -1,0 +1,14 @@
+{
+  "accountId": {
+    "type": "int"
+  },
+  "nickName": {
+    "type": "string"
+  },
+  "avatar": {
+    "type": "string"
+  },
+  "groupId": {
+    "type": "int"
+  }
+}

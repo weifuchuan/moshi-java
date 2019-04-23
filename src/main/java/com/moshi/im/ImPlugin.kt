@@ -29,7 +29,7 @@ class ImPlugin : IPlugin {
 
   companion object Me {
 
-    val feather: Feather = Feather.with(CustomerServiceModule(), DbModule(), ServerModule())
+    val feather: Feather = Feather.with(ImModule(), DbModule(), ServerModule())
   }
 
 
