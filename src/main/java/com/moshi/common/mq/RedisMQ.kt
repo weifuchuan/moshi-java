@@ -48,8 +48,8 @@ class RedisMQ(uri: RedisURI) {
   }
 
   fun stop() {
-    pubCli.shutdown();
-    subCli.shutdown();
+    pubCli.shutdown()
+    subCli.shutdown()
   }
 
   companion object {

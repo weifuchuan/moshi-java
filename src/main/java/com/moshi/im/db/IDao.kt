@@ -47,6 +47,8 @@ interface IDao {
 
   fun decrOnlineCount(userId: String)
 
+  fun clearOnlineCount(userId: String)
+
   fun isOnline(userId: String): Boolean
 
   fun joinGroup(accountId: Int, groupId:Int):Ret

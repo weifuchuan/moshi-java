@@ -245,15 +245,19 @@ class DaoByRedis(
   }
 
   override fun incrOnlineCount(userId: String) {
-    R.async().incr(Db.K.onlineCount(userId))
+    R.sync().incr(Db.K.onlineCount(userId))
   }
 
   override fun decrOnlineCount(userId: String) {
-    R.async().decr(Db.K.onlineCount(userId))
+    R.sync().decr(Db.K.onlineCount(userId))
   }
 
   override fun isOnline(userId: String): Boolean {
     return onlineCountForUserId(userId) > 0
+  }
+
+  override fun clearOnlineCount(userId: String) {
+    R.sync().set(Db.K.onlineCount(userId),0)
   }
 
   override fun joinGroup(accountId: Int, groupId: Int): Ret {

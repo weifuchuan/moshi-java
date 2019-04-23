@@ -63,8 +63,8 @@ class OnlineNotifySubscribeHandler(dao: IDao) : BaseActualHandler(dao) {
 
           // if account is subscribed by me
           if (ws.whoSet.contains(context.userid) && account.id != me.id) {
-            if (dao.onlineCountForUserId(  account.id) <= 1)
             // push online notify to me
+            if (dao.onlineCountForUserId(account.id) <= 1)
               TioKit.sendWsByText(
                 ctx,
                 ImPacket<OnlineOfflinePushPayload>()
@@ -90,7 +90,7 @@ class OnlineNotifySubscribeHandler(dao: IDao) : BaseActualHandler(dao) {
             val account = context.getAttribute("account") as AccountBaseInfo
 
             if (ws.whoSet.contains(context.userid)) {
-              if (dao.onlineCountForUserId( account.id) <= 1)
+              if (dao.onlineCountForUserId(account.id) <= 1)
                 TioKit.sendWsByText(
                   ctx,
                   ImPacket<OnlineOfflinePushPayload>()
@@ -107,13 +107,62 @@ class OnlineNotifySubscribeHandler(dao: IDao) : BaseActualHandler(dao) {
         }
       }
       packDisposable.set("disposable", disposable)
+
+      val close1 = C.mq.onMessage<Kv>("online") { msg ->
+        val account = msg.getAs<AccountBaseInfo>("account")
+        val ctxId = msg.getAs<String>("id")
+        val context = Tio.getChannelContextById(ctx.groupContext, ctxId) ?: return@onMessage
+        if (ws.whoSet.contains(context.userid) && account.id != me.id) {
+          // push online notify to me
+          if (dao.onlineCountForUserId(account.id) <= 1)
+            TioKit.sendWsByText(
+              ctx,
+              ImPacket<OnlineOfflinePushPayload>()
+                .setCommand(Command.COMMAND_ONLINE_PUSH)
+                .setPayload(
+                  OnlineOfflinePushPayload()
+                    .setId(account.id)
+                    .setNickName(account.nickName)
+                    .setAvatar(account.avatar)
+                )
+            )
+        }
+      }
+
+      val close2 = C.mq.onMessage<Kv>("offline") { msg ->
+        val account = msg.getAs<AccountBaseInfo>("account")
+        val ctxId = msg.getAs<String>("id")
+        val context = Tio.getChannelContextById(ctx.groupContext, ctxId) ?: return@onMessage
+
+        // if closed context is this context
+        if (ctx == context) {
+          packDisposable.getAs<Disposable>("disposable").dispose()
+          idToWS.remove(ctx.id)
+        } else {
+          // somebody offline
+          if (ws.whoSet.contains(context.userid)) {
+            if (dao.onlineCountForUserId(account.id) <= 1)
+              TioKit.sendWsByText(
+                ctx,
+                ImPacket<OnlineOfflinePushPayload>()
+                  .setCommand(Command.COMMAND_OFFLINE_PUSH)
+                  .setPayload(
+                    OnlineOfflinePushPayload()
+                      .setId(account.id)
+                      .setNickName(account.nickName)
+                      .setAvatar(account.avatar)
+                  )
+              )
+          }
+        }
+      }
     }
 
     // for each new subscribed accounts, push online notify when account is online now
     who.parallelStream()
       .filter(Predicate<Any> { Objects.nonNull(it) })
       .forEach { id ->
-        val isOnline = dao.isOnline( id as String)
+        val isOnline = dao.isOnline(id as String)
         if (isOnline) {
           val contexts = Tio.getChannelContextsByUserid(ctx.groupContext, id)
           contexts?.handle(

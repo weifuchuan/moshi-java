@@ -1,12 +1,20 @@
 package com.moshi.im.common;
 
 import com.moshi.im.common.payload.BasePayload;
+import org.tio.core.intf.Packet;
 
 import java.util.Map;
 
 public class ImPacket<Payload extends BasePayload> {
   private Command command;
   private Payload payload;
+
+  public ImPacket(){}
+
+  public ImPacket(Command command, Payload payload){
+    this.command=command;
+    this.payload=payload;
+  }
 
   public Command getCommand() {
     return command;

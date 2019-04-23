@@ -29,6 +29,7 @@ class MainHandler(
   private val dao: IDao
 ) : IWsMsgHandler {
 
+
   @Throws(Exception::class)
   override fun handshake(req: HttpRequest, resp: HttpResponse, ctx: ChannelContext): HttpResponse? {
     val id = req.getParam("id")
@@ -64,7 +65,7 @@ class MainHandler(
           )
         )
         dao.incrOnlineCount(ctx.userid)
-        C.mq.publish("online", Kv.by("userId", ctx.userid))
+        C.mq.publish("online", Kv.by("account", account).set("id", ctx.id)).get()
       } else {
         Tio.close(ctx, "account not exists")
       }
@@ -94,7 +95,7 @@ class MainHandler(
       Collections.unmodifiableMap(Kv.create().set(Kv.by("type", "close").set("ctx", ctx)))
     )
     dao.decrOnlineCount(ctx.userid)
-    C.mq.publish("offline", Kv.by("userId", ctx.userid))
+    C.mq.publish("offline", Kv.by("account", ctx.getAttribute("account") as AccountBaseInfo).set("id", ctx.id)).get()
     return null
   }
 
