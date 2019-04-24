@@ -51,6 +51,14 @@ interface IDao {
 
   fun isOnline(userId: String): Boolean
 
-  fun joinGroup(accountId: Int, groupId:Int):Ret
+  fun joinGroup(accountId: Int, groupId: Int): Ret
+
+  fun getClusterCount(): Int
+
+  fun incrClusterCount()
+
+  fun decrClusterCount()
+
+  fun clearClusterCount()
 
 }

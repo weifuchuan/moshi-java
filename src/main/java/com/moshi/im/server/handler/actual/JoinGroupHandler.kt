@@ -6,6 +6,7 @@ import com.moshi.im.common.payload.JoinGroupPayload
 import com.moshi.im.db.IDao
 import com.moshi.im.kit.TioKit
 import com.moshi.im.server.handler.BaseActualHandler
+import com.moshi.im.server.handler.C
 import com.moshi.im.server.handler.HandlerForCommand
 import com.moshi.im.server.websocket.common.WsRequest
 import org.slf4j.LoggerFactory
@@ -21,6 +22,7 @@ class JoinGroupHandler(dao: IDao) : BaseActualHandler(dao) {
     val reply = srv.fetchBaseInfo(AccountBaseInfoReq.newBuilder().setId(payload.accountId.toString()).build())
     val account: AccountBaseInfo = reply.account
     if (reply.code == Code.OK) {
+      C.accountIdToAccount[account.id]=account
     } else {
       log.error("account not exists: {}", payload.accountId)
       return null

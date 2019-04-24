@@ -22,39 +22,39 @@ class Db {
 
     // account 已加入的 room | set
     fun joinedRooms(accountId: Any): String {
-      return "im:joined:$accountId"
+      return "moshi:im:joined:$accountId"
     }
 
     // room info | hash
     fun roomInfo(roomKey: Any): String {
-      return "im:room:info:$roomKey"
+      return "moshi:im:room:info:$roomKey"
     }
 
     // members of room | set
     fun members(roomKey: Any): String {
-      return "im:room:members:$roomKey"
+      return "moshi:im:room:members:$roomKey"
     }
 
     // message key list of room | list
     fun messages(roomKey: Any): String {
-      return "im:room:messages:$roomKey"
+      return "moshi:im:room:messages:$roomKey"
     }
 
     // message detail | hash
     fun message(msgKey: Any): String {
-      return "im:room:message:$msgKey"
+      return "moshi:im:room:message:$msgKey"
     }
 
     // remind message key list of room | list
     fun remind(roomKey: Any, accountId: Any): String {
-      return "im:room:remind:$roomKey:$accountId"
+      return "moshi:im:room:remind:$roomKey:$accountId"
     }
 
     fun onlineCount(id: Any): String {
-      return "im:onlineCount:$id"
+      return "moshi:im:onlineCount:$id"
     }
 
     // yes / no
-    fun isFirstFetchJoinedRoom(id:Any) = "im:isFirstFetchJoinedRoom:$id"
+    fun isFirstFetchJoinedRoom(id:Any) = "moshi:im:isFirstFetchJoinedRoom:$id"
   }
 }

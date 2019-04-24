@@ -24,7 +24,8 @@ class ImPlugin : IPlugin {
   }
 
   override fun stop(): Boolean {
-    return server!!.starter.tioServer.stop()
+    server!!.stop()
+    return true
   }
 
   companion object Me {

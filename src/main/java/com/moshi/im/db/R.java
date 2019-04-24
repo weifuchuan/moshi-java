@@ -157,7 +157,7 @@ public class R {
 
   public static String nextId() {
     RedisCommands<String, Object> sync = R.sync();
-    Long nextId = sync.incr("im:nextIdForAll");
+    Long nextId = sync.incr("moshi:im:nextIdForAll");
     if (nextId == null) return "0";
     return nextId.toString();
   }

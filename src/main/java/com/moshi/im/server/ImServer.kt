@@ -6,6 +6,7 @@ import com.moshi.common.mq.RedisMQ
 import com.moshi.im.common.Command
 import com.moshi.im.common.ImPacket
 import com.moshi.im.common.payload.JoinGroupPayload
+import com.moshi.im.db.IDao
 import com.moshi.im.kit.TioKit
 import com.moshi.im.server.config.ImServerConfig
 import org.tio.core.stat.IpStatListener
@@ -28,10 +29,11 @@ constructor(
   listener: WsServerAioListener,
   ipStatListener: IpStatListener,
   tioClusterConfig: TioClusterConfig,
-  private val mq: RedisMQ
+  private val mq: RedisMQ,
+  private val dao: IDao
 ) {
-  val starter: WsServerStarter = WsServerStarter(config, handler)
-  val serverGroupContext: ServerGroupContext = starter.serverGroupContext
+  private val starter: WsServerStarter = WsServerStarter(config, handler)
+  private val serverGroupContext: ServerGroupContext = starter.serverGroupContext
 
   init {
     serverGroupContext.name = config.protocolName
@@ -49,6 +51,8 @@ constructor(
       val keyStorePwd = config.sslpPwd
       serverGroupContext.useSsl(keyStoreFile, trustStoreFile, keyStorePwd)
     }
+
+    // TODO: Maybe we need a way to handle system kill signal?
   }
 
   @Throws(IOException::class)
@@ -57,17 +61,25 @@ constructor(
     starter.start()
   }
 
+  fun stop() {
+    onStop()
+    starter.tioServer.stop()
+  }
+
   private fun onStart() {
-    GlobalScope.launch {
-      mq.onMessage<Subscription>("subscribed") {
-        if (it.subscribeType == Subscription.SUB_TYPE_COURSE)
-          TioKit.notifyClusterForAll(
-            serverGroupContext,
-            ImPacket<JoinGroupPayload>().setCommand(Command.COMMAND_JOIN_GROUP_REQ).setPayload(
-              JoinGroupPayload().setAccountId(it.accountId).setGroupId(it.refId)
-            )
+    mq.onMessage<Subscription>("subscribed") {
+      if (it.subscribeType == Subscription.SUB_TYPE_COURSE)
+        TioKit.notifyClusterForAll(
+          serverGroupContext,
+          ImPacket<JoinGroupPayload>().setCommand(Command.COMMAND_JOIN_GROUP_REQ).setPayload(
+            JoinGroupPayload().setAccountId(it.accountId).setGroupId(it.refId)
           )
-      }
+        )
     }
+    dao.incrClusterCount()
+  }
+
+  private fun onStop() {
+    dao.decrClusterCount()
   }
 }

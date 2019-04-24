@@ -257,7 +257,7 @@ class DaoByRedis(
   }
 
   override fun clearOnlineCount(userId: String) {
-    R.sync().set(Db.K.onlineCount(userId),0)
+    R.sync().set(Db.K.onlineCount(userId), 0)
   }
 
   override fun joinGroup(accountId: Int, groupId: Int): Ret {
@@ -308,6 +308,28 @@ class DaoByRedis(
           .setId(course.id.toString())
       R.setHash(async, Db.K.roomInfo(roomKey), room)
     }
+  }
+
+
+  override fun getClusterCount(): Int {
+    return when (val count = R.sync().get("moshi:im:cluster:count")) {
+      null -> 0
+      is Int -> count
+      is String -> count.toInt()
+      else -> 0
+    }
+  }
+
+  override fun incrClusterCount() {
+    R.sync().incr("moshi:im:cluster:count")
+  }
+
+  override fun decrClusterCount() {
+    R.sync().decr("moshi:im:cluster:count")
+  }
+
+  override fun clearClusterCount() {
+    R.sync().set("moshi:im:cluster:count", 0)
   }
 
   companion object {

@@ -15,6 +15,7 @@ import com.moshi.im.server.handler.BaseActualHandler
 import com.moshi.im.server.handler.HandlerForCommand
 import com.jfinal.kit.Kv
 import com.jfinal.kit.Ret
+import com.moshi.im.server.handler.C
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tio.core.ChannelContext
@@ -78,6 +79,7 @@ class CallHandler(dao: IDao) : BaseActualHandler(dao) {
         )
         if (reply.code == Code.OK) {
           val account = reply.account
+          C.accountIdToAccount[account.id]=account
           return Ret.ok(
             "account",
             Kv.by("id", account.id)

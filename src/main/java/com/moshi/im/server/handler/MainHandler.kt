@@ -17,6 +17,7 @@ import org.tio.utils.lock.ReadLockHandler
 import org.tio.utils.lock.SetWithLock
 import com.moshi.im.server.websocket.common.WsRequest
 import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
+import org.cliffc.high_scale_lib.NonBlockingHashMap
 import org.tio.cluster.TioClusterConfig
 
 import java.util.Collections
@@ -28,7 +29,7 @@ class MainHandler(
   private val realHandler: IActualHandler,
   private val dao: IDao
 ) : IWsMsgHandler {
-
+  private val userIdToFirstConnect = NonBlockingHashMap<String, Boolean>()
 
   @Throws(Exception::class)
   override fun handshake(req: HttpRequest, resp: HttpResponse, ctx: ChannelContext): HttpResponse? {
@@ -55,15 +56,24 @@ class MainHandler(
   override fun onAfterHandshaked(req: HttpRequest, resp: HttpResponse, ctx: ChannelContext) {
     log.info("user {} connected", ctx.userid)
     try {
+      // TODO: Not enough good
+      if (ctx.groupContext.tioClusterConfig != null && ctx.groupContext.tioClusterConfig.isCluster4all) {
+        if (dao.getClusterCount() > 1) {
+        } else {
+          dao.clearOnlineCount(ctx.userid)
+        }
+      } else {
+        dao.clearOnlineCount(ctx.userid)
+      }
       val accountBaseInfoReply = accountService.fetchBaseInfo(AccountBaseInfoReq.newBuilder().setId(ctx.userid).build())
       if (accountBaseInfoReply.code == Code.OK) {
         val account = accountBaseInfoReply.account
         ctx.setAttribute("account", account)
-        C.bus.onNext(
-          Collections.unmodifiableMap(
-            Kv.create().set(Kv.by("type", "handshaked").set("ctx", ctx))
-          )
-        )
+        // C.bus.onNext(
+        //   Collections.unmodifiableMap(
+        //     Kv.create().set(Kv.by("type", "handshaked").set("ctx", ctx))
+        //   )
+        // )
         dao.incrOnlineCount(ctx.userid)
         C.mq.publish("online", Kv.by("account", account).set("id", ctx.id)).get()
       } else {
@@ -91,9 +101,9 @@ class MainHandler(
   @Throws(Exception::class)
   override fun onClose(req: WsRequest, bytes: ByteArray, ctx: ChannelContext): Any? {
     log.info("user {} disconnected", ctx.userid)
-    C.bus.onNext(
-      Collections.unmodifiableMap(Kv.create().set(Kv.by("type", "close").set("ctx", ctx)))
-    )
+    // C.bus.onNext(
+    //   Collections.unmodifiableMap(Kv.create().set(Kv.by("type", "close").set("ctx", ctx)))
+    // )
     dao.decrOnlineCount(ctx.userid)
     C.mq.publish("offline", Kv.by("account", ctx.getAttribute("account") as AccountBaseInfo).set("id", ctx.id)).get()
     return null

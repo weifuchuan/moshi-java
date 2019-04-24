@@ -41,9 +41,10 @@ class ServerModule {
     listener: WsServerAioListener,
     ipStatListener: IpStatListener,
     tioClusterConfig: TioClusterConfig,
-    mq: RedisMQ
+    mq: RedisMQ,
+    dao:IDao
   ): ImServer {
-    return ImServer(config, handler, listener, ipStatListener, tioClusterConfig, mq)
+    return ImServer(config, handler, listener, ipStatListener, tioClusterConfig, mq,dao)
   }
 
   @Provides

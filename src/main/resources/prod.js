@@ -15,3 +15,14 @@ const text1 = lines.map(line => {
 
 fs.writeFileSync("./jboot.properties", text1);
 fs.writeFileSync("./jboot.properties.bak", text);
+
+const imText = fs.readFileSync("./im/config.properties").toString();
+
+const imText1 = imText.split("\n").map(line => {
+    if (line.startsWith("mode=")) return "mode=prod";
+    if (/123\.207\.28\.107/.test(line)) return line.replace(/123\.207\.28\.107/g, "127.0.0.1");
+    return line;
+}).reduce((p, c) => p + "\n" + c, '');
+
+fs.writeFileSync("./im/config.properties", imText1);
+fs.writeFileSync("./im/config.properties.bak", imText);

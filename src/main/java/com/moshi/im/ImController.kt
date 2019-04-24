@@ -26,6 +26,6 @@ class ImController : BaseController() {
   }
 
   companion object {
-    val IM_AUTH = "im:auth:"
+    val IM_AUTH = "moshi:im:auth:"
   }
 }
