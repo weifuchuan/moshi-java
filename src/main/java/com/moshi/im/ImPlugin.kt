@@ -35,3 +35,9 @@ class ImPlugin : IPlugin {
 
 
 }
+
+// dev
+fun main() {
+  val im = ImPlugin()
+  im.start()
+}

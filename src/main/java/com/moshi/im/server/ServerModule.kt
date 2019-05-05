@@ -84,9 +84,4 @@ class ServerModule {
     return TioClusterConfig(topic)
   }
 
-  @Provides
-  @Singleton
-  fun mq(uri: RedisURI): RedisMQ {
-    return RedisMQ(uri)
-  }
 }

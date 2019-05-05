@@ -1,10 +1,21 @@
 package com.moshi.easyrec;
 
-public class EasyrecConfig {
+import java.io.Serializable;
+
+public class EasyrecConfig implements Serializable {
   private String serverUrl;
   private String tenantid;
   private String token;
   private String apikey;
+  private String sessionid;
+
+  public String getSessionid() {
+    return sessionid;
+  }
+
+  public void setSessionid(String sessionid) {
+    this.sessionid = sessionid;
+  }
 
   public String getServerUrl() {
     return serverUrl;
@@ -36,5 +47,15 @@ public class EasyrecConfig {
 
   public void setApikey(String apikey) {
     this.apikey = apikey;
+  }
+
+  public EasyrecConfig clone() {
+    EasyrecConfig config = new EasyrecConfig();
+    config.apikey = apikey;
+    config.serverUrl = serverUrl;
+    config.sessionid = sessionid;
+    config.tenantid = tenantid;
+    config.token = token;
+    return config;
   }
 }

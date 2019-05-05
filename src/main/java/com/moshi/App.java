@@ -18,6 +18,7 @@ import com.moshi.common.plugin.LetturePlugin;
 import com.moshi.common.plugin.RedisMQPlugin;
 import com.moshi.common.socketio.MoshiSocketIOPlugin;
 import com.moshi.common.socketio.MoshiSocketIOServer;
+import com.moshi.easyrec.EasyrecService;
 import com.moshi.im.ImPlugin;
 import com.moshi.im.grpc.ImGrpcPlugin;
 import com.moshi.reg.AccountGenerator;
@@ -26,6 +27,7 @@ import io.jboot.Jboot;
 import io.jboot.aop.jfinal.JfinalPlugins;
 import io.jboot.app.JbootApplication;
 import io.jboot.core.listener.JbootAppListenerBase;
+import io.jboot.utils.ClassScanner;
 import io.lettuce.core.RedisURI;
 import io.reactivex.Observable;
 
@@ -73,13 +75,20 @@ public class App extends JbootAppListenerBase {
               }
             });
     RedisURI uri =
-      ConfigKit.createConfigObject(
-        new Prop("jboot.properties").getProperties(), RedisURI.class, "letture");
+        ConfigKit.createConfigObject(
+            new Prop("jboot.properties").getProperties(), RedisURI.class, "jboot.redis");
     plugins.add(new LetturePlugin(uri));
     plugins.add(new MoshiSocketIOPlugin());
-    plugins.add(new ImGrpcPlugin());
-    plugins.add(new ImPlugin());
     plugins.add(new RedisMQPlugin(uri));
+    plugins.add(new ImGrpcPlugin());
+
+    if (!Jboot.isDevMode()) {
+      plugins.add(new ImPlugin());
+    }
   }
 
+  @Override
+  public void onStart() {
+//    EasyrecService.Companion.mock();
+  }
 }

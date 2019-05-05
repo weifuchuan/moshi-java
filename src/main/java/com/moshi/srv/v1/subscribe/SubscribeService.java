@@ -51,8 +51,8 @@ public class SubscribeService {
     }
     if (subscription.update()) {
       SubscriptionService.me.clearCache(accountId);
-      CourseService.me.clearHotCache(Course.TYPE_COLUMN);
-      CourseService.me.clearHotCache(Course.TYPE_VIDEO);
+      CourseService.Companion.getMe().clearHotCache(Course.TYPE_COLUMN);
+      CourseService.Companion.getMe().clearHotCache(Course.TYPE_VIDEO);
       mq.publish("subscribed", subscription);
       return Ret.ok();
     } else {
