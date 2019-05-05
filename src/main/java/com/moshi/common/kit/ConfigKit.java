@@ -1,7 +1,8 @@
 package com.moshi.common.kit;
 
 import cn.hutool.core.util.ReflectUtil;
-import io.jboot.Jboot;
+import com.moshi.common.MainConfig;
+
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -16,11 +17,16 @@ import java.util.Properties;
 public class ConfigKit {
 
   public static final String HOST_PORT =
-    Jboot.configValue("host").trim() + ":" + Jboot.configValue("port").trim();
+      MainConfig.Companion.getP().get("host").trim() + ":" + MainConfig.Companion.getP().get("port").trim();
 
   public static <T> T createConfigObject(Properties props, Class<T> clazz, String prefix) {
+    return createConfigObject(props, clazz, prefix, new Object[0]);
+  }
 
-    Object configObject = Utils.newInstance(clazz);
+  public static <T> T createConfigObject(
+      Properties props, Class<T> clazz, String prefix, Object[] initArgs) {
+
+    Object configObject = Utils.newInstance(clazz, initArgs);
 
     Field[] fields = ReflectUtil.getFields(clazz);
     for (Field field : fields) {
@@ -38,25 +44,6 @@ public class ConfigKit {
       } catch (Throwable ex) {
       }
     }
-
-    //    List<Method> setMethods = Utils.getClassSetMethods(clazz);
-    //    if (setMethods != null) {
-    //      for (Method method : setMethods) {
-    //
-    //        String key = buildKey(prefix, method);
-    //        String value = props.getProperty(key);
-    //
-    //        try {
-    //          if (Utils.isNotBlank(value)) {
-    //            Object val = convert(method.getParameterTypes()[0], value);
-    //            method.invoke(configObject, val);
-    //          }
-    //        } catch (Throwable ex) {
-    //          ex.printStackTrace();
-    //        }
-    //      }
-    //    }
-
     return (T) configObject;
   }
 
@@ -92,11 +79,16 @@ public class ConfigKit {
       return !isBlank(string);
     }
 
-    public static <T> T newInstance(Class<T> clazz) {
+    public static <T> T newInstance(Class<T> clazz, Object[] initArgs) {
       try {
-        Constructor constructor = clazz.getDeclaredConstructor();
+        Class<?>[] clzs = new Class<?>[initArgs.length];
+        int i = 0;
+        for (Object arg : initArgs) {
+          clzs[i++] = arg.getClass();
+        }
+        Constructor constructor = clazz.getDeclaredConstructor(clzs);
         constructor.setAccessible(true);
-        return (T) constructor.newInstance();
+        return (T) constructor.newInstance(initArgs);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -108,8 +100,8 @@ public class ConfigKit {
       Method[] methods = clazz.getMethods();
       for (Method method : methods) {
         if (method.getName().startsWith("set")
-          && method.getName().length() > 3
-          && method.getParameterCount() == 1) {
+            && method.getName().length() > 3
+            && method.getParameterCount() == 1) {
 
           setMethods.add(method);
         }
@@ -153,8 +145,7 @@ public class ConfigKit {
       return ret != null ? ret : Utils.class.getClassLoader();
     }
 
-    public static void doNothing(Throwable ex) {
-    }
+    public static void doNothing(Throwable ex) {}
 
     public static final Object convert(Class<?> type, String s) {
 
@@ -204,7 +195,7 @@ public class ConfigKit {
       }
 
       throw new RuntimeException(
-        type.getName() + " can not be converted, please use other type in your config class!");
+          type.getName() + " can not be converted, please use other type in your config class!");
     }
   }
 }

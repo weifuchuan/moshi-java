@@ -7,8 +7,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.moshi.common.model.Issue;
 import com.moshi.common.model.IssueComment;
 import com.moshi.common.plugin.Letture;
-import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
+
 
 import java.util.Date;
 import java.util.List;

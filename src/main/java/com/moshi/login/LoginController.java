@@ -3,14 +3,13 @@ package com.moshi.login;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
+import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.moshi.common.model.Account;
 
-import io.jboot.web.controller.JbootController;
-import io.jboot.web.controller.annotation.RequestMapping;
 
-@RequestMapping("/login")
-public class LoginController extends JbootController {
+
+public class LoginController extends Controller {
   private LoginService srv = LoginService.me;
 
   @Before(LoginValidator.class)

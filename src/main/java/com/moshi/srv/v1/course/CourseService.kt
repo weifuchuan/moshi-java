@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Db
 import com.jfinal.plugin.activerecord.Page
 import com.jfinal.plugin.activerecord.Record
 import com.jfinal.plugin.activerecord.SqlPara
+import com.jfinal.plugin.ehcache.CacheKit
 import com.moshi.common.model.Article
 import com.moshi.common.model.Course
 import com.moshi.common.model.Subscription
@@ -13,7 +14,7 @@ import com.moshi.common.plugin.Letture
 import com.moshi.srv.v1.article.ArticleService
 import com.moshi.srv.v1.statistics.StatisticsService
 import com.moshi.subscription.SubscriptionService
-import io.jboot.Jboot
+
 import java.util.*
 
 import java.util.concurrent.ExecutionException
@@ -297,15 +298,15 @@ open class CourseService {
   }
 
   fun clearHotCache(courseType: Int) {
-    Jboot.getCache().remove(cacheName, "hot:$courseType")
+    CacheKit.remove(cacheName, "hot:$courseType")
   }
 
   fun clearSubscribedCoursesCache(accountId: Int) {
-    Jboot.getCache().remove(cacheName, "subscribedCourses:$accountId")
+    CacheKit.remove(cacheName, "subscribedCourses:$accountId")
   }
 
   fun clearCache() {
-    Jboot.getCache().removeAll(cacheName)
+    CacheKit.removeAll(cacheName)
   }
 
   companion object {

@@ -1,9 +1,9 @@
 export interface IPayload{
 
 }
-#for(model : models)
-export interface #(model.name) extends IPayload {
-    #for(prop : model.props)
+#for(com.moshi.common.model : models)
+export interface #(com.moshi.common.model.name) extends IPayload {
+    #for(prop : com.moshi.common.model.props)
     #(prop.comment?"// "+prop.comment:"")
     #(prop.name)#(prop.optional?"?":""): #(prop.type);
     #end

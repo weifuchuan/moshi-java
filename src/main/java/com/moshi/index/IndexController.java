@@ -1,11 +1,9 @@
 package com.moshi.index;
 
-import io.jboot.Jboot;
-import io.jboot.web.controller.JbootController;
-import io.jboot.web.controller.annotation.RequestMapping;
 
-@RequestMapping("/")
-public class IndexController extends JbootController {
+import com.jfinal.core.Controller;
+
+public class IndexController extends Controller {
   public void index() {
     render("learner.html");    
   }

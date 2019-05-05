@@ -17,8 +17,8 @@ public class #(name) extends BasePayload {
 #end
 
   public static #(name) from(Map obj) {
-    #(name) model = new #(name)();
-    model.set(obj);
-    return model;
+    #(name) com.moshi.common.model = new #(name)();
+    com.moshi.common.model.set(obj);
+    return com.moshi.common.model;
   }
 }

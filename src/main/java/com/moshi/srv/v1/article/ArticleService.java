@@ -6,6 +6,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.moshi.common.kit.BitKit;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.Article;
@@ -14,8 +15,7 @@ import com.moshi.common.model.Audio;
 import com.moshi.common.plugin.Letture;
 import com.moshi.srv.v1.statistics.StatisticsService;
 import com.moshi.subscription.SubscriptionService;
-import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -136,6 +136,6 @@ public class ArticleService {
   }
 
   public void clearTrialReadingCache(int courseId) {
-    Jboot.getCache().remove(CACHE_NAME, "trialReading:" + courseId);
+    CacheKit.remove(CACHE_NAME, "trialReading:" + courseId);
   }
 }

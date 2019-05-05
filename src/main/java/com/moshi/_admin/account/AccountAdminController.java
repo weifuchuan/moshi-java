@@ -29,7 +29,7 @@ public class AccountAdminController extends BaseController {
   public void page() {
     int pageNumber = getParaToInt("pageNumber", 1);
     int pageCount = getParaToInt("pageCount", 20);
-    Page<Account> page = Account.dao.paginate(pageNumber, pageCount);
+    Page<Account> page = Account.dao.paginate(pageNumber, pageCount, Db.getSqlPara("account.all"));
     page.getList().forEach(Account::removeSensitiveInfo);
     renderJson(page);
   }
@@ -37,7 +37,7 @@ public class AccountAdminController extends BaseController {
   /** 提交修改 */
   @Before(AccountUpdateValidator.class)
   public void update() {
-    Account account = getModel(Account.class,"",true);
+    Account account = getModel(Account.class, "", true);
     Ret ret = srv.update(account);
     renderJson(ret);
   }
@@ -54,8 +54,8 @@ public class AccountAdminController extends BaseController {
     renderJson(ret);
   }
 
-  public void updateStatus(int accountId, int status){
-    Ret ret=srv.updateStatus(accountId,status);
+  public void updateStatus(int accountId, int status) {
+    Ret ret = srv.updateStatus(accountId, status);
     renderJson(ret);
   }
 

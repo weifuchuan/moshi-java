@@ -7,8 +7,7 @@ import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.Article;
 import com.moshi.common.model.Course;
 import com.moshi.srv.v1.article.ArticleService;
-import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
+
 
 public class NewsController extends BaseController {
   public static final int COURSE_ID_FOR_NEWS = Article.COURSE_ID_FOR_NEWS;

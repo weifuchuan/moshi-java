@@ -10,6 +10,7 @@ import com.jfinal.kit.AesKit;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.Ret;
 import com.jfinal.render.QrCodeRender;
+import com.moshi.common.MainConfig;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
 import com.moshi.common.kit.ConfigKit;
@@ -19,8 +20,8 @@ import com.moshi.common.model.Subscription;
 import com.moshi.common.plugin.Letture;
 import com.moshi.srv.v1.coupon.CouponService;
 import com.moshi.srv.v1.course.CourseService;
-import io.jboot.Jboot;
-import io.jboot.support.redis.JbootRedis;
+
+
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -117,9 +118,9 @@ public class SubscribeController extends BaseController {
           Kv.by("key", key)
               .set(
                   "url",
-                  Jboot.configValue("host").trim()
+                  MainConfig.Companion.getP().get("host").trim()
                       + ":"
-                      + Jboot.configValue("socketio.port").trim()
+                      + MainConfig.Companion.getP().get("socketio.port").trim()
                       + "/srv/v1/subscribe/confirm"));
     } else {
       renderError(404);
@@ -132,7 +133,6 @@ public class SubscribeController extends BaseController {
     String id = jsonObject.getString("id");
     int accountId = jsonObject.getInteger("accountId");
     Ret ret = srv.confirm(id, accountId);
-    //    Jboot.getMq().publish(ret, "subscribe:" + id);
     SUBJECT.onNext(Kv.by("id", id).set("ret", ret));
     renderJson(ret);
   }

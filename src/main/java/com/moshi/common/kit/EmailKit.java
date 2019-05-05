@@ -16,8 +16,8 @@ package com.moshi.common.kit;
 
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
-import io.jboot.Jboot;
-import io.jboot.app.config.annotation.ConfigModel;
+
+import com.moshi.common.MainConfig;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
@@ -28,9 +28,9 @@ public class EmailKit {
   private static final Log log = Log.getLog(EmailKit.class);
 
   public static String sendEmail(String toEmail, String title, String content) {
-    String emailServer = Jboot.configValue("email.server");
-    String fromEmail = Jboot.configValue("email.from");
-    String password = Jboot.configValue("email.password");
+    String emailServer = MainConfig.Companion.getP().get("email.server");
+    String fromEmail = MainConfig.Companion.getP().get("email.from");
+    String password = MainConfig.Companion.getP().get("email.password");
 
     SimpleEmail email = new SimpleEmail();
     if (StrKit.notBlank(emailServer)) {

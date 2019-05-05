@@ -1,4 +1,4 @@
-package com.moshi.im.common.model;
+package com.moshi.im.common.com.moshi.common.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +22,8 @@ public class #(name) extends HashMap {
   }
 
   public static #(name) from(Map obj) {
-      #(name) model = new #(name)();
-      model.putAll(obj);
-      return model;
+      #(name) com.moshi.common.model = new #(name)();
+      com.moshi.common.model.putAll(obj);
+      return com.moshi.common.model;
   }
 }

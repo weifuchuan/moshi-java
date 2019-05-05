@@ -8,11 +8,12 @@ import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.Kv;
 import com.jfinal.upload.UploadFile;
+import com.moshi.common.MainConfig;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
 import com.moshi.common.plugin.Letture;
-import io.jboot.Jboot;
-import io.jboot.web.controller.annotation.RequestMapping;
+
+
 import org.yaml.snakeyaml.Yaml;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@RequestMapping("/file")
 @Before(UnlockInterceptor.class)
 public class FileController extends BaseController {
   private static final Supplier<Map<String, Object>> configGetter =
@@ -29,7 +29,7 @@ public class FileController extends BaseController {
         String raw = FileUtil.readUtf8String("cloudinary.yml");
         Yaml yaml = new Yaml();
         Map<String, Map<String, Object>> config = yaml.loadAs(raw, Map.class);
-        if (Jboot.isDevMode()) {
+        if (MainConfig.Companion.getP().getBoolean("devMode",false)) {
           return config.get("development");
         } else {
           return config.get("production");
@@ -110,10 +110,6 @@ public class FileController extends BaseController {
       }
     }
     if (validFiles.size() > 0) {
-      Jboot.sendEvent(
-          "file/upload",
-          Kv.by("uploadPath", uploadPath)
-              .set("absPath", validFiles.get(0).getFile().getAbsolutePath() + "/.."));
     }
     renderJson(kv);
   }

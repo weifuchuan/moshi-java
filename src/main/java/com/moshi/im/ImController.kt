@@ -4,11 +4,9 @@ import com.jfinal.kit.Ret
 import com.jfinal.kit.StrKit
 import com.moshi.common.controller.BaseController
 import com.moshi.common.plugin.Letture
-import io.jboot.web.controller.annotation.RequestMapping
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
-@RequestMapping("/im")
 class ImController : BaseController() {
 
   fun token() {

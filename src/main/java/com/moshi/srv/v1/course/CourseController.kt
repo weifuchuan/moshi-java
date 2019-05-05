@@ -12,7 +12,7 @@ import com.moshi.common.controller.BaseController
 import com.moshi.common.model.Article
 import com.moshi.common.model.Course
 import com.moshi.srv.v1.article.ArticleService
-import io.jboot.Jboot
+
 import java.util.stream.Collector
 import java.util.stream.Collectors
 import java.util.stream.Stream

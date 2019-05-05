@@ -77,8 +77,8 @@ public class AccountService {
    * 避免使用关联查询，优化性能，在使用中更关键的地方在于缓存的清除
    *
    * @param joinOnField join 使用的字段名，account 这端使用 id
-   * @param model 需要 join 的 model
-   * @param joinAttrs 需要 join 到 model 中的的属性名称
+   * @param model 需要 join 的 com.moshi.common.model
+   * @param joinAttrs 需要 join 到 com.moshi.common.model 中的的属性名称
    */
   public void join(String joinOnField, Model model, String... joinAttrs) {
     Integer accountId = model.getInt(joinOnField);

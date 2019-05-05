@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Deprecated
 public class ImServerEndPoint implements SocketIOServerEndPoint<Action> {
   static final ConcurrentMap<UUID, SessionState> onlineClients = new NonBlockingHashMap<>();
 

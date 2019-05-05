@@ -12,15 +12,14 @@ import com.moshi.common.interceptor.IsTeacherOrManagerInterceptor;
 import com.moshi.common.interceptor.UnlockInterceptor;
 import com.moshi.common.model.Video;
 import com.moshi.common.plugin.Letture;
-import io.jboot.Jboot;
-import io.jboot.web.controller.annotation.RequestMapping;
+
+
 
 import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
-@RequestMapping("/video")
 public class VideoController extends BaseController {
   private static long getNextId() {
     return Letture.sync().incr("file:nextId");

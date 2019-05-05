@@ -4,11 +4,10 @@ import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.Application;
-import io.jboot.web.controller.annotation.RequestMapping;
+
 
 import java.util.List;
 
-@RequestMapping("/apply")
 public class ApplyController extends BaseController {
   @Inject private ApplyService srv;
 

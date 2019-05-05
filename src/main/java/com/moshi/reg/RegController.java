@@ -2,14 +2,13 @@ package com.moshi.reg;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
+import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
-import io.jboot.web.controller.JbootController;
-import io.jboot.web.controller.annotation.RequestMapping;
 
-@RequestMapping("/reg")
-public class RegController extends JbootController {
+
+public class RegController extends Controller {
 
   @Inject
   private RegService srv;

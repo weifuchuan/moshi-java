@@ -146,7 +146,7 @@ Table: issue
  accountId | INT(10)     | NO   |     |         |         
  title     | TEXT(65535) | NO   |     |         |         
  openAt    | BIGINT(19)  | NO   |     |         |         
- closerId  | INT(10)     | YES  |     |         |         
+ closerId  | INT(10)     | YES  |     |         | 弃用      
  closeAt   | BIGINT(19)  | YES  |     |         |         
  status    | INT(10)     | NO   |     |         |         
 -----------+-------------+------+-----+---------+---------

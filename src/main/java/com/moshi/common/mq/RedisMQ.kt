@@ -4,14 +4,7 @@ import com.moshi.common.plugin.FstRedisCodec
 import io.lettuce.core.RedisClient
 import io.lettuce.core.RedisFuture
 import io.lettuce.core.RedisURI
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import java.io.Serializable
-import java.time.Duration
-import java.util.function.Consumer
-import redis.clients.jedis.Jedis
-import java.net.InetSocketAddress
-
 
 class RedisMQ(uri: RedisURI) {
   constructor(uri: RedisURI, prefix: String) : this(uri) {
@@ -56,18 +49,4 @@ class RedisMQ(uri: RedisURI) {
     private val codec = FstRedisCodec()
   }
 
-}
-
-fun main() {
-  val uri = RedisURI.create("127.0.0.1", 6380)
-  val mq = RedisMQ(uri)
-  mq.onMessage<String> { msg ->
-    println(msg)
-  }
-  runBlocking {
-    repeat(10) {
-      mq.publish("msg" + it)
-    }
-    delay(10000)
-  }
 }

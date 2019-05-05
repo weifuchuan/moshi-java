@@ -1,10 +1,10 @@
 package com.moshi.common.controller;
 
+import com.jfinal.core.Controller;
 import com.jfinal.core.NotAction;
 import com.moshi.common.kit.FstKit;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
-import io.jboot.web.controller.JbootController;
 
 import java.util.ConcurrentModificationException;
 
@@ -18,7 +18,7 @@ import java.util.ConcurrentModificationException;
  * <p>注意： 需要 LoginSessionInterceptor 配合，该拦截器使用 setAttr("loginAccount", ...) 事先注入了登录账户
  * 否则即便已经登录，该控制器也会认为没有登录
  */
-public class BaseController extends JbootController {
+public class BaseController extends Controller {
 
   /**
    * 警告：由于这个属性的存在，不能直接使用 FastControllerFactory，除非使用 jfinal 3.5 并覆盖父类中的 _clear_()

@@ -5,9 +5,10 @@ import cn.hutool.http.HttpRequest
 import cn.hutool.http.HttpResponse
 import com.jfinal.kit.Kv
 import com.jfinal.kit.StrKit
+import com.moshi.common.MainConfig
+import com.moshi.common.kit.ConfigKit
 import com.moshi.common.model.Account
 import com.moshi.common.model.Course
-import io.jboot.Jboot
 import kotlinx.coroutines.*
 
 class EasyrecService {
@@ -101,7 +102,7 @@ class EasyrecService {
   }
 
   companion object {
-    val config = Jboot.config(EasyrecConfig::class.java, "easyrec")
+    val config = ConfigKit.createConfigObject(MainConfig.p!!.properties, EasyrecConfig::class.java, "easyrec")
 
     fun mock() {
       val srv = EasyrecService()

@@ -4,12 +4,12 @@ import com.jfinal.kit.HashKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.moshi.common.authcode.AuthCodeService;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.AuthCode;
 import com.moshi.common.model.Session;
-import io.jboot.Jboot;
-import io.jboot.components.cache.JbootCache;
+
 
 import java.util.Date;
 
@@ -21,8 +21,6 @@ public class RegService {
   public static final RegService me = new RegService();
 
   private Account accountDao = new Account().dao();
-
-  private final JbootCache cache = Jboot.getCache();
 
   /** 邮箱是否已被注册 */
   public boolean isEmailExists(String email) {
@@ -105,7 +103,7 @@ public class RegService {
       }
 
       account.put("sessionId", sessionId); // 保存一份 sessionId 到 loginAccount 备用
-      cache.put(loginAccountCacheName, sessionId, account);
+      CacheKit.put(loginAccountCacheName, sessionId, account);
 
       String authCode = AuthCodeService.me.createRegActivateAuthCode(account.getInt("id"));
       if (sendRegActivateAuthEmail(authCode, account)) {

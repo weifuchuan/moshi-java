@@ -26,12 +26,12 @@ public class _PayloadModelGenerator {
     String payloadModelTmpl =
         FileUtil.readString(
             PathKit.getWebRootPath()
-                + "/src/main/java/com/moshi/im/common/payload/_payload-model.enjoy",
+                + "/src/main/java/com/moshi/im/common/payload/_payload-com.moshi.common.model.enjoy",
             "UTF-8");
     String payloadModelTSTmpl =
         FileUtil.readString(
             PathKit.getWebRootPath()
-                + "/src/main/java/com/moshi/im/common/payload/_payload-model-ts.enjoy",
+                + "/src/main/java/com/moshi/im/common/payload/_payload-com.moshi.common.model-ts.enjoy",
             "UTF-8");
 
     Engine engine = new Engine();
@@ -114,7 +114,7 @@ public class _PayloadModelGenerator {
 
         FileUtil.writeString(
             payloadModelTSRendered,
-            PathKit.getWebRootPath() + "/src/main/java/" + OUTPUT_DIR + "/ts/payload-model.ts",
+            PathKit.getWebRootPath() + "/src/main/java/" + OUTPUT_DIR + "/ts/payload-com.moshi.common.model.ts",
             "utf-8");
       }
     }

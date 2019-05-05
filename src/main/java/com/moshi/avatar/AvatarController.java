@@ -8,14 +8,14 @@ import com.jfinal.upload.UploadFile;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.Audio;
 import com.moshi.common.plugin.Letture;
-import io.jboot.Jboot;
-import io.jboot.web.controller.annotation.RequestMapping;
+
+
 
 import java.io.File;
 import java.util.Date;
 import java.util.function.Function;
 
-@RequestMapping("/avatar")
+
 public class AvatarController extends BaseController {
   private static long getNextId() {
     return Letture.sync().incr("file:nextId");

@@ -6,9 +6,9 @@ import com.jfinal.kit.Kv;
 import com.jfinal.kit.Ret;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.interceptor.UnlockInterceptor;
-import io.jboot.web.controller.annotation.RequestMapping;
 
-@RequestMapping("/article")
+
+
 public class ArticleController extends BaseController {
   @Inject private ArticleService srv;
 

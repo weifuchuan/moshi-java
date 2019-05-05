@@ -7,23 +7,24 @@ import io.lettuce.core.RedisURI;
 public class RedisMQPlugin implements IPlugin {
   private static RedisMQ mq;
 
-  public static RedisMQ getMq(){return mq;}
+  public static RedisMQ getMq() {
+    return mq;
+  }
 
   private RedisURI uri;
 
-  public RedisMQPlugin(RedisURI uri){
-    this.uri=uri;
+  public RedisMQPlugin(RedisURI uri) {
+    this.uri = uri;
   }
 
   @Override
   public boolean start() {
-    mq=new RedisMQ(uri) ;
+    mq = new RedisMQ(uri);
     return true;
   }
 
   @Override
   public boolean stop() {
-    mq.stop();
     mq.stop();
     return true;
   }

@@ -5,3 +5,7 @@
       #end
   where id = #para(id)
 #end
+
+#sql("all")
+select * from account
+#end

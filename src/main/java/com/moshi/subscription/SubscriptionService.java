@@ -2,8 +2,9 @@ package com.moshi.subscription;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.moshi.common.model.Subscription;
-import io.jboot.Jboot;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class SubscriptionService {
   }
 
   public boolean subscribed(int refId, String type, int accountId) {
-    if (Jboot.getCache().get("subscribed", type + ":" + refId + ":" + accountId) != null) {
+    if (CacheKit.get("subscribed", type + ":" + refId + ":" + accountId) != null) {
       return true;
     }
     Record first =
@@ -44,12 +45,12 @@ public class SubscriptionService {
             accountId,
             Subscription.STATUS_SUCCESS);
     if (first != null) {
-      Jboot.getCache().put("subscribed", type + ":" + refId + ":" + accountId, true);
+      CacheKit.put("subscribed", type + ":" + refId + ":" + accountId, true);
     }
     return first != null;
   }
 
   public void clearCache(int accountId) {
-    Jboot.getCache().remove(SubscriptionService.cacheName, "" + accountId);
+    CacheKit.remove(SubscriptionService.cacheName, "" + accountId);
   }
 }

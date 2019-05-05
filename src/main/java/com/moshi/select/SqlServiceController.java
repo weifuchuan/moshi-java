@@ -5,12 +5,12 @@ import com.jfinal.ext.interceptor.POST;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.moshi.common.controller.BaseController;
-import io.jboot.web.controller.annotation.RequestMapping;
+
 
 import java.util.List;
 
 /** 不使用GraphQL，使用SQL搭建类似服务 此服务使用SQL语法解析器过滤掉所有非select语句 */
-@RequestMapping("/select")
+
 public class SqlServiceController extends BaseController {
 
   @Before({POST.class, SqlSrvLearnerInterceptor.class})

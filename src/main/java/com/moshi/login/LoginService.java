@@ -7,13 +7,12 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.moshi.common.account.AccountService;
 import com.moshi.common.authcode.AuthCodeService;
 import com.moshi.common.kit.EmailKit;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.Session;
-import io.jboot.Jboot;
-import io.jboot.components.cache.JbootCache;
 
 public class LoginService {
   public static final LoginService me = new LoginService();
@@ -25,8 +24,6 @@ public class LoginService {
   public static final String sessionIdName = "moshiId";
 
   private Account accountDao = Account.dao;
-
-  private final JbootCache cache = Jboot.getCache();
 
   public Ret loginByEmail(String email, String password) {
     email = email.trim();
@@ -57,7 +54,7 @@ public class LoginService {
     }
 
     account.put("sessionId", sessionId); // 保存一份 sessionId 到 loginAccount 备用
-    cache.put(loginAccountCacheName, sessionId, account);
+    CacheKit.put(loginAccountCacheName, sessionId, account);
 
     return Ret.ok(sessionIdName, sessionId)
         .set(loginAccountCacheName, account)
@@ -65,11 +62,11 @@ public class LoginService {
   }
 
   public Account getLoginAccountWithSessionIdFromCache(String sessionId) {
-    return cache.get(loginAccountCacheName, sessionId);
+    return CacheKit.get(loginAccountCacheName, sessionId);
   }
 
   public void removeLoginAccountWithSessionIdFromCache(String sessionId) {
-    cache.remove(loginAccountCacheName, sessionId);
+    CacheKit.remove(loginAccountCacheName, sessionId);
   }
 
   /**
@@ -92,7 +89,7 @@ public class LoginService {
     if (loginAccount != null && !loginAccount.isStatusLock()) {
       loginAccount.removeSensitiveInfo(); // 移除 password 与 salt 属性值
       loginAccount.put("sessionId", sessionId); // 保存一份 sessionId 到 loginAccount 备用
-      cache.put(loginAccountCacheName, sessionId, loginAccount);
+      CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
 
       return loginAccount;
     }
@@ -126,7 +123,7 @@ public class LoginService {
   /** 退出登录 */
   public void logout(String sessionId) {
     if (sessionId != null) {
-      cache.remove(loginAccountCacheName, sessionId);
+      CacheKit.remove(loginAccountCacheName, sessionId);
       Session.dao.deleteById(sessionId);
     }
   }
@@ -145,7 +142,7 @@ public class LoginService {
     // 其它节点发现数据不存在会自动去数据库读取，
     // 所以未来可能就是在 AccountService.getById(int id)的方法引入缓存就好
     // 所有用到 account 对象的地方都从这里去取
-    cache.put(loginAccountCacheName, sessionId, loginAccount);
+    CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
   }
 
 }

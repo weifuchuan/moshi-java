@@ -14,11 +14,12 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.moshi.common.MainConfig;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;
 import com.moshi.select.wall.WallConfig;
 import com.moshi.select.wall.WallFilter;
-import io.jboot.Jboot;
+
 
 import java.lang.reflect.Type;
 import java.sql.SQLException;
@@ -30,15 +31,15 @@ public class SqlSrvManagerInterceptor implements Interceptor {
 
   public SqlSrvManagerInterceptor() {
     filter = new WallFilter();
-    filter.setDbType(Jboot.configValue("jboot.datasource.type"));
+    filter.setDbType(MainConfig.Companion.getP().get("db.datasource.type"));
     filter.setLogViolation(true);
     filter.setThrowException(true);
     filter.setConfig(buildConfig());
     DruidPlugin druidPlugin =
         new DruidPlugin(
-            Jboot.configValue("jboot.datasource.url"),
-            Jboot.configValue("jboot.datasource.user"),
-            Jboot.configValue("jboot.datasource.password"));
+            MainConfig.Companion.getP().get("db.datasource.url"),
+            MainConfig.Companion.getP().get("db.datasource.user"),
+            MainConfig.Companion.getP().get("db.datasource.password"));
     druidPlugin.start();
 
     filter.init((DruidDataSource) druidPlugin.getDataSource());
@@ -69,7 +70,7 @@ public class SqlSrvManagerInterceptor implements Interceptor {
   private WallConfig buildConfig() {
     WallConfig config = new WallConfig();
 
-    String json = new FileReader(Jboot.configValue("sqlService.configFile")).readString();
+    String json = new FileReader(MainConfig.Companion.getP().get("sqlService.configFile")).readString();
     JSONObject jsonObject = JSON.parseObject(json).getJSONObject("manager");
     String[] keys =
         new String[] {
@@ -132,7 +133,7 @@ public class SqlSrvManagerInterceptor implements Interceptor {
     config2.setConditionOpBitwseAllow(true);
     config2.setConstArithmeticAllow(true);
     config2.setMustParameterized(true);
-//    config2.setSelectLimit(Integer.parseInt(Jboot.configValue("sqlService.selectLimit").trim()));
+//    config2.setSelectLimit(Integer.parseInt(MainConfig.Companion.getP().get("sqlService.selectLimit").trim()));
 
     return config2;
   }

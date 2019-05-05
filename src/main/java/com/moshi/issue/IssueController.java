@@ -5,11 +5,11 @@ import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Record;
 import com.moshi.common.controller.BaseController;
 import com.moshi.common.model.IssueComment;
-import io.jboot.web.controller.annotation.RequestMapping;
+
 
 import java.util.List;
 
-@RequestMapping("/issue")
+
 public class IssueController extends BaseController {
   @Inject
   private IssueService srv;

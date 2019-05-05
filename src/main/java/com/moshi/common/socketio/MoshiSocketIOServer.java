@@ -5,48 +5,42 @@ import com.corundumstudio.socketio.SocketIONamespace;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
-import io.jboot.Jboot;
-import io.jboot.utils.ClassScanner;
+
+import com.moshi.common.MainConfig;
+import jodd.io.findfile.ClassScanner;
+import org.reflections.Reflections;
 
 import java.util.List;
+import java.util.Set;
 
 public class MoshiSocketIOServer {
   private SocketIOServer server;
 
-  public void start() {
+  public void start(List<SocketIOServerEndPoint<Action>> endPoints) {
     Configuration conf = new Configuration();
-    conf.setHostname(Jboot.configValue("socketio.host").trim());
-    conf.setPort(Integer.parseInt(Jboot.configValue("socketio.port").trim()));
+    conf.setHostname(MainConfig.Companion.getP().get("socketio.host").trim());
+    conf.setPort(Integer.parseInt(MainConfig.Companion.getP().get("socketio.port").trim()));
     conf.setPingTimeout(30000);
     server = new SocketIOServer(conf);
-    List<Class<SocketIOServerEndPoint>> classes =
-        ClassScanner.scanSubClass(SocketIOServerEndPoint.class, true);
-    for (Class<SocketIOServerEndPoint> cls : classes) {
-      try {
-        SocketIOServerEndPoint<Action> point = cls.newInstance();
-        SocketIONamespace ns = server.addNamespace(point.getNamespace());
-        if (point.getEventListeners() != null)
-          for (SocketIOServerEventListener<Action> listener : point.getEventListeners()) {
-            ns.addEventListener(
-                listener.getEventName(), listener.getEventClass(), listener.getListener());
-          }
-        List<ConnectListener> connectListeners = point.getConnectListeners();
-        if (connectListeners != null) {
-          for (ConnectListener listener : connectListeners) {
-            ns.addConnectListener(listener);
-          }
+    for (SocketIOServerEndPoint<Action> point : endPoints) {
+
+      SocketIONamespace ns = server.addNamespace(point.getNamespace());
+      if (point.getEventListeners() != null)
+        for (SocketIOServerEventListener<Action> listener : point.getEventListeners()) {
+          ns.addEventListener(
+              listener.getEventName(), listener.getEventClass(), listener.getListener());
         }
-        List<DisconnectListener> disconnectListeners = point.getDisconnectListener();
-        if (disconnectListeners != null) {
-          for (DisconnectListener listener : disconnectListeners) {
-            ns.addDisconnectListener(listener);
-          }
+      List<ConnectListener> connectListeners = point.getConnectListeners();
+      if (connectListeners != null) {
+        for (ConnectListener listener : connectListeners) {
+          ns.addConnectListener(listener);
         }
-        System.out.println("ADD SocketIOServerEventListener: " + cls.getName());
-      } catch (InstantiationException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
+      }
+      List<DisconnectListener> disconnectListeners = point.getDisconnectListener();
+      if (disconnectListeners != null) {
+        for (DisconnectListener listener : disconnectListeners) {
+          ns.addDisconnectListener(listener);
+        }
       }
     }
     server.start();

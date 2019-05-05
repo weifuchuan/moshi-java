@@ -10,6 +10,7 @@
 
     <properties>
         <jfinal.version>3.8</jfinal.version>
+        <jfinalUndertow.version>1.6</jfinalUndertow.version>
         <jboot.version>2.0.8</jboot.version>
         <tio.version>3.2.9.v20190401-RELEASE</tio.version>
         <grpc.version>1.20.0</grpc.version>
@@ -25,12 +26,18 @@
             <artifactId>jfinal</artifactId>
             <version>${jfinal.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>io.jboot</groupId>
-            <artifactId>jboot</artifactId>
-            <version>${jboot.version}</version>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-undertow</artifactId>
+            <version>${jfinalUndertow.version}</version>
         </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>io.jboot</groupId>-->
+        <!--            <artifactId>jboot</artifactId>-->
+        <!--            <version>${jboot.version}</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.t-io</groupId>
@@ -43,6 +50,13 @@
             <artifactId>tio-http-server</artifactId>
             <version>${tio.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.16</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
@@ -80,7 +94,16 @@
             <version>${grpc.version}</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.11</version>
+        </dependency>
+        <dependency>
+            <groupId>it.sauronsoftware.cron4j</groupId>
+            <artifactId>cron4j</artifactId>
+            <version>2.2.5</version>
+        </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
@@ -116,6 +139,12 @@
             <artifactId>druid</artifactId>
             <version>1.1.15</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -215,6 +244,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
             <version>1.7.26</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
         </dependency>
     </dependencies>
 
