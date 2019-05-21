@@ -19,9 +19,9 @@ import java.util.stream.Stream
 
 open class CourseController : BaseController() {
   @Inject
-  internal var srv: CourseService? = null
+  lateinit var srv: CourseService
   @Inject
-  internal var articleSrv: ArticleService? = null
+  lateinit var articleSrv: ArticleService
 
   fun list(type: String, orderBy: String, cending: String, pageNumber: Int, pageSize: Int) {
     if (!typeSet.contains(type)) {
@@ -33,7 +33,7 @@ open class CourseController : BaseController() {
     if (!cendingSet.contains(cending)) {
       renderJson(Ret.fail("msg", "Unsupported cending"))
     }
-    val ret = srv!!.list(type, orderBy, cending, pageNumber, pageSize, loginAccountId)
+    val ret = srv.list(type, orderBy, cending, pageNumber, pageSize, loginAccountId)
     val page = ret["page"] as Page<Record>
     page.list = page.list.stream()
       .filter { x -> x.getInt("id") != Article.COURSE_ID_FOR_NEWS }
@@ -43,25 +43,35 @@ open class CourseController : BaseController() {
 
   fun index(id: Int) {
     if (id == Article.COURSE_ID_FOR_NEWS) renderError(404)
-    val ret = srv!!.take(id, loginAccountId)
+    val ret = srv.take(id, loginAccountId)
     renderJson(ret)
+  }
+
+  fun search(q: String) {
+    val list = srv.search(q, loginAccountId)
+    renderJson(list)
   }
 
   fun simpleCourseListByIdList() {
     val rawData = rawData
     val idList = JSON.parseArray(rawData)
-    val list = srv!!.simpleCourseListByIdList(idList.map { it as Int })
+    val list = srv.simpleCourseListByIdList(idList.map { it as Int }, loginAccountId)
     renderJson(list)
   }
 
   fun intro(id: Int) {
     if (id == Article.COURSE_ID_FOR_NEWS) renderError(404)
-    val ret = srv!!.intro(id, loginAccountId)
+    val ret = srv.intro(id, loginAccountId)
     renderJson(ret)
   }
 
+  fun allCourseType() {
+    val list = srv.allCourseType()
+    renderJson(list)
+  }
+
   fun clear() {
-    srv!!.clearCache()
+    srv.clearCache()
     renderText("")
   }
 

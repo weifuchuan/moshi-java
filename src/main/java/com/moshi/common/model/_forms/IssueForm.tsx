@@ -68,7 +68,7 @@ class IssueForm extends React.Component<FormComponentProps & {
             rules: []
           })(<Input />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="">
+        <Form.Item {...formItemLayout} label="弃用">
           {getFieldDecorator("closerId", {
             initialValue: issue.closerId,
             rules: []

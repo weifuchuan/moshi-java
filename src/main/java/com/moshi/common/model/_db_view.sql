@@ -9,6 +9,7 @@
     "auth_code", 
     "coupon", 
     "course", 
+    "course_type", 
     "issue", 
     "issue_comment", 
     "news", 
@@ -34,6 +35,7 @@
     "auth_code_l", 
     "coupon_l", 
     "course_l", 
+    "course_type_l", 
     "issue_l", 
     "issue_comment_l", 
     "news_l", 
@@ -59,6 +61,7 @@
     "auth_code_t", 
     "coupon_t", 
     "course_t", 
+    "course_type_t", 
     "issue_t", 
     "issue_comment_t", 
     "news_t", 
@@ -84,6 +87,7 @@
     "auth_code_m", 
     "coupon_m", 
     "course_m", 
+    "course_type_m", 
     "issue_m", 
     "issue_comment_m", 
     "news_m", 
@@ -258,6 +262,17 @@ CREATE OR REPLACE VIEW `moshi`.`course_l`
             `status`, 
             `lectureCount`
     from `moshi`.`course`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`course_type_l`
+    AS
+(
+    SELECT
+            `id`, 
+            `typeName`, 
+            `courseId`
+    from `moshi`.`course_type`
 );
 
 
@@ -612,6 +627,17 @@ CREATE OR REPLACE VIEW `moshi`.`course_t`
 );
 
 
+CREATE OR REPLACE VIEW `moshi`.`course_type_t`
+    AS
+(
+    SELECT
+            `id`, 
+            `typeName`, 
+            `courseId`
+    from `moshi`.`course_type`
+);
+
+
 CREATE OR REPLACE VIEW `moshi`.`issue_t`
     AS
 (
@@ -960,6 +986,17 @@ CREATE OR REPLACE VIEW `moshi`.`course_m`
             `status`, 
             `lectureCount`
     from `moshi`.`course`
+);
+
+
+CREATE OR REPLACE VIEW `moshi`.`course_type_m`
+    AS
+(
+    SELECT
+            `id`, 
+            `typeName`, 
+            `courseId`
+    from `moshi`.`course_type`
 );
 
 

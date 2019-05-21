@@ -17,6 +17,7 @@ import com.moshi.common.model._MappingKit
 import com.moshi.common.plugin.LetturePlugin
 import com.moshi.common.plugin.RedisMQPlugin
 import com.moshi.common.socketio.MoshiSocketIOPlugin
+import com.moshi.easyrec.EasyrecService
 import com.moshi.im.ImPlugin
 import com.moshi.im.grpc.ImGrpcPlugin
 import com.moshi.srv.v1.SrvV1Routes
@@ -83,11 +84,16 @@ class MainConfig : JFinalConfig() {
     me.devMode = p!!.getBoolean("dev", false)
   }
 
+  override fun onStart() {
+    // EasyrecService.mock()
+  }
+
   companion object {
     var p: Prop? = null
 
-    fun loadConfig() {
+    fun loadConfig():Prop {
       p = PropKit.useFirstFound("config-pro.properties", "config.properties", "config-dev.properties")
+      return p!!
     }
 
     fun getDruidPlugin(): DruidPlugin {

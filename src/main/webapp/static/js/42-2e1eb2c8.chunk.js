@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{1188:function(e,n,c){},1260:function(e,n,c){"use strict";c.r(n);var s=c(4),a=c.n(s);c(1188);n.default=(({children:e})=>a.a.createElement("div",{className:"Course"},"course",e))}}]);

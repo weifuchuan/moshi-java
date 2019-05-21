@@ -27,9 +27,9 @@ public class Letture {
   private static RedisClient subClient; // for sub
   private static StatefulRedisConnection<String, Object> conn;
   private static final RedisCodec<String, Object> codec = new FstRedisCodec();
-  private static StatefulRedisConnection<String, Object> syncConn;
-  private static StatefulRedisConnection<String, Object> asyncConn;
-  private static StatefulRedisConnection<String, Object> pipeConn;
+  //  private static StatefulRedisConnection<String, Object> syncConn;
+  //  private static StatefulRedisConnection<String, Object> asyncConn;
+  //  private static StatefulRedisConnection<String, Object> pipeConn;
 
   static void init(RedisURI uri) {
     client = RedisClient.create(uri);
@@ -37,9 +37,9 @@ public class Letture {
     subClient = RedisClient.create(uri);
 
     conn = client.connect(codec);
-    syncConn = client.connect(codec);
-    asyncConn = client.connect(codec);
-    pipeConn = client.connect(codec);
+    //    syncConn = client.connect(codec);
+    //    asyncConn = client.connect(codec);
+    //    pipeConn = client.connect(codec);
   }
 
   static void close() {
@@ -57,15 +57,15 @@ public class Letture {
   }
 
   public static StatefulRedisConnection<String, Object> connect() {
-    return conn;
+    return client.connect(codec);
   }
 
   public static RedisAsyncCommands<String, Object> async() {
-    return asyncConn.async();
+    return connect().async();
   }
 
   public static RedisCommands<String, Object> sync() {
-    return syncConn.sync();
+    return connect().sync();
   }
 
   public static void pipeNotRetAsync(Consumer<RedisAsyncCommands<String, Object>> consumer) {
@@ -76,26 +76,26 @@ public class Letture {
   }
 
   public static List<Object> pipe(Consumer<RedisAsyncCommands<String, Object>> consumer)
-    throws ExecutionException, InterruptedException {
+      throws ExecutionException, InterruptedException {
     return pipe(consumer, 30);
   }
 
   public static List<Object> pipe(
-    Consumer<RedisAsyncCommands<String, Object>> consumer, int timeoutSecond)
-    throws ExecutionException, InterruptedException {
-    RedisAsyncCommands<String, Object> async = pipeConn.async();
+      Consumer<RedisAsyncCommands<String, Object>> consumer, int timeoutSecond)
+      throws ExecutionException, InterruptedException {
+    RedisAsyncCommands<String, Object> async = conn.async();
 
     List<RedisFuture> futureList = new ArrayList<>();
 
     RedisAsyncCommands<String, Object> proxyAsync =
-      ProxyKit.intercept(
-        async,
-        EmptyRedisAsyncCommandsImpl.class,
-        (ret, method, args) -> {
-          if (ret instanceof RedisFuture) {
-            futureList.add((RedisFuture) ret);
-          }
-        });
+        ProxyKit.intercept(
+            async,
+            EmptyRedisAsyncCommandsImpl.class,
+            (ret, method, args) -> {
+              if (ret instanceof RedisFuture) {
+                futureList.add((RedisFuture) ret);
+              }
+            });
 
     async.setAutoFlushCommands(false);
 
@@ -104,19 +104,19 @@ public class Letture {
     async.flushCommands();
 
     LettuceFutures.awaitAll(
-      timeoutSecond, TimeUnit.SECONDS, futureList.toArray(new RedisFuture[0]));
+        timeoutSecond, TimeUnit.SECONDS, futureList.toArray(new RedisFuture[0]));
 
     return futureList.stream()
-      .map(
-        future -> {
-          try {
-            return future.get();
-          } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-          }
-          return null;
-        })
-      .collect(Collectors.toList());
+        .map(
+            future -> {
+              try {
+                return future.get();
+              } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+              }
+              return null;
+            })
+        .collect(Collectors.toList());
   }
 
   public static RedisFuture<TransactionResult> multi(
@@ -159,16 +159,13 @@ public class Letture {
   }
 
   public static class EmptyRedisAsyncCommandsImpl implements RedisAsyncCommands<String, Object> {
-    public EmptyRedisAsyncCommandsImpl() {
-    }
+    public EmptyRedisAsyncCommandsImpl() {}
 
     @Override
-    public void setTimeout(Duration timeout) {
-    }
+    public void setTimeout(Duration timeout) {}
 
     @Override
-    public void setTimeout(long timeout, TimeUnit unit) {
-    }
+    public void setTimeout(long timeout, TimeUnit unit) {}
 
     @Override
     public String auth(String password) {
@@ -352,7 +349,7 @@ public class Letture {
 
     @Override
     public RedisFuture<String> migrate(
-      String host, int port, int db, long timeout, MigrateArgs<String> migrateArgs) {
+        String host, int port, int db, long timeout, MigrateArgs<String> migrateArgs) {
       return null;
     }
 
@@ -443,7 +440,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> sort(
-      ValueStreamingChannel<Object> channel, String key, SortArgs sortArgs) {
+        ValueStreamingChannel<Object> channel, String key, SortArgs sortArgs) {
       return null;
     }
 
@@ -494,19 +491,19 @@ public class Letture {
 
     @Override
     public RedisFuture<StreamScanCursor> scan(
-      KeyStreamingChannel<String> channel, ScanArgs scanArgs) {
+        KeyStreamingChannel<String> channel, ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> scan(
-      KeyStreamingChannel<String> channel, ScanCursor scanCursor, ScanArgs scanArgs) {
+        KeyStreamingChannel<String> channel, ScanCursor scanCursor, ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> scan(
-      KeyStreamingChannel<String> channel, ScanCursor scanCursor) {
+        KeyStreamingChannel<String> channel, ScanCursor scanCursor) {
       return null;
     }
 
@@ -617,7 +614,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> mget(
-      KeyValueStreamingChannel<String, Object> channel, String... keys) {
+        KeyValueStreamingChannel<String, Object> channel, String... keys) {
       return null;
     }
 
@@ -748,15 +745,15 @@ public class Letture {
 
     @Override
     public <T> RedisFuture<T> dispatch(
-      ProtocolKeyword type, CommandOutput<String, Object, T> output) {
+        ProtocolKeyword type, CommandOutput<String, Object, T> output) {
       return null;
     }
 
     @Override
     public <T> RedisFuture<T> dispatch(
-      ProtocolKeyword type,
-      CommandOutput<String, Object, T> output,
-      CommandArgs<String, Object> args) {
+        ProtocolKeyword type,
+        CommandOutput<String, Object, T> output,
+        CommandArgs<String, Object> args) {
       return null;
     }
 
@@ -766,16 +763,13 @@ public class Letture {
     }
 
     @Override
-    public void reset() {
-    }
+    public void reset() {}
 
     @Override
-    public void setAutoFlushCommands(boolean autoFlush) {
-    }
+    public void setAutoFlushCommands(boolean autoFlush) {}
 
     @Override
-    public void flushCommands() {
-    }
+    public void flushCommands() {}
 
     @Override
     public RedisFuture<Long> geoadd(String key, double longitude, double latitude, Object member) {
@@ -794,51 +788,51 @@ public class Letture {
 
     @Override
     public RedisFuture<Set<Object>> georadius(
-      String key, double longitude, double latitude, double distance, GeoArgs.Unit unit) {
+        String key, double longitude, double latitude, double distance, GeoArgs.Unit unit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<GeoWithin<Object>>> georadius(
-      String key,
-      double longitude,
-      double latitude,
-      double distance,
-      GeoArgs.Unit unit,
-      GeoArgs geoArgs) {
+        String key,
+        double longitude,
+        double latitude,
+        double distance,
+        GeoArgs.Unit unit,
+        GeoArgs geoArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> georadius(
-      String key,
-      double longitude,
-      double latitude,
-      double distance,
-      GeoArgs.Unit unit,
-      GeoRadiusStoreArgs<String> geoRadiusStoreArgs) {
+        String key,
+        double longitude,
+        double latitude,
+        double distance,
+        GeoArgs.Unit unit,
+        GeoRadiusStoreArgs<String> geoRadiusStoreArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<Set<Object>> georadiusbymember(
-      String key, Object member, double distance, GeoArgs.Unit unit) {
+        String key, Object member, double distance, GeoArgs.Unit unit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<GeoWithin<Object>>> georadiusbymember(
-      String key, Object member, double distance, GeoArgs.Unit unit, GeoArgs geoArgs) {
+        String key, Object member, double distance, GeoArgs.Unit unit, GeoArgs geoArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> georadiusbymember(
-      String key,
-      Object member,
-      double distance,
-      GeoArgs.Unit unit,
-      GeoRadiusStoreArgs<String> geoRadiusStoreArgs) {
+        String key,
+        Object member,
+        double distance,
+        GeoArgs.Unit unit,
+        GeoRadiusStoreArgs<String> geoRadiusStoreArgs) {
       return null;
     }
 
@@ -924,7 +918,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> hmget(
-      KeyValueStreamingChannel<String, Object> channel, String key, String... fields) {
+        KeyValueStreamingChannel<String, Object> channel, String key, String... fields) {
       return null;
     }
 
@@ -945,7 +939,7 @@ public class Letture {
 
     @Override
     public RedisFuture<MapScanCursor<String, Object>> hscan(
-      String key, ScanCursor scanCursor, ScanArgs scanArgs) {
+        String key, ScanCursor scanCursor, ScanArgs scanArgs) {
       return null;
     }
 
@@ -956,28 +950,28 @@ public class Letture {
 
     @Override
     public RedisFuture<StreamScanCursor> hscan(
-      KeyValueStreamingChannel<String, Object> channel, String key) {
+        KeyValueStreamingChannel<String, Object> channel, String key) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> hscan(
-      KeyValueStreamingChannel<String, Object> channel, String key, ScanArgs scanArgs) {
+        KeyValueStreamingChannel<String, Object> channel, String key, ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> hscan(
-      KeyValueStreamingChannel<String, Object> channel,
-      String key,
-      ScanCursor scanCursor,
-      ScanArgs scanArgs) {
+        KeyValueStreamingChannel<String, Object> channel,
+        String key,
+        ScanCursor scanCursor,
+        ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> hscan(
-      KeyValueStreamingChannel<String, Object> channel, String key, ScanCursor scanCursor) {
+        KeyValueStreamingChannel<String, Object> channel, String key, ScanCursor scanCursor) {
       return null;
     }
 
@@ -1058,7 +1052,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> lrange(
-      ValueStreamingChannel<Object> channel, String key, long start, long stop) {
+        ValueStreamingChannel<Object> channel, String key, long start, long stop) {
       return null;
     }
 
@@ -1104,7 +1098,7 @@ public class Letture {
 
     @Override
     public <T> RedisFuture<T> eval(
-      String script, ScriptOutputType type, String[] keys, Object... values) {
+        String script, ScriptOutputType type, String[] keys, Object... values) {
       return null;
     }
 
@@ -1115,7 +1109,7 @@ public class Letture {
 
     @Override
     public <T> RedisFuture<T> evalsha(
-      String digest, ScriptOutputType type, String[] keys, Object... values) {
+        String digest, ScriptOutputType type, String[] keys, Object... values) {
       return null;
     }
 
@@ -1250,12 +1244,10 @@ public class Letture {
     }
 
     @Override
-    public void debugOom() {
-    }
+    public void debugOom() {}
 
     @Override
-    public void debugSegfault() {
-    }
+    public void debugSegfault() {}
 
     @Override
     public RedisFuture<String> debugReload() {
@@ -1313,8 +1305,7 @@ public class Letture {
     }
 
     @Override
-    public void shutdown(boolean save) {
-    }
+    public void shutdown(boolean save) {}
 
     @Override
     public RedisFuture<String> slaveof(String host, int port) {
@@ -1433,7 +1424,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> srandmember(
-      ValueStreamingChannel<Object> channel, String key, long count) {
+        ValueStreamingChannel<Object> channel, String key, long count) {
       return null;
     }
 
@@ -1469,7 +1460,7 @@ public class Letture {
 
     @Override
     public RedisFuture<ValueScanCursor<Object>> sscan(
-      String key, ScanCursor scanCursor, ScanArgs scanArgs) {
+        String key, ScanCursor scanCursor, ScanArgs scanArgs) {
       return null;
     }
 
@@ -1485,34 +1476,34 @@ public class Letture {
 
     @Override
     public RedisFuture<StreamScanCursor> sscan(
-      ValueStreamingChannel<Object> channel, String key, ScanArgs scanArgs) {
+        ValueStreamingChannel<Object> channel, String key, ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> sscan(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      ScanCursor scanCursor,
-      ScanArgs scanArgs) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        ScanCursor scanCursor,
+        ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> sscan(
-      ValueStreamingChannel<Object> channel, String key, ScanCursor scanCursor) {
+        ValueStreamingChannel<Object> channel, String key, ScanCursor scanCursor) {
       return null;
     }
 
     @Override
     public RedisFuture<KeyValue<String, ScoredValue<Object>>> bzpopmin(
-      long timeout, String... keys) {
+        long timeout, String... keys) {
       return null;
     }
 
     @Override
     public RedisFuture<KeyValue<String, ScoredValue<Object>>> bzpopmax(
-      long timeout, String... keys) {
+        long timeout, String... keys) {
       return null;
     }
 
@@ -1543,7 +1534,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> zadd(
-      String key, ZAddArgs zAddArgs, ScoredValue<Object>... scoredValues) {
+        String key, ZAddArgs zAddArgs, ScoredValue<Object>... scoredValues) {
       return null;
     }
 
@@ -1554,7 +1545,7 @@ public class Letture {
 
     @Override
     public RedisFuture<Double> zaddincr(
-      String key, ZAddArgs zAddArgs, double score, Object member) {
+        String key, ZAddArgs zAddArgs, double score, Object member) {
       return null;
     }
 
@@ -1630,19 +1621,19 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> zrange(
-      ValueStreamingChannel<Object> channel, String key, long start, long stop) {
+        ValueStreamingChannel<Object> channel, String key, long start, long stop) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangeWithScores(
-      String key, long start, long stop) {
+        String key, long start, long stop) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangeWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, long start, long stop) {
+        ScoredValueStreamingChannel<Object> channel, String key, long start, long stop) {
       return null;
     }
 
@@ -1658,7 +1649,7 @@ public class Letture {
 
     @Override
     public RedisFuture<List<Object>> zrangebylex(
-      String key, String min, String max, long offset, long count) {
+        String key, String min, String max, long offset, long count) {
       return null;
     }
 
@@ -1684,153 +1675,153 @@ public class Letture {
 
     @Override
     public RedisFuture<List<Object>> zrangebyscore(
-      String key, double min, double max, long offset, long count) {
+        String key, double min, double max, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<Object>> zrangebyscore(
-      String key, String min, String max, long offset, long count) {
+        String key, String min, String max, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<Object>> zrangebyscore(
-      String key, Range<? extends Number> range, Limit limit) {
+        String key, Range<? extends Number> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, double min, double max) {
+        ValueStreamingChannel<Object> channel, String key, double min, double max) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, String min, String max) {
+        ValueStreamingChannel<Object> channel, String key, String min, String max) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
+        ValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      double min,
-      double max,
-      long offset,
-      long count) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        double min,
+        double max,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      String min,
-      String max,
-      long offset,
-      long count) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        String min,
+        String max,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      Range<? extends Number> range,
-      Limit limit) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        Range<? extends Number> range,
+        Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, double min, double max) {
+        String key, double min, double max) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, String min, String max) {
+        String key, String min, String max) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, Range<? extends Number> range) {
+        String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, double min, double max, long offset, long count) {
+        String key, double min, double max, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, String min, String max, long offset, long count) {
+        String key, String min, String max, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrangebyscoreWithScores(
-      String key, Range<? extends Number> range, Limit limit) {
+        String key, Range<? extends Number> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, double min, double max) {
+        ScoredValueStreamingChannel<Object> channel, String key, double min, double max) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, String min, String max) {
+        ScoredValueStreamingChannel<Object> channel, String key, String min, String max) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
+        ScoredValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      double min,
-      double max,
-      long offset,
-      long count) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        double min,
+        double max,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      String min,
-      String max,
-      long offset,
-      long count) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        String min,
+        String max,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      Range<? extends Number> range,
-      Limit limit) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        Range<? extends Number> range,
+        Limit limit) {
       return null;
     }
 
@@ -1881,19 +1872,19 @@ public class Letture {
 
     @Override
     public RedisFuture<Long> zrevrange(
-      ValueStreamingChannel<Object> channel, String key, long start, long stop) {
+        ValueStreamingChannel<Object> channel, String key, long start, long stop) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangeWithScores(
-      String key, long start, long stop) {
+        String key, long start, long stop) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangeWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, long start, long stop) {
+        ScoredValueStreamingChannel<Object> channel, String key, long start, long stop) {
       return null;
     }
 
@@ -1924,153 +1915,153 @@ public class Letture {
 
     @Override
     public RedisFuture<List<Object>> zrevrangebyscore(
-      String key, double max, double min, long offset, long count) {
+        String key, double max, double min, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<Object>> zrevrangebyscore(
-      String key, String max, String min, long offset, long count) {
+        String key, String max, String min, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<Object>> zrevrangebyscore(
-      String key, Range<? extends Number> range, Limit limit) {
+        String key, Range<? extends Number> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, double max, double min) {
+        ValueStreamingChannel<Object> channel, String key, double max, double min) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, String max, String min) {
+        ValueStreamingChannel<Object> channel, String key, String max, String min) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
+        ValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      double max,
-      double min,
-      long offset,
-      long count) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        double max,
+        double min,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      String max,
-      String min,
-      long offset,
-      long count) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        String max,
+        String min,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscore(
-      ValueStreamingChannel<Object> channel,
-      String key,
-      Range<? extends Number> range,
-      Limit limit) {
+        ValueStreamingChannel<Object> channel,
+        String key,
+        Range<? extends Number> range,
+        Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, double max, double min) {
+        String key, double max, double min) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, String max, String min) {
+        String key, String max, String min) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, Range<? extends Number> range) {
+        String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, double max, double min, long offset, long count) {
+        String key, double max, double min, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, String max, String min, long offset, long count) {
+        String key, String max, String min, long offset, long count) {
       return null;
     }
 
     @Override
     public RedisFuture<List<ScoredValue<Object>>> zrevrangebyscoreWithScores(
-      String key, Range<? extends Number> range, Limit limit) {
+        String key, Range<? extends Number> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, double max, double min) {
+        ScoredValueStreamingChannel<Object> channel, String key, double max, double min) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, String max, String min) {
+        ScoredValueStreamingChannel<Object> channel, String key, String max, String min) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
+        ScoredValueStreamingChannel<Object> channel, String key, Range<? extends Number> range) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      double max,
-      double min,
-      long offset,
-      long count) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        double max,
+        double min,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      String max,
-      String min,
-      long offset,
-      long count) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        String max,
+        String min,
+        long offset,
+        long count) {
       return null;
     }
 
     @Override
     public RedisFuture<Long> zrevrangebyscoreWithScores(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      Range<? extends Number> range,
-      Limit limit) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        Range<? extends Number> range,
+        Limit limit) {
       return null;
     }
 
@@ -2091,7 +2082,7 @@ public class Letture {
 
     @Override
     public RedisFuture<ScoredValueScanCursor<Object>> zscan(
-      String key, ScanCursor scanCursor, ScanArgs scanArgs) {
+        String key, ScanCursor scanCursor, ScanArgs scanArgs) {
       return null;
     }
 
@@ -2102,28 +2093,28 @@ public class Letture {
 
     @Override
     public RedisFuture<StreamScanCursor> zscan(
-      ScoredValueStreamingChannel<Object> channel, String key) {
+        ScoredValueStreamingChannel<Object> channel, String key) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> zscan(
-      ScoredValueStreamingChannel<Object> channel, String key, ScanArgs scanArgs) {
+        ScoredValueStreamingChannel<Object> channel, String key, ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> zscan(
-      ScoredValueStreamingChannel<Object> channel,
-      String key,
-      ScanCursor scanCursor,
-      ScanArgs scanArgs) {
+        ScoredValueStreamingChannel<Object> channel,
+        String key,
+        ScanCursor scanCursor,
+        ScanArgs scanArgs) {
       return null;
     }
 
     @Override
     public RedisFuture<StreamScanCursor> zscan(
-      ScoredValueStreamingChannel<Object> channel, String key, ScanCursor scanCursor) {
+        ScoredValueStreamingChannel<Object> channel, String key, ScanCursor scanCursor) {
       return null;
     }
 
@@ -2169,19 +2160,19 @@ public class Letture {
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xclaim(
-      String key,
-      io.lettuce.core.Consumer<String> consumer,
-      long minIdleTime,
-      String... messageIds) {
+        String key,
+        io.lettuce.core.Consumer<String> consumer,
+        long minIdleTime,
+        String... messageIds) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xclaim(
-      String key,
-      io.lettuce.core.Consumer<String> consumer,
-      XClaimArgs args,
-      String... messageIds) {
+        String key,
+        io.lettuce.core.Consumer<String> consumer,
+        XClaimArgs args,
+        String... messageIds) {
       return null;
     }
 
@@ -2192,13 +2183,13 @@ public class Letture {
 
     @Override
     public RedisFuture<String> xgroupCreate(
-      XReadArgs.StreamOffset<String> streamOffset, String group) {
+        XReadArgs.StreamOffset<String> streamOffset, String group) {
       return null;
     }
 
     @Override
     public RedisFuture<Boolean> xgroupDelconsumer(
-      String key, io.lettuce.core.Consumer<String> consumer) {
+        String key, io.lettuce.core.Consumer<String> consumer) {
       return null;
     }
 
@@ -2209,7 +2200,7 @@ public class Letture {
 
     @Override
     public RedisFuture<String> xgroupSetid(
-      XReadArgs.StreamOffset<String> streamOffset, String group) {
+        XReadArgs.StreamOffset<String> streamOffset, String group) {
       return null;
     }
 
@@ -2225,63 +2216,63 @@ public class Letture {
 
     @Override
     public RedisFuture<List<Object>> xpending(
-      String key, String group, Range<String> range, Limit limit) {
+        String key, String group, Range<String> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<Object>> xpending(
-      String key, io.lettuce.core.Consumer<String> consumer, Range<String> range, Limit limit) {
+        String key, io.lettuce.core.Consumer<String> consumer, Range<String> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xrange(
-      String key, Range<String> range) {
+        String key, Range<String> range) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xrange(
-      String key, Range<String> range, Limit limit) {
+        String key, Range<String> range, Limit limit) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xread(
-      XReadArgs.StreamOffset<String>... streams) {
+        XReadArgs.StreamOffset<String>... streams) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xread(
-      XReadArgs args, XReadArgs.StreamOffset<String>... streams) {
+        XReadArgs args, XReadArgs.StreamOffset<String>... streams) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xreadgroup(
-      io.lettuce.core.Consumer<String> consumer, XReadArgs.StreamOffset<String>... streams) {
+        io.lettuce.core.Consumer<String> consumer, XReadArgs.StreamOffset<String>... streams) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xreadgroup(
-      io.lettuce.core.Consumer<String> consumer,
-      XReadArgs args,
-      XReadArgs.StreamOffset<String>... streams) {
+        io.lettuce.core.Consumer<String> consumer,
+        XReadArgs args,
+        XReadArgs.StreamOffset<String>... streams) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xrevrange(
-      String key, Range<String> range) {
+        String key, Range<String> range) {
       return null;
     }
 
     @Override
     public RedisFuture<List<StreamMessage<String, Object>>> xrevrange(
-      String key, Range<String> range, Limit limit) {
+        String key, Range<String> range, Limit limit) {
       return null;
     }
 

@@ -10,7 +10,7 @@ import org.codejargon.feather.Provides
 import org.redisson.Redisson
 import org.redisson.api.RedissonClient
 import org.redisson.config.Config
-import org.tio.utils.jfinal.Prop
+import com.jfinal.kit.Prop
 
 import javax.inject.Singleton
 
@@ -19,13 +19,13 @@ class DbModule {
   @Provides
   @Singleton
   fun redisURI(config: Prop): RedisURI {
-    return ConfigKit.createConfigObject(config.properties, RedisURI::class.java, "redis")
+    return ConfigKit.createConfigObject(config.properties, RedisURI::class.java, "im.redis")
   }
 
   @Provides
   @Singleton
   fun redisClient(config: Prop): RedisClient {
-    val uri = ConfigKit.createConfigObject(config.properties, RedisURI::class.java, "redis")
+    val uri = ConfigKit.createConfigObject(config.properties, RedisURI::class.java, "im.redis")
     val client = RedisClient.create(uri)
     R.init(client)
     return client

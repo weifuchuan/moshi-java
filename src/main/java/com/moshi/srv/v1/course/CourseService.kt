@@ -7,8 +7,10 @@ import com.jfinal.plugin.activerecord.Page
 import com.jfinal.plugin.activerecord.Record
 import com.jfinal.plugin.activerecord.SqlPara
 import com.jfinal.plugin.ehcache.CacheKit
+import com.moshi.common.kit.SqlKit
 import com.moshi.common.model.Article
 import com.moshi.common.model.Course
+import com.moshi.common.model.CourseType
 import com.moshi.common.model.Subscription
 import com.moshi.common.plugin.Letture
 import com.moshi.srv.v1.article.ArticleService
@@ -27,10 +29,59 @@ import kotlin.Comparator
 open class CourseService {
 
   private val dao = Course().dao()
+  private val courseTypeDao = CourseType().dao()
 
   private val subsSrv = SubscriptionService()
   private val articleService = ArticleService()
   private val statisticsService = StatisticsService()
+
+  fun search(text: String, accountId: Int?): List<Record> {
+    var list = Db.find(
+      """
+        SELECT c.id,
+               c.accountId,
+               c.name,
+               c.shortIntro,
+               c.introduceImage,
+               c.publishAt,
+               c.buyerCount,
+               c.courseType,
+               c.price,
+               c.discountedPrice,
+               c.offerTo,
+               c.status,
+               c.lectureCount,
+               a.nickName,
+               a.avatar,
+               a.realPicture
+        FROM course c, account a
+        WHERE c.accountId = a.id
+          and ${SqlKit.is0At("c.status", 0)}
+          and ${SqlKit.is1At("c.status", 2)}
+          and MATCH (c.name, c.introduce, c.shortIntro)
+              AGAINST (?)
+      """.trimIndent(), text
+    )
+
+    if (accountId != null) {
+      val subscriptionList = subsSrv.findByAccountId(accountId)
+      val subscribed = subscriptionList.stream()
+        .filter { s -> s.subscribeType == "course" && s.status == Subscription.STATUS_SUCCESS }
+        .map<Int> { it.getRefId() }
+        .collect<Set<Int>, Any>(Collectors.toSet<Any>() as Collector<in Int, Any, Set<Int>>?)
+      list.forEach { c: Record -> c.set("subscribed", subscribed.contains(c.getInt("id"))) }
+      run {
+        val `unsubscribed$` = list.stream().filter { x -> !x.getBoolean("subscribed") }
+        val `subscribed$` = list.stream().filter { x -> x.getBoolean("subscribed") }
+        list = Stream.concat(
+          `unsubscribed$`,
+          `subscribed$`
+        ).collect<List<Record>, Any>(Collectors.toList<Any>() as Collector<in Record, Any, List<Record>>?)
+
+      }
+    }
+    return list
+  }
 
   @Throws(ExecutionException::class, InterruptedException::class)
   fun hot(maxCount: Int, courseType: Int): List<Record> {
@@ -267,12 +318,12 @@ open class CourseService {
     return subscribedCourses
   }
 
-  fun simpleCourseListByIdList(idList: List<Int>): List<Course> {
+  fun simpleCourseListByIdList(idList: List<Int>, accountId: Int?): List<Record> {
     if (idList.isEmpty()) {
       return Collections.emptyList()
     }
 
-    val list = dao.find("""
+    val list = Db.find("""
       select
          c.id,
          c.accountId,
@@ -292,9 +343,47 @@ open class CourseService {
     """.trimIndent()
     )
 
-    val id2Course = list.groupBy { it.id }
+    val id2Course = list.groupBy { it.getInt("id") }
 
-    return idList.map { id2Course[it]!![0]!! }
+    return patchSubscriptionInfo(accountId, idList.map { id2Course[it]!![0]!! })
+  }
+
+
+  fun allCourseType(): List<CourseType> {
+    return courseTypeDao.findAll()
+  }
+
+  fun allCourseTypeName(): List<String> {
+    return courseTypeDao.find(
+      """
+        select DISTINCT typeName
+        from course_type
+      """.trimIndent()
+    ).map {
+      it.typeName
+    }
+  }
+
+  fun patchSubscriptionInfo(accountId: Int?, courseList: List<Record>): List<Record> {
+    if (accountId != null) {
+      val subscriptionList = subsSrv.findByAccountId(accountId)
+      val subscribed = subscriptionList.stream()
+        .filter { s -> s.subscribeType == "course" && s.status == Subscription.STATUS_SUCCESS }
+        .map<Int> { it.getRefId() }
+        .collect<Set<Int>, Any>(Collectors.toSet<Any>() as Collector<in Int, Any, Set<Int>>?)
+      courseList
+        .forEach { c: Record -> c.set("subscribed", subscribed.contains(c.getInt("id"))) }
+
+      val list = courseList
+      val `unsubscribed$` = list.stream().filter { x -> !x.getBoolean("subscribed") }
+      val `subscribed$` = list.stream().filter { x -> x.getBoolean("subscribed") }
+
+      return Stream.concat(
+        `unsubscribed$`,
+        `subscribed$`
+      ).collect<List<Record>, Any>(Collectors.toList<Any>() as Collector<in Record, Any, List<Record>>?)
+    }
+    return courseList
   }
 
   fun clearHotCache(courseType: Int) {
@@ -324,14 +413,4 @@ open class CourseService {
       }
     }
   }
-}
-
-fun main() {
-  val idList = arrayOf(1)
-  println("""
-      select
-      from course
-      where ${idList.map { id -> " id=$id " }.reduce { prev, curr -> " $prev or $curr " }}
-    """
-  )
 }

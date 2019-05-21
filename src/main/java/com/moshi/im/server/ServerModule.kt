@@ -13,7 +13,7 @@ import com.moshi.im.server.listener.ImIpStatListener
 import com.moshi.im.server.listener.MainListener
 import org.codejargon.feather.Provides
 import org.tio.core.stat.IpStatListener
-import org.tio.utils.jfinal.Prop
+import com.jfinal.kit.Prop
 import com.moshi.im.server.websocket.server.WsServerAioListener
 import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
 import io.lettuce.core.RedisURI
@@ -29,7 +29,7 @@ class ServerModule {
   @Provides
   @Singleton
   fun config(config: Prop): ImServerConfig {
-    return ConfigKit.createConfigObject(config.properties, ImServerConfig::class.java, "ws")
+    return ConfigKit.createConfigObject(config.properties, ImServerConfig::class.java, "im.ws")
   }
 
   @Provides

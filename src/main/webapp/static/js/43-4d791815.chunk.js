@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[43],{1220:function(e,n,a){},1270:function(e,n,a){"use strict";a.r(n);var i=a(4),c=a.n(i);a(1220);n.default=(({children:e})=>c.a.createElement("div",{className:"Media"},"media"))}}]);
