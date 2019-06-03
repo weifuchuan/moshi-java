@@ -11,7 +11,6 @@ import com.jfinal.plugin.ehcache.EhCachePlugin
 import com.jfinal.template.Engine
 import com.moshi._admin.common.AdminRoutes
 import com.moshi.common.interceptor.LoginSessionInterceptor
-// import com.moshi.common.interceptor.LoginSessionInterceptor
 import com.moshi.common.kit.ConfigKit
 import com.moshi.common.model._MappingKit
 import com.moshi.common.plugin.LetturePlugin
@@ -22,7 +21,6 @@ import com.moshi.im.ImPlugin
 import com.moshi.im.grpc.ImGrpcPlugin
 import com.moshi.srv.v1.SrvV1Routes
 import com.moshi.srv.v1.subscribe.SubscribeConfirmServerEndPoint
-// import com.moshi.common.com.moshi.common.model._MappingKit
 import io.lettuce.core.RedisURI
 import java.sql.Connection
 import java.util.*
@@ -99,9 +97,9 @@ class MainConfig : JFinalConfig() {
     fun getDruidPlugin(): DruidPlugin {
       loadConfig()
       return DruidPlugin(
-        p!!.get("db.datasource.url"),
-        p!!.get("db.datasource.user"),
-        p!!.get("db.datasource.password").trim { it <= ' ' })
+        p!!.get("db.datasource.url").trim(),
+        p!!.get("db.datasource.user").trim(),
+        p!!.get("db.datasource.password").trim())
     }
   }
 }

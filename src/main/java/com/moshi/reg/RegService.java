@@ -5,7 +5,7 @@ import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
-import com.moshi.common.authcode.AuthCodeService;
+import com.moshi.authcode.AuthCodeService;
 import com.moshi.common.model.Account;
 import com.moshi.common.model.AuthCode;
 import com.moshi.common.model.Session;

@@ -16,6 +16,7 @@ public class ArticleController extends BaseController {
   public void index(int id) {
     Ret ret = srv.findById(id, getLoginAccountId());
     renderJson(ret);
+
   }
 
   public void trialReading(int courseId) {

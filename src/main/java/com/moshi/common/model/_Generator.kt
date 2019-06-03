@@ -106,4 +106,5 @@ object _Generator {
     FileWriter(PathKit.getWebRootPath() + "/src/main/resources/sqlService/config.json")
       .write(configRaw)
   }
+
 }

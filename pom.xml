@@ -9,10 +9,10 @@
     <version>0.1</version>
 
     <properties>
-        <jfinal.version>4.0</jfinal.version>
+        <jfinal.version>4.1</jfinal.version>
         <jfinalUndertow.version>1.6</jfinalUndertow.version>
-<!--        <jboot.version>2.0.8</jboot.version>-->
-        <tio.version>3.3.0.v20190512-RELEASE</tio.version>
+        <!--        <jboot.version>2.0.8</jboot.version>-->
+        <tio.version>3.3.1.v20190520-RELEASE</tio.version>
         <grpc.version>1.20.0</grpc.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.t-io</groupId>
         <artifactId>tio-parent</artifactId>
-        <version>3.3.0.v20190512-RELEASE</version>
+        <version>3.3.1.v20190520-RELEASE</version>
     </parent>
 
     <dependencies>
@@ -46,17 +46,17 @@
         <!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.t-io/tio-parent -->
-<!--        <dependency>-->
-<!--            <groupId>org.t-io</groupId>-->
-<!--            <artifactId>tio-parent</artifactId>-->
-<!--            <version>${tio.version}</version>-->
-<!--            <type>pom</type>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.t-io</groupId>-->
+        <!--            <artifactId>tio-parent</artifactId>-->
+        <!--            <version>${tio.version}</version>-->
+        <!--            <type>pom</type>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.t-io</groupId>
             <artifactId>tio-core</artifactId>
-<!--            <version>${tio.version}</version>-->
+            <!--            <version>${tio.version}</version>-->
         </dependency>
 
         <dependency>
@@ -73,6 +73,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
         </dependency>
 
 
@@ -238,30 +243,30 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-<!--            <version>${logback.version}</version>-->
+            <!--            <version>${logback.version}</version>-->
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
-<!--            <version>${logback.version}</version>-->
+            <!--            <version>${logback.version}</version>-->
         </dependency>
         <!-- redirect apache commons logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-<!--            <version>1.7.26</version>-->
+            <!--            <version>1.7.26</version>-->
         </dependency>
         <!-- redirect jdk util logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
-<!--            <version>1.7.26</version>-->
+            <!--            <version>1.7.26</version>-->
         </dependency>
         <!-- redirect log4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-<!--            <version>1.7.26</version>-->
+            <!--            <version>1.7.26</version>-->
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>

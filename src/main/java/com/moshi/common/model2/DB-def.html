@@ -1,0 +1,1148 @@
+    <!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+
+          .dbt{
+              font-size:1.5rem;
+              padding:1rem;
+              page-break-before: auto;
+              page-break-after: always;
+          }
+        </style>
+    </head><div class='dbt'><h4>account</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>id</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>realPicture</td>
+  <td>VARCHAR(200)</td>
+  <td>真实照片</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>账号状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>账号创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>profession</td>
+  <td>VARCHAR(255)</td>
+  <td>行业</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>education</td>
+  <td>VARCHAR(255)</td>
+  <td>学历</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>birthday</td>
+  <td>BIGINT(19)</td>
+  <td>生日</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>sex</td>
+  <td>VARCHAR(8)</td>
+  <td>性别</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>personalProfile</td>
+  <td>VARCHAR(512)</td>
+  <td>个人介绍</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>position</td>
+  <td>VARCHAR(255)</td>
+  <td>职位</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>company</td>
+  <td>VARCHAR(255)</td>
+  <td>公司</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>age</td>
+  <td>BIGINT(19)</td>
+  <td>年龄</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>identityNumber</td>
+  <td>VARCHAR(64)</td>
+  <td>身份证号</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>realName</td>
+  <td>VARCHAR(48)</td>
+  <td>真实名</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>avatar</td>
+  <td>VARCHAR(255)</td>
+  <td>头像</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>phone</td>
+  <td>VARCHAR(32)</td>
+  <td>手机</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>email</td>
+  <td>VARCHAR(255)</td>
+  <td>邮箱</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>password</td>
+  <td>VARCHAR(255)</td>
+  <td>密码（hash）</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>nickName</td>
+  <td>VARCHAR(32)</td>
+  <td>昵称</td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div><div class='dbt'><h4>account_role</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>roleId</td>
+  <td>INT(10)</td>
+  <td></td>
+  <td>是</td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td></td>
+  <td>是</td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>application</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>contentType</td>
+  <td>VARCHAR(50)</td>
+  <td>内容类型(html,md)</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>refId</td>
+  <td>INT(10)</td>
+  <td>引用到</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>reply</td>
+  <td>TEXT(65535)</td>
+  <td>管理员的回应</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>申请书状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>申请创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>title</td>
+  <td>TEXT(65535)</td>
+  <td>标题</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>category</td>
+  <td>INT(10)</td>
+  <td>类别</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>账号ID</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>article</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>coverImage</td>
+  <td>VARCHAR(200)</td>
+  <td>图片</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>summary</td>
+  <td>VARCHAR(200)</td>
+  <td>摘要</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>contentType</td>
+  <td>VARCHAR(50)</td>
+  <td>内容类型</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>publishAt</td>
+  <td>BIGINT(19)</td>
+  <td>发布时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>title</td>
+  <td>TEXT(65535)</td>
+  <td>标题</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>courseId</td>
+  <td>INT(10)</td>
+  <td>所属课程</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>audioId</td>
+  <td>INT(10)</td>
+  <td>音频ID</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>article_comment</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>replyTo</td>
+  <td>INT(10)</td>
+  <td>回复给</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>articleId</td>
+  <td>INT(10)</td>
+  <td>所属文章</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>评论者</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>audio</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>uploadAt</td>
+  <td>BIGINT(19)</td>
+  <td>上传于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>name</td>
+  <td>VARCHAR(100)</td>
+  <td>名称</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>上传者</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>recorder</td>
+  <td>VARCHAR(100)</td>
+  <td>朗读者</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>resource</td>
+  <td>TEXT(65535)</td>
+  <td>资源URL</td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div><div class='dbt'><h4>auth_code</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>VARCHAR(33)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>type</td>
+  <td>INT(10)</td>
+  <td>类型</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>expireAt</td>
+  <td>BIGINT(19)</td>
+  <td>过期于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>所属账号</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>coupon</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>VARCHAR(50)</td>
+  <td>id</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>offerTo</td>
+  <td>BIGINT(19)</td>
+  <td>过期时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>refType</td>
+  <td>INT(10)</td>
+  <td>可用于的实体的类型，course、通用</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>refId</td>
+  <td>INT(10)</td>
+  <td>可用于实体，null则通用</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>valueType</td>
+  <td>INT(10)</td>
+  <td>折扣或金额券</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>value</td>
+  <td>DOUBLE(22)</td>
+  <td>价值</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>所属人</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>course</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>lectureCount</td>
+  <td>INT(10)</td>
+  <td>预计文章数</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>offerTo</td>
+  <td>BIGINT(19)</td>
+  <td>优惠到某时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>discountedPrice</td>
+  <td>DOUBLE(22)</td>
+  <td>优惠价格</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>price</td>
+  <td>DOUBLE(22)</td>
+  <td>标准价格</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>courseType</td>
+  <td>INT(10)</td>
+  <td>课程类型（1：专栏；2：视频）</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>buyerCount</td>
+  <td>INT(10)</td>
+  <td>购买人数</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>publishAt</td>
+  <td>BIGINT(19)</td>
+  <td>发布时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建时间</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>note</td>
+  <td>TEXT(65535)</td>
+  <td>订阅须知</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>introduceImage</td>
+  <td>TEXT(65535)</td>
+  <td>简介图片</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>shortIntro</td>
+  <td>VARCHAR(100)</td>
+  <td>短介绍</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>introduce</td>
+  <td>TEXT(65535)</td>
+  <td>专栏简介</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>name</td>
+  <td>VARCHAR(64)</td>
+  <td>专栏名</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>作者id</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>course_type</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>typeName</td>
+  <td>VARCHAR(100)</td>
+  <td>类型名称</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>courseId</td>
+  <td>INT(10)</td>
+  <td>所属课程</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>issue</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>closeAt</td>
+  <td>BIGINT(19)</td>
+  <td>关闭于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>closerId</td>
+  <td>INT(10)</td>
+  <td>(弃用)</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>openAt</td>
+  <td>BIGINT(19)</td>
+  <td>打开于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>title</td>
+  <td>TEXT(65535)</td>
+  <td>标题</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>courseId</td>
+  <td>INT(10)</td>
+  <td>所属课程</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>提出者</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>issue_comment</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>issueId</td>
+  <td>INT(10)</td>
+  <td>所属Issue</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>评论者</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>paragraph</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>sectionId</td>
+  <td>INT(10)</td>
+  <td>所属章节</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>(弃用)</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>vedioId</td>
+  <td>INT(10)</td>
+  <td>视频ID</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>paragraph_comment</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>replyTo</td>
+  <td>INT(10)</td>
+  <td>回复给</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>content</td>
+  <td>TEXT(65535)</td>
+  <td>内容</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>paragraphId</td>
+  <td>INT(10)</td>
+  <td>所属段落</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>评论者</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>permission</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>remark</td>
+  <td>VARCHAR(1024)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>controller</td>
+  <td>VARCHAR(512)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>actionKey</td>
+  <td>VARCHAR(512)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div><div class='dbt'><h4>preset_text</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>key</td>
+  <td>VARCHAR(100)</td>
+  <td></td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>type</td>
+  <td>VARCHAR(50)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>value</td>
+  <td>TEXT(65535)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div><div class='dbt'><h4>role</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>name</td>
+  <td>VARCHAR(128)</td>
+  <td>角色名</td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div><div class='dbt'><h4>role_permission</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>permissionId</td>
+  <td>INT(10)</td>
+  <td></td>
+  <td>是</td>
+  <td>是</td>
+</tr><tr>
+  <td>roleId</td>
+  <td>INT(10)</td>
+  <td></td>
+  <td>是</td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>section</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>title</td>
+  <td>VARCHAR(100)</td>
+  <td>标题</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>courseId</td>
+  <td>INT(10)</td>
+  <td>所属课程</td>
+  <td></td>
+  <td>是</td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>(弃用)</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>session</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>VARCHAR(33)</td>
+  <td></td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>expireAt</td>
+  <td>BIGINT(19)</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td></td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>subscription</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>VARCHAR(50)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>payWay</td>
+  <td>INT(10)</td>
+  <td>购买方法</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>cost</td>
+  <td>DOUBLE(22)</td>
+  <td>花费</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>createAt</td>
+  <td>BIGINT(19)</td>
+  <td>创建于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>subscribeType</td>
+  <td>VARCHAR(100)</td>
+  <td>订阅类型</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>refId</td>
+  <td>INT(10)</td>
+  <td>引用到</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>订阅者</td>
+  <td></td>
+  <td>是</td>
+</tr></tbody></table></div><div class='dbt'><h4>video</h4><table  class="table">
+  <thead>
+    <tr>
+      <th>属性名称</th>
+      <th>数据类型</th>
+      <th>属性描述</th>
+      <th>是否主键</th>
+      <th>是否外键</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+  <td>id</td>
+  <td>INT(10)</td>
+  <td>ID</td>
+  <td>是</td>
+  <td></td>
+</tr><tr>
+  <td>uploadAt</td>
+  <td>BIGINT(19)</td>
+  <td>上传于</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>name</td>
+  <td>VARCHAR(100)</td>
+  <td>视频名</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>status</td>
+  <td>INT(10)</td>
+  <td>状态</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>accountId</td>
+  <td>INT(10)</td>
+  <td>上传者</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>recorder</td>
+  <td>VARCHAR(100)</td>
+  <td>录制者</td>
+  <td></td>
+  <td></td>
+</tr><tr>
+  <td>resource</td>
+  <td>TEXT(65535)</td>
+  <td>资源URL</td>
+  <td></td>
+  <td></td>
+</tr></tbody></table></div></html>

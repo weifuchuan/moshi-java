@@ -14,7 +14,7 @@
 
 package com.moshi.my.setting;
 
-import com.moshi.common.account.AccountService;
+import com.moshi.account.AccountService;
 import com.moshi.common.kit.ImageKit;
 import com.moshi.common.model.Account;
 import com.moshi.login.LoginService;

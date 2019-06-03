@@ -4,7 +4,6 @@ import com.jfinal.config.Routes
 import com.moshi.srv.v1.article.ArticleController
 import com.moshi.srv.v1.course.CourseController
 import com.moshi.srv.v1.explore.ExploreController
-import com.moshi.srv.v1.im.ImController
 import com.moshi.srv.v1.issue.IssueController
 import com.moshi.srv.v1.news.NewsController
 import com.moshi.srv.v1.statistics.StatisticsController
@@ -19,6 +18,5 @@ class SrvV1Routes : Routes() {
     add("/srv/v1/article", ArticleController::class.java)
     add("/srv/v1/issue", IssueController::class.java)
     add("/srv/v1/news", NewsController::class.java)
-    add("/srv/v1/im", ImController::class.java)
   }
 }

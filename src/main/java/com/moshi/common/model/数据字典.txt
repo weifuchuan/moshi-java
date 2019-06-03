@@ -1,0 +1,312 @@
+Table: account
+-----------------+--------------+------+-----+---------+---------
+ Field           | Type         | Null | Key | Default | Remarks 
+-----------------+--------------+------+-----+---------+---------
+ id              | INT(10)      | NO   | PRI |         | id      
+ nickName        | VARCHAR(32)  | NO   |     |         | 昵称      
+ password        | VARCHAR(255) | NO   |     |         | 密码（hash）
+ email           | VARCHAR(255) | NO   |     |         | 邮箱      
+ phone           | VARCHAR(32)  | YES  |     |         | 手机      
+ avatar          | VARCHAR(255) | NO   |     |         | 头像      
+ realName        | VARCHAR(48)  | YES  |     |         | 真实名     
+ identityNumber  | VARCHAR(64)  | YES  |     |         | 身份证号    
+ age             | BIGINT(19)   | YES  |     |         | 年龄      
+ company         | VARCHAR(255) | YES  |     |         | 公司      
+ position        | VARCHAR(255) | YES  |     |         | 职位      
+ personalProfile | VARCHAR(512) | YES  |     |         | 个人介绍    
+ sex             | VARCHAR(8)   | YES  |     |         | 性别      
+ birthday        | BIGINT(19)   | YES  |     |         | 生日      
+ education       | VARCHAR(255) | YES  |     |         | 学历      
+ profession      | VARCHAR(255) | YES  |     |         | 行业      
+ createAt        | BIGINT(19)   | NO   |     |         |         
+ status          | INT(10)      | NO   |     | 0       | 账号状态    
+ realPicture     | VARCHAR(200) | YES  |     |         |         
+-----------------+--------------+------+-----+---------+---------
+
+Table: account_role
+-----------+---------+------+-----+---------+---------
+ Field     | Type    | Null | Key | Default | Remarks 
+-----------+---------+------+-----+---------+---------
+ accountId | INT(10) | NO   | PRI |         |         
+ roleId    | INT(10) | NO   | PRI |         |         
+-----------+---------+------+-----+---------+---------
+
+Table: application
+-------------+-------------+------+-----+---------+---------
+ Field       | Type        | Null | Key | Default | Remarks 
+-------------+-------------+------+-----+---------+---------
+ id          | INT(10)     | NO   | PRI |         |         
+ accountId   | INT(10)     | NO   |     |         |         
+ category    | INT(10)     | NO   |     |         | 类别      
+ title       | TEXT(65535) | NO   |     |         |         
+ content     | TEXT(65535) | NO   |     |         |         
+ createAt    | BIGINT(19)  | NO   |     |         |         
+ status      | INT(10)     | NO   |     | 0       |         
+ reply       | TEXT(65535) | YES  |     |         | 管理员的回应  
+ refId       | INT(10)     | NO   |     |         |         
+ contentType | VARCHAR(50) | NO   |     | html    |         
+-------------+-------------+------+-----+---------+---------
+
+Table: article
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         |         
+ courseId    | INT(10)      | NO   |     |         |         
+ title       | TEXT(65535)  | NO   |     |         |         
+ content     | TEXT(65535)  | NO   |     |         |         
+ publishAt   | BIGINT(19)   | YES  |     |         |         
+ createAt    | BIGINT(19)   | NO   |     |         |         
+ status      | INT(10)      | NO   |     | 0       |         
+ audioId     | INT(10)      | NO   |     | 0       |         
+ contentType | VARCHAR(50)  | NO   |     | html    |         
+ summary     | VARCHAR(200) | NO   |     |         |         
+ coverImage  | VARCHAR(200) | YES  |     |         |         
+-------------+--------------+------+-----+---------+---------
+
+Table: article_comment
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | INT(10)     | NO   | PRI |         |         
+ articleId | INT(10)     | NO   |     |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ content   | TEXT(65535) | NO   |     |         |         
+ createAt  | BIGINT(19)  | NO   |     |         |         
+ status    | INT(10)     | NO   |     | 0       |         
+ replyTo   | INT(10)     | YES  |     |         |         
+-----------+-------------+------+-----+---------+---------
+
+Table: audio
+-----------+--------------+------+-----+---------+---------
+ Field     | Type         | Null | Key | Default | Remarks 
+-----------+--------------+------+-----+---------+---------
+ id        | INT(10)      | NO   | PRI |         |         
+ resource  | TEXT(65535)  | NO   |     |         |         
+ recorder  | VARCHAR(100) | NO   |     |         |         
+ accountId | INT(10)      | NO   |     |         |         
+ status    | INT(10)      | NO   |     | 0       |         
+ name      | VARCHAR(100) | NO   |     |         |         
+ uploadAt  | BIGINT(19)   | NO   |     |         |         
+-----------+--------------+------+-----+---------+---------
+
+Table: auth_code
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | VARCHAR(33) | NO   | PRI |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ expireAt  | BIGINT(19)  | NO   |     |         |         
+ type      | INT(10)     | NO   |     |         |         
+-----------+-------------+------+-----+---------+---------
+
+Table: coupon
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | VARCHAR(50) | NO   | PRI |         | id      
+ value     | DOUBLE(22)  | NO   |     |         | 价值      
+ valueType | INT(10)     | NO   |     | 0       | 折扣或金额券  
+ accountId | INT(10)     | NO   |     |         | 所属人     
+ refId     | INT(10)     | YES  |     |         | 可用于实体，null则通用
+ refType   | INT(10)     | NO   |     | 0       | 可用于的实体的类型，course、通用
+ createAt  | BIGINT(19)  | NO   |     |         | 创建时间    
+ offerTo   | BIGINT(19)  | NO   |     |         | 过期时间    
+ status    | INT(10)     | NO   |     | 0       | 状态      
+-----------+-------------+------+-----+---------+---------
+
+Table: course
+-----------------+--------------+------+-----+---------+---------
+ Field           | Type         | Null | Key | Default | Remarks 
+-----------------+--------------+------+-----+---------+---------
+ id              | INT(10)      | NO   | PRI |         |         
+ accountId       | INT(10)      | NO   |     |         | 作者id    
+ name            | VARCHAR(64)  | NO   |     |         | 专栏名     
+ introduce       | TEXT(65535)  | NO   |     |         | 专栏简介    
+ shortIntro      | VARCHAR(100) | NO   |     |         |         
+ introduceImage  | TEXT(65535)  | YES  |     |         |         
+ note            | TEXT(65535)  | YES  |     |         | 订阅须知    
+ createAt        | BIGINT(19)   | NO   |     |         | 创建时间    
+ publishAt       | BIGINT(19)   | YES  |     |         | 发布时间    
+ buyerCount      | INT(10)      | NO   |     | 0       | 购买人数    
+ courseType      | INT(10)      | NO   |     |         | 课程类型（1：专栏；2：视频）
+ price           | DOUBLE(22)   | YES  |     |         | 标准价格    
+ discountedPrice | DOUBLE(22)   | YES  |     |         | 优惠价格    
+ offerTo         | BIGINT(19)   | YES  |     |         | 优惠到某时间  
+ status          | INT(10)      | NO   |     | 0       |         
+ lectureCount    | INT(10)      | NO   |     | 0       |         
+-----------------+--------------+------+-----+---------+---------
+
+Table: course_type
+----------+--------------+------+-----+---------+---------
+ Field    | Type         | Null | Key | Default | Remarks 
+----------+--------------+------+-----+---------+---------
+ id       | INT(10)      | NO   | PRI |         |         
+ typeName | VARCHAR(100) | NO   |     |         |         
+ courseId | INT(10)      | NO   |     |         |         
+----------+--------------+------+-----+---------+---------
+
+Table: issue
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | INT(10)     | NO   | PRI |         |         
+ courseId  | INT(10)     | NO   |     |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ title     | TEXT(65535) | NO   |     |         |         
+ openAt    | BIGINT(19)  | NO   |     |         |         
+ closerId  | INT(10)     | YES  |     |         | 弃用      
+ closeAt   | BIGINT(19)  | YES  |     |         |         
+ status    | INT(10)     | NO   |     |         |         
+-----------+-------------+------+-----+---------+---------
+
+Table: issue_comment
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | INT(10)     | NO   | PRI |         |         
+ issueId   | INT(10)     | NO   |     |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ createAt  | BIGINT(19)  | NO   |     |         |         
+ content   | TEXT(65535) | NO   |     |         |         
+ status    | INT(10)     | NO   |     | 0       |         
+-----------+-------------+------+-----+---------+---------
+
+Table: news
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         |         
+ title       | VARCHAR(200) | NO   |     |         |         
+ content     | TEXT(65535)  | NO   |     |         |         
+ createAt    | BIGINT(19)   | NO   |     |         |         
+ publishAt   | BIGINT(19)   | YES  |     |         |         
+ status      | INT(10)      | NO   |     | 0       |         
+ author      | VARCHAR(100) | NO   |     |         |         
+ audioId     | INT(10)      | YES  |     |         |         
+ contentType | VARCHAR(50)  | NO   |     | html    |         
+-------------+--------------+------+-----+---------+---------
+
+Table: paragraph
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | INT(10)     | NO   | PRI |         |         
+ sectionId | INT(10)     | NO   |     |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ vedioId   | INT(10)     | NO   |     |         |         
+ content   | TEXT(65535) | NO   |     |         |         
+ createAt  | BIGINT(19)  | NO   |     |         |         
+ status    | INT(10)     | NO   |     | 0       |         
+-----------+-------------+------+-----+---------+---------
+
+Table: paragraph_comment
+-------------+-------------+------+-----+---------+---------
+ Field       | Type        | Null | Key | Default | Remarks 
+-------------+-------------+------+-----+---------+---------
+ id          | INT(10)     | NO   | PRI |         |         
+ paragraphId | INT(10)     | NO   |     |         |         
+ accountId   | INT(10)     | NO   |     |         |         
+ content     | TEXT(65535) | NO   |     |         |         
+ createAt    | BIGINT(19)  | NO   |     |         |         
+ status      | INT(10)     | NO   |     | 0       |         
+ replyTo     | INT(10)     | YES  |     |         |         
+-------------+-------------+------+-----+---------+---------
+
+Table: permission
+------------+---------------+------+-----+---------+---------
+ Field      | Type          | Null | Key | Default | Remarks 
+------------+---------------+------+-----+---------+---------
+ id         | INT(10)       | NO   | PRI |         |         
+ actionKey  | VARCHAR(512)  | NO   |     |         |         
+ controller | VARCHAR(512)  | NO   |     |         |         
+ remark     | VARCHAR(1024) | YES  |     |         |         
+------------+---------------+------+-----+---------+---------
+
+Table: preset_text
+-------+--------------+------+-----+---------+---------
+ Field | Type         | Null | Key | Default | Remarks 
+-------+--------------+------+-----+---------+---------
+ key   | VARCHAR(100) | NO   | PRI |         |         
+ value | TEXT(65535)  | NO   |     |         |         
+ type  | VARCHAR(50)  | NO   |     | html    |         
+-------+--------------+------+-----+---------+---------
+
+Table: recommend
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         |         
+ image       | TEXT(65535)  | NO   |     |         |         
+ title       | VARCHAR(200) | NO   |     |         |         
+ content     | TEXT(65535)  | NO   |     |         |         
+ createAt    | BIGINT(19)   | NO   |     |         |         
+ status      | INT(10)      | NO   |     | 0       |         
+ contentType | VARCHAR(50)  | NO   |     | html    |         
+-------------+--------------+------+-----+---------+---------
+
+Table: role
+----------+--------------+------+-----+---------+---------
+ Field    | Type         | Null | Key | Default | Remarks 
+----------+--------------+------+-----+---------+---------
+ id       | INT(10)      | NO   | PRI |         |         
+ name     | VARCHAR(128) | NO   |     |         |         
+ createAt | BIGINT(19)   | NO   |     |         |         
+----------+--------------+------+-----+---------+---------
+
+Table: role_permission
+--------------+---------+------+-----+---------+---------
+ Field        | Type    | Null | Key | Default | Remarks 
+--------------+---------+------+-----+---------+---------
+ roleId       | INT(10) | NO   | PRI |         |         
+ permissionId | INT(10) | NO   | PRI |         |         
+--------------+---------+------+-----+---------+---------
+
+Table: section
+-----------+--------------+------+-----+---------+---------
+ Field     | Type         | Null | Key | Default | Remarks 
+-----------+--------------+------+-----+---------+---------
+ id        | INT(10)      | NO   | PRI |         |         
+ courseId  | INT(10)      | NO   |     |         |         
+ accountId | INT(10)      | NO   |     |         |         
+ title     | VARCHAR(100) | NO   |     |         |         
+ createAt  | BIGINT(19)   | NO   |     |         |         
+ status    | INT(10)      | NO   |     | 0       |         
+-----------+--------------+------+-----+---------+---------
+
+Table: session
+-----------+-------------+------+-----+---------+---------
+ Field     | Type        | Null | Key | Default | Remarks 
+-----------+-------------+------+-----+---------+---------
+ id        | VARCHAR(33) | NO   | PRI |         |         
+ accountId | INT(10)     | NO   |     |         |         
+ expireAt  | BIGINT(19)  | NO   |     |         |         
+-----------+-------------+------+-----+---------+---------
+
+Table: subscription
+---------------+--------------+------+-----+---------+---------
+ Field         | Type         | Null | Key | Default | Remarks 
+---------------+--------------+------+-----+---------+---------
+ id            | VARCHAR(50)  | NO   | PRI |         |         
+ accountId     | INT(10)      | NO   |     |         |         
+ refId         | INT(10)      | NO   |     |         |         
+ subscribeType | VARCHAR(100) | NO   |     | course  |         
+ createAt      | BIGINT(19)   | NO   |     |         |         
+ cost          | DOUBLE(22)   | NO   |     |         |         
+ status        | INT(10)      | NO   |     | 0       |         
+ payWay        | INT(10)      | NO   |     | 0       |         
+---------------+--------------+------+-----+---------+---------
+
+Table: video
+-----------+--------------+------+-----+---------+---------
+ Field     | Type         | Null | Key | Default | Remarks 
+-----------+--------------+------+-----+---------+---------
+ id        | INT(10)      | NO   | PRI |         |         
+ resource  | TEXT(65535)  | NO   |     |         |         
+ recorder  | VARCHAR(100) | NO   |     |         |         
+ accountId | INT(10)      | NO   |     |         |         
+ status    | INT(10)      | NO   |     | 0       |         
+ name      | VARCHAR(100) | NO   |     |         |         
+ uploadAt  | BIGINT(19)   | NO   |     |         |         
+-----------+--------------+------+-----+---------+---------
+

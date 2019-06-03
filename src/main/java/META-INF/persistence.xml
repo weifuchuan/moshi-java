@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <class>com.moshi.common.entity.Account</class>
+        <class>com.moshi.common.entity.AccountRole</class>
+        <class>com.moshi.common.entity.Application</class>
+        <class>com.moshi.common.entity.Article</class>
+        <class>com.moshi.common.entity.ArticleComment</class>
+        <class>com.moshi.common.entity.Audio</class>
+        <class>com.moshi.common.entity.AuthCode</class>
+        <class>com.moshi.common.entity.Coupon</class>
+        <class>com.moshi.common.entity.Course</class>
+        <class>com.moshi.common.entity.CourseType</class>
+        <class>com.moshi.common.entity.Issue</class>
+        <class>com.moshi.common.entity.IssueComment</class>
+        <class>com.moshi.common.entity.Paragraph</class>
+        <class>com.moshi.common.entity.ParagraphComment</class>
+        <class>com.moshi.common.entity.Permission</class>
+        <class>com.moshi.common.entity.PresetText</class>
+        <class>com.moshi.common.entity.Role</class>
+        <class>com.moshi.common.entity.RolePermission</class>
+        <class>com.moshi.common.entity.Section</class>
+        <class>com.moshi.common.entity.Session</class>
+        <class>com.moshi.common.entity.Subscription</class>
+        <class>com.moshi.common.entity.Video</class>
+        <properties>
+            <property name="toplink.jdbc.url" value="jdbc:mysql://123.207.28.107:3306"/>
+            <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://123.207.28.107:3306"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:mysql://123.207.28.107:3306"/>
+            <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://123.207.28.107:3306"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>
