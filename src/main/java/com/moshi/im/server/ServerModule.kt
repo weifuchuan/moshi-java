@@ -14,8 +14,8 @@ import com.moshi.im.server.listener.MainListener
 import org.codejargon.feather.Provides
 import org.tio.core.stat.IpStatListener
 import com.jfinal.kit.Prop
-import com.moshi.im.server.websocket.server.WsServerAioListener
-import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
+import org.tio.websocket.server.WsServerAioListener
+import org.tio.websocket.server.handler.IWsMsgHandler
 import io.lettuce.core.RedisURI
 import org.redisson.Redisson
 import org.redisson.api.RedissonClient

@@ -11,14 +11,10 @@ import com.moshi.im.kit.TioKit
 import com.moshi.im.server.config.ImServerConfig
 import org.tio.core.stat.IpStatListener
 import org.tio.server.ServerGroupContext
-import com.moshi.im.server.websocket.server.WsServerAioListener
-import com.moshi.im.server.websocket.server.WsServerStarter
-import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import org.tio.websocket.server.WsServerAioListener
+import org.tio.websocket.server.WsServerStarter
+import org.tio.websocket.server.handler.IWsMsgHandler
 import org.tio.cluster.TioClusterConfig
-import org.tio.core.GroupContext
 
 import java.io.IOException
 
@@ -63,7 +59,6 @@ constructor(
 
   fun stop() {
     onStop()
-    starter.tioServer.stop()
   }
 
   private fun onStart() {

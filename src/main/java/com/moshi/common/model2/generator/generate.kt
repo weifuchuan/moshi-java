@@ -48,7 +48,6 @@ fun main() {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
           .dbt{
-              font-size:14px;
               page-break-before: auto;
               page-break-after: always;
           }
@@ -59,7 +58,7 @@ fun main() {
   list.forEach {
     sb.append("<div class='dbt'>")
 
-    sb.append("<h4>${it.name}</h4>")
+    sb.append("<div>表名：${it.name}</div>")
 
     sb.append(
       """

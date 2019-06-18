@@ -9,10 +9,10 @@
     <version>0.1</version>
 
     <properties>
-        <jfinal.version>4.1</jfinal.version>
+        <jfinal.version>4.2</jfinal.version>
         <jfinalUndertow.version>1.6</jfinalUndertow.version>
         <!--        <jboot.version>2.0.8</jboot.version>-->
-        <tio.version>3.3.1.v20190520-RELEASE</tio.version>
+        <tio.version>3.3.2.v20190601-RELEASE</tio.version>
         <grpc.version>1.20.0</grpc.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -36,32 +36,6 @@
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal-undertow</artifactId>
             <version>${jfinalUndertow.version}</version>
-        </dependency>
-
-
-        <!--        <dependency>-->
-        <!--            <groupId>io.jboot</groupId>-->
-        <!--            <artifactId>jboot</artifactId>-->
-        <!--            <version>${jboot.version}</version>-->
-        <!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.t-io/tio-parent -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.t-io</groupId>-->
-        <!--            <artifactId>tio-parent</artifactId>-->
-        <!--            <version>${tio.version}</version>-->
-        <!--            <type>pom</type>-->
-        <!--        </dependency>-->
-
-        <dependency>
-            <groupId>org.t-io</groupId>
-            <artifactId>tio-core</artifactId>
-            <!--            <version>${tio.version}</version>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.t-io</groupId>
-            <artifactId>tio-http-server</artifactId>
         </dependency>
 
         <dependency>
@@ -168,7 +142,6 @@
             <version>5.1.44</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
@@ -185,6 +158,12 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>3.2.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
         </dependency>
 
         <dependency>
@@ -267,11 +246,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
             <!--            <version>1.7.26</version>-->
-        </dependency>
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.11.3</version>
         </dependency>
     </dependencies>
 
@@ -393,6 +367,25 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Generate UML diagrams in javadoc using doclet: mvn javadoc:javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <doclet>info.leadinglight.umljavadoclet.UmlJavaDoclet</doclet>
+                    <docletArtifact>
+                        <groupId>info.leadinglight</groupId>
+                        <artifactId>uml-java-doclet</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                    </docletArtifact>
+                    <!-- -linetype polyline / spline / ortho (default) -->
+                    <!-- -dependencies public (default) / protected / package / private -->
+                    <additionalparam></additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                </configuration>
+            </plugin>
         </plugins>
 
         <extensions>
@@ -413,22 +406,4 @@
             </resource>
         </resources>
     </build>
-
-
-    <!-- 使用阿里 maven 库 -->
-    <repositories>
-        <repository>
-            <id>ali-maven</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
 </project>

@@ -1,7 +1,7 @@
 package com.moshi.im.server.config;
 
 import org.tio.utils.time.Time;
-import com.moshi.im.server.websocket.server.WsServerConfig;
+import org.tio.websocket.server.WsServerConfig;
 
 public class ImServerConfig extends WsServerConfig {
   public ImServerConfig() {

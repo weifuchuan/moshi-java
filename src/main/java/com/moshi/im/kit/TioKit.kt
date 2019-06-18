@@ -2,7 +2,7 @@ package com.moshi.im.kit
 
 import com.moshi.im.common.ImPacket
 import com.moshi.im.common.ImPacketCoder
-import com.moshi.im.server.websocket.common.WsResponse
+import org.tio.websocket.common.WsResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tio.cluster.TioClusterVo

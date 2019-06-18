@@ -16,7 +16,6 @@ import com.moshi.common.model._MappingKit
 import com.moshi.common.plugin.LetturePlugin
 import com.moshi.common.plugin.RedisMQPlugin
 import com.moshi.common.socketio.MoshiSocketIOPlugin
-import com.moshi.easyrec.EasyrecService
 import com.moshi.im.ImPlugin
 import com.moshi.im.grpc.ImGrpcPlugin
 import com.moshi.srv.v1.SrvV1Routes

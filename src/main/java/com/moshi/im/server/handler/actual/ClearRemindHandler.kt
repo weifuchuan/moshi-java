@@ -7,7 +7,7 @@ import com.moshi.im.db.IDao
 import com.moshi.im.server.handler.BaseActualHandler
 import com.moshi.im.server.handler.HandlerForCommand
 import org.tio.core.ChannelContext
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 
 @HandlerForCommand(Command.COMMAND_CLEAR_REMIND_REQ)
 class ClearRemindHandler(dao: IDao) : BaseActualHandler(dao) {

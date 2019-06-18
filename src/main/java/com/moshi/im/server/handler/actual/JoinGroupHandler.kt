@@ -8,7 +8,7 @@ import com.moshi.im.kit.TioKit
 import com.moshi.im.server.handler.BaseActualHandler
 import com.moshi.im.server.handler.C
 import com.moshi.im.server.handler.HandlerForCommand
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 import org.slf4j.LoggerFactory
 import org.tio.core.ChannelContext
 

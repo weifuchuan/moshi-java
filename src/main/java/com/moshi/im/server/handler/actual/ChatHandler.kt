@@ -11,7 +11,7 @@ import com.moshi.im.db.IDao
 import com.moshi.im.kit.TioKit
 import com.moshi.im.server.handler.BaseActualHandler
 import com.moshi.im.server.handler.HandlerForCommand
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 import com.jfinal.kit.Kv
 import com.moshi.im.common.payload.ChatRespPayload
 import org.slf4j.Logger

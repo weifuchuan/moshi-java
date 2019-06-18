@@ -17,7 +17,7 @@ import org.tio.core.ChannelContext
 import org.tio.core.Tio
 import org.tio.utils.lock.ReadLockHandler
 import org.tio.utils.lock.SetWithLock
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 
 import java.util.Objects
 import java.util.concurrent.atomic.AtomicBoolean

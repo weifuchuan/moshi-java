@@ -10,7 +10,7 @@ import com.moshi.im.server.handler.HandlerForCommand
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tio.core.ChannelContext
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 
 @HandlerForCommand(Command.COMMAND_HEARTBEAT_REQ)
 class HeartbeatHandler(dao: IDao) : BaseActualHandler(dao) {

@@ -1,0 +1,718 @@
+@startuml
+
+class com.moshi.App {
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.App$main$1 {
+	{method} +accept ( paramObject1 : Object ) : void
+	{method} +accept ( paramWebBuilder1 : com.jfinal.server.undertow.WebBuilder ) : void
+}
+
+
+class com.moshi._admin.account.AccountAdminController {
+	{field} ~mySettingSrv : com.moshi.my.setting.MySettingService
+	{method} +addRole () : void
+	{method} +avatar () : void
+	{method} +deleteRole () : void
+	{method} +lock () : void
+	{method} +page () : void
+	{method} +saveAvatar () : void
+	{method} +showAdminList () : void
+	{method} +unlock () : void
+	{method} +update () : void
+	{method} +updateStatus ( paramint1 : int , paramint2 : int ) : void
+	{method} +uploadAvatar () : void
+}
+
+
+class com.moshi._admin.account.AccountAdminService {
+	{field} -dao : com.moshi.common.model.Account
+	{method} +addRole ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +deleteRole ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +findById ( paramint1 : int ) : com.moshi.common.model.Account
+	{method} +getAdminList () : java.util.List
+	{method} +lock ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +markAssignedRoles ( paramAccount1 : com.moshi.common.model.Account , paramList2 : java.util.List ) : void
+	{method} +paginate ( paramint1 : int ) : com.jfinal.plugin.activerecord.Page
+	{method} +unlock ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +update ( paramAccount1 : com.moshi.common.model.Account ) : com.jfinal.kit.Ret
+	{method} +updateStatus ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.account.AccountUpdateValidator {
+	{method} #handleError ( paramController1 : com.jfinal.core.Controller ) : void
+	{method} #validate ( paramController1 : com.jfinal.core.Controller ) : void
+}
+
+
+class com.moshi._admin.apply.ApplyAdminController {
+	{method} +pass ( paramint1 : int , paramString2 : String ) : void
+	{method} +reject ( paramint1 : int , paramString2 : String ) : void
+}
+
+
+class com.moshi._admin.apply.ApplyAdminService {
+	{field} -dao : com.moshi.common.model.Application
+	{method} +pass ( paramint1 : int , paramString2 : String ) : com.jfinal.kit.Ret
+	{method} +reject ( paramint1 : int , paramString2 : String ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.article.ArticleAdminController {
+	{method} +updateStatus ( paramint1 : int , paramint2 : int ) : void
+}
+
+
+class com.moshi._admin.article.ArticleAdminService {
+	{field} -dao : com.moshi.common.model.Article
+	{method} +status ( paramint1 : int ) : int
+	{method} +updateStatus ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.auth.AdminAuthInterceptor {
+	{field} {static} -threadLocal : ThreadLocal
+	{method}  {static} +getThreadLocalAccount () : com.moshi.common.model.Account
+	{method} +intercept ( paramInvocation1 : com.jfinal.aop.Invocation ) : void
+}
+
+
+class com.moshi._admin.auth.AdminAuthKit {
+	{method} +hasPermission ( paramString1 : String ) : boolean
+	{method} +hasRole ( paramString;1 : [Ljava.lang.String; ) : boolean
+}
+
+
+class com.moshi._admin.auth.AdminAuthService {
+	{method} +hasPermission ( paramint1 : int , paramString2 : String ) : boolean
+	{method} +hasRole ( paramint1 : int , paramString;2 : [Ljava.lang.String; ) : boolean
+	{method} +isSuperAdmin ( paramint1 : int ) : boolean
+}
+
+
+class com.moshi._admin.common.AdminRoutes {
+	{method} +config () : void
+}
+
+
+class com.moshi._admin.course.CourseAdminController {
+	{method} +addCourseType ( paramint1 : int , paramString2 : String ) : void
+	{method} +delCourseType ( paramString1 : String , paramInteger2 : Integer , paramString3 : String ) : void
+	{method} +lock ( paramint1 : int ) : void
+	{method} +publish ( paramint1 : int ) : void
+	{method} +unlock ( paramint1 : int ) : void
+	{method} +unpublish ( paramint1 : int ) : void
+	{method} +update () : void
+}
+
+
+class com.moshi._admin.course.CourseAdminService {
+	{field} -courseTypeDao : com.moshi.common.model.CourseType
+	{field} -dao : com.moshi.common.model.Course
+	{method} +addCourseType ( paramint1 : int , paramString2 : String ) : com.jfinal.kit.Ret
+	{method} +delCourseType ( paramString1 : String ) : com.jfinal.kit.Ret
+	{method} +delCourseType ( paramint1 : int , paramString2 : String ) : com.jfinal.kit.Ret
+	{method} +lock ( paramInteger1 : Integer ) : com.jfinal.kit.Ret
+	{method} +publish ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +unlock ( paramInteger1 : Integer ) : com.jfinal.kit.Ret
+	{method} +unpublish ( paramint1 : int ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.news.NewsAdminController {
+	{field} {static} +COURSE_ID_FOR_NEWS : int
+	{method} +create ( paramString1 : String , paramString2 : String , paramInteger3 : Integer ) : void
+	{method} +publish ( paramint1 : int ) : void
+}
+
+
+class com.moshi._admin.permission.PermissionAdminController {
+	{method} +delete () : void
+	{method} +sync () : void
+	{method} +update () : void
+}
+
+
+class com.moshi._admin.permission.PermissionAdminService {
+	{field} -dao : com.moshi.common.model.Permission
+	{method} +delete ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +findById ( paramint1 : int ) : com.moshi.common.model.Permission
+	{method} +getAllPermissions () : java.util.List
+	{method} -lambda$delete$0 ( paramint1 : int ) : boolean
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+	{method} +markRemovedActionKey ( paramPage1 : com.jfinal.plugin.activerecord.Page ) : boolean
+	{method} +paginate ( paramint1 : int ) : com.jfinal.plugin.activerecord.Page
+	{method} +replaceControllerPrefix ( paramPage1 : com.jfinal.plugin.activerecord.Page , paramString2 : String , paramString3 : String ) : void
+	{method} -setRemarkValue ( paramPermission1 : com.moshi.common.model.Permission , paramAction2 : com.jfinal.core.Action ) : void
+	{method} +sync () : com.jfinal.kit.Ret
+	{method} +update ( paramPermission1 : com.moshi.common.model.Permission ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.permission.PermissionDirective {
+	{method} +exec ( paramEnv1 : com.jfinal.template.Env , paramScope2 : com.jfinal.template.stat.Scope , paramWriter3 : com.jfinal.template.io.Writer ) : void
+	{method} -getPermission ( paramScope1 : com.jfinal.template.stat.Scope ) : String
+	{method} +hasEnd () : boolean
+}
+
+
+annotation com.moshi._admin.permission.Remark
+
+class com.moshi._admin.preset_text.PresetTextAdminController {
+	{field} -dao : com.moshi.common.model.PresetText
+	{method} +delete ( paramString1 : String ) : void
+	{method} +saveOrUpdate ( paramString1 : String , paramString2 : String , paramString3 : String ) : void
+}
+
+
+class com.moshi._admin.role.RoleAdminController {
+	{method} +addPermission () : void
+	{method} +assignPermissions () : void
+	{method} +delete () : void
+	{method} +deletePermission () : void
+	{method} +save () : void
+	{method} +update () : void
+}
+
+
+class com.moshi._admin.role.RoleAdminService {
+	{field} -dao : com.moshi.common.model.Role
+	{method} +addPermission ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +delete ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +deletePermission ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +exists ( paramint1 : int , paramString2 : String ) : boolean
+	{method} +findById ( paramint1 : int ) : com.moshi.common.model.Role
+	{method} +getAllRoles () : java.util.List
+	{method} +groupByController ( paramList1 : java.util.List ) : java.util.LinkedHashMap
+	{method} -lambda$delete$0 ( paramint1 : int ) : boolean
+	{method} +markAssignedPermissions ( paramRole1 : com.moshi.common.model.Role , paramList2 : java.util.List ) : void
+	{method} +paginate ( paramint1 : int ) : com.jfinal.plugin.activerecord.Page
+	{method} +save ( paramRole1 : com.moshi.common.model.Role ) : com.jfinal.kit.Ret
+	{method} +update ( paramRole1 : com.moshi.common.model.Role ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi._admin.role.RoleAdminValidator {
+	{method} #handleError ( paramController1 : com.jfinal.core.Controller ) : void
+	{method} #validate ( paramController1 : com.jfinal.core.Controller ) : void
+}
+
+
+class com.moshi._admin.role.RoleDirective {
+	{method} +exec ( paramEnv1 : com.jfinal.template.Env , paramScope2 : com.jfinal.template.stat.Scope , paramWriter3 : com.jfinal.template.io.Writer ) : void
+	{method} -getRoleNameArray ( paramScope1 : com.jfinal.template.stat.Scope ) : [Ljava.lang.String;
+	{method} +hasEnd () : boolean
+}
+
+
+class com.moshi._admin.subscription.SubscriptionController {
+	{method} +page () : void
+}
+
+
+class com.moshi._generate_umlKt {
+	{method}  {static} +main () : void
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.account.AccountService {
+	{field} -allAccountsCacheName : String
+	{field} -dao : com.moshi.common.model.Account
+	{method} +clearCache ( paramint1 : int ) : void
+	{method} +getById ( paramint1 : int ) : com.moshi.common.model.Account
+	{method} +getByNickName ( paramString1 : String , paramString2 : String ) : com.moshi.common.model.Account
+	{method} +getUsefulById ( paramint1 : int ) : com.moshi.common.model.Account
+	{method} +join ( paramString1 : String , paramModel2 : com.jfinal.plugin.activerecord.Model , paramString;3 : [Ljava.lang.String; ) : void
+	{method} +join ( paramString1 : String , paramList2 : java.util.List , paramString;3 : [Ljava.lang.String; ) : void
+	{method} +joinNickNameAndAvatar ( paramModel1 : com.jfinal.plugin.activerecord.Model ) : void
+	{method} +joinNickNameAndAvatar ( paramList1 : java.util.List ) : void
+	{method} +updateAccountAvatar ( paramint1 : int , paramString2 : String ) : void
+}
+
+
+class com.moshi.apply.ApplyController {
+	{method} +cancel () : void
+	{method} +commit () : void
+	{method} +my () : void
+}
+
+
+class com.moshi.apply.ApplyService {
+	{field} {static} -dao : com.moshi.common.model.Application
+	{method} +cancel ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +commit ( paramint1 : int , paramint2 : int , paramString3 : String , paramString4 : String , paramint5 : int , paramint6 : int ) : com.jfinal.kit.Ret
+	{method} +findMy ( paramint1 : int , paramint2 : int ) : java.util.List
+}
+
+
+class com.moshi.article.ArticleController {
+	{method} +comment () : void
+	{method} +create () : void
+	{method} +fetch () : void
+	{method} +removeComment () : void
+	{method} +update () : void
+	{method} +updateCommentStatus () : void
+}
+
+
+class com.moshi.article.ArticleService {
+	{field} -dao : com.moshi.common.model.Article
+	{method} +comment ( paramint1 : int , paramString2 : String , paramInteger3 : Integer , paramint4 : int ) : com.jfinal.kit.Ret
+	{method} +create ( paramString1 : String , paramString2 : String , paramString3 : String , paramint4 : int , paramInteger5 : Integer ) : com.jfinal.kit.Ret
+	{method} +deleteComment ( paramint1 : int , paramint2 : int , paramint3 : int ) : com.jfinal.kit.Ret
+	{method} +findAllUsefulData ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +update ( paramint1 : int , paramKv2 : com.jfinal.kit.Kv ) : com.jfinal.kit.Ret
+	{method} +updateCommentStatus ( paramint1 : int , paramint2 : int , paramint3 : int , paramint4 : int ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.audio.AudioController {
+	{method} +delete () : void
+	{method}  {static} -getNextId () : long
+	{method} +index ( paramint1 : int ) : void
+	{method}  {static} -lambda$upload$0 ( paramUploadFile1 : com.jfinal.upload.UploadFile ) : Boolean
+	{method} +myUploaded () : void
+	{method} +upload () : void
+}
+
+
+class com.moshi.authcode.AuthCodeService {
+	{field} -dao : com.moshi.common.model.AuthCode
+	{method} +clearExpiredAuthCode () : int
+	{method} -createAuthCode ( paramint1 : int , paramint2 : int , paramint3 : int ) : String
+	{method} +createRegActivateAuthCode ( paramint1 : int ) : String
+	{method} +createRetrievePasswordAuthCode ( paramint1 : int ) : String
+	{method} +getAuthCode ( paramString1 : String ) : com.moshi.common.model.AuthCode
+	{method} +peekAuthCode ( paramString1 : String ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.avatar.AvatarController {
+	{method}  {static} -getNextId () : long
+	{method}  {static} -lambda$upload$0 ( paramUploadFile1 : com.jfinal.upload.UploadFile ) : Boolean
+	{method} +upload () : void
+}
+
+
+class com.moshi.common.FrontRoutes {
+	{method} +config () : void
+}
+
+
+class com.moshi.common.MainConfig {
+	{field} {static} -p : com.jfinal.kit.Prop
+	{method}  {static} +access$getP$cp () : com.jfinal.kit.Prop
+	{method}  {static} +access$setP$cp ( paramProp1 : com.jfinal.kit.Prop ) : void
+	{method} +configConstant ( paramConstants1 : com.jfinal.config.Constants ) : void
+	{method} +configEngine ( paramEngine1 : com.jfinal.template.Engine ) : void
+	{method} +configHandler ( paramHandlers1 : com.jfinal.config.Handlers ) : void
+	{method} +configInterceptor ( paramInterceptors1 : com.jfinal.config.Interceptors ) : void
+	{method} +configPlugin ( paramPlugins1 : com.jfinal.config.Plugins ) : void
+	{method} +configRoute ( paramRoutes1 : com.jfinal.config.Routes ) : void
+	{method} +onStart () : void
+}
+
+
+class com.moshi.common.MainConfig$Companion {
+	{method} +getDruidPlugin () : com.jfinal.plugin.druid.DruidPlugin
+	{method} +getP () : com.jfinal.kit.Prop
+	{method} +loadConfig () : com.jfinal.kit.Prop
+	{method} +setP ( paramProp1 : com.jfinal.kit.Prop ) : void
+}
+
+
+class com.moshi.course.CourseController {
+	{method} +create () : void
+	{method} +detail () : void
+	{method} +myByTeacher () : void
+	{method} +update () : void
+}
+
+
+class com.moshi.course.CourseService {
+	{field} -dao : com.moshi.common.model.Course
+	{method} +create ( paramint1 : int , paramString2 : String , paramString3 : String , paramint4 : int ) : com.jfinal.kit.Ret
+	{method} +detail ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+	{method} +findByAccountId ( paramint1 : int ) : java.util.List
+	{method} +update ( paramint1 : int , paramKv2 : com.jfinal.kit.Kv ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.easyrec.EasyrecConfig {
+	{field} +apikey : String
+	{field} +serverUrl : String
+	{field} +sessionid : String
+	{field} +tenantid : String
+	{field} +token : String
+	{method} +clone () : com.moshi.easyrec.EasyrecConfig
+	{method} +clone () : Object
+}
+
+
+class com.moshi.easyrec.EasyrecController {
+	{method} +index () : void
+}
+
+
+class com.moshi.easyrec.EasyrecService {
+	{method}  {static} +access$getConfig$cp () : com.moshi.easyrec.EasyrecConfig
+	{method} +buy ( paramString1 : String , paramString2 : String , paramString3 : String , paramString4 : String , paramKv5 : com.jfinal.kit.Kv ) : cn.hutool.http.HttpResponse
+	{method} -get ( paramString1 : String , paramKv2 : com.jfinal.kit.Kv ) : cn.hutool.http.HttpResponse
+	{method} -post ( paramString1 : String , paramKv2 : com.jfinal.kit.Kv ) : cn.hutool.http.HttpResponse
+	{method} +rate ( paramString1 : String , paramString2 : String , paramString3 : String , paramString4 : String , paramint5 : int , paramKv6 : com.jfinal.kit.Kv ) : void
+	{method} +sendaction ( paramString1 : String , paramString2 : String , paramString3 : String , paramString4 : String , paramString5 : String , paramKv6 : com.jfinal.kit.Kv ) : void
+	{method} +track ( paramString1 : String , paramString2 : String , paramString3 : String , paramKv4 : com.jfinal.kit.Kv ) : void
+	{method} +view ( paramString1 : String , paramString2 : String , paramString3 : String , paramString4 : String , paramKv5 : com.jfinal.kit.Kv ) : cn.hutool.http.HttpResponse
+}
+
+
+class com.moshi.easyrec.EasyrecService$Companion {
+	{method} +getConfig () : com.moshi.easyrec.EasyrecConfig
+	{method} +mock () : void
+}
+
+
+class com.moshi.easyrec.EasyrecService$Companion$mock$1 {
+	{field} ~$accountList : java.util.List
+	{field} ~$courseList : java.util.List
+	{field} ~label : int
+	{field} -p$ : kotlinx.coroutines.CoroutineScope
+	{method} +create ( paramObject1 : Object , paramContinuation2 : kotlin.coroutines.Continuation ) : kotlin.coroutines.Continuation
+	{method} +invoke ( paramObject1 : Object , paramObject2 : Object ) : Object
+	{method} +invokeSuspend ( paramObject1 : Object ) : Object
+}
+
+
+class com.moshi.easyrec.EasyrecService$Companion$mock$1$1 {
+	{field} ~$c : com.moshi.common.model.Course
+	{field} ~$sid : String
+	{field} ~label : int
+	{field} -p$ : kotlinx.coroutines.CoroutineScope
+	{method} +create ( paramObject1 : Object , paramContinuation2 : kotlin.coroutines.Continuation ) : kotlin.coroutines.Continuation
+	{method} +invoke ( paramObject1 : Object , paramObject2 : Object ) : Object
+	{method} +invokeSuspend ( paramObject1 : Object ) : Object
+}
+
+
+class com.moshi.easyrec.EasyrecService$Companion$mock$1$2 {
+	{field} ~$c : com.moshi.common.model.Course
+	{field} ~$sid : String
+	{field} ~label : int
+	{field} -p$ : kotlinx.coroutines.CoroutineScope
+	{method} +create ( paramObject1 : Object , paramContinuation2 : kotlin.coroutines.Continuation ) : kotlin.coroutines.Continuation
+	{method} +invoke ( paramObject1 : Object , paramObject2 : Object ) : Object
+	{method} +invokeSuspend ( paramObject1 : Object ) : Object
+}
+
+
+class com.moshi.file.FileController {
+	{field} {static} -cloudinary : com.cloudinary.Cloudinary
+	{field} {static} -configGetter : java.util.function.Supplier
+	{method}  {static} -getNextId () : long
+	{method}  {static} -lambda$static$0 () : java.util.Map
+	{method}  {static} -lambda$upload$1 ( paramUploadFile1 : com.jfinal.upload.UploadFile ) : Boolean
+	{method} +upload () : void
+}
+
+
+class com.moshi.im.ImController {
+	{field} {static} -IM_AUTH : String
+	{method}  {static} +access$getIM_AUTH$cp () : String
+	{method} +token () : void
+}
+
+
+class com.moshi.im.ImController$Companion {
+	{method} +getIM_AUTH () : String
+}
+
+
+class com.moshi.im.ImController$token$1 {
+	{field} ~$sync : io.lettuce.core.api.sync.RedisCommands
+	{field} ~$token : String
+	{method} +accept ( paramLong1 : Long ) : void
+	{method} +accept ( paramObject1 : Object ) : void
+}
+
+
+class com.moshi.im.ImModule {
+	{method} +accountService ( paramProp1 : com.jfinal.kit.Prop ) : com.moshi.im.common.AccountServiceGrpc$AccountServiceBlockingStub
+	{method} +authService ( paramProp1 : com.jfinal.kit.Prop ) : com.moshi.im.common.AuthServiceGrpc$AuthServiceBlockingStub
+	{method} +config () : com.jfinal.kit.Prop
+	{method} +courseService ( paramProp1 : com.jfinal.kit.Prop ) : com.moshi.im.common.CourseServiceGrpc$CourseServiceBlockingStub
+	{method} +mq ( paramRedisURI1 : io.lettuce.core.RedisURI ) : com.moshi.common.mq.RedisMQ
+}
+
+
+class com.moshi.im.ImPlugin {
+	{field} {static} -feather : org.codejargon.feather.Feather
+	{field} +server : com.moshi.im.server.ImServer
+	{method}  {static} +access$getFeather$cp () : org.codejargon.feather.Feather
+	{method} +start () : boolean
+	{method} +stop () : boolean
+}
+
+
+class com.moshi.im.ImPlugin$Me {
+	{method} +getFeather () : org.codejargon.feather.Feather
+}
+
+
+class com.moshi.im.ImPluginKt {
+	{method}  {static} +main () : void
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.index.IndexController {
+	{method} +admin () : void
+	{method} +index () : void
+	{method} +teacher () : void
+}
+
+
+class com.moshi.issue.IssueController {
+	{method} +comment () : void
+	{method} +fetch () : void
+}
+
+
+class com.moshi.issue.IssueService {
+	{field} -dao : com.moshi.common.model.Issue
+	{method} +comment ( paramint1 : int , paramString2 : String , paramint3 : int ) : com.jfinal.kit.Ret
+	{method} +find ( paramint1 : int ) : java.util.List
+}
+
+
+class com.moshi.login.LoginController {
+	{method} +captcha () : void
+	{method} +index () : void
+	{method} +logout () : void
+	{method} +probe () : void
+}
+
+
+class com.moshi.login.LoginService {
+	{field} -accountDao : com.moshi.common.model.Account
+	{field} {static} +loginAccountCacheName : String
+	{field} {static} +sessionIdName : String
+	{method} +getLoginAccountWithSessionIdFromCache ( paramString1 : String ) : com.moshi.common.model.Account
+	{method} +loginByEmail ( paramString1 : String , paramString2 : String ) : com.jfinal.kit.Ret
+	{method} +loginWithSessionId ( paramString1 : String ) : com.moshi.common.model.Account
+	{method} +logout ( paramString1 : String ) : void
+	{method} +reloadLoginAccount ( paramAccount1 : com.moshi.common.model.Account ) : void
+	{method} +removeLoginAccountWithSessionIdFromCache ( paramString1 : String ) : void
+	{method} +sendRetrievePasswordAuthEmail ( paramString1 : String ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.login.LoginValidator {
+	{method} #handleError ( paramController1 : com.jfinal.core.Controller ) : void
+	{method} #validate ( paramController1 : com.jfinal.core.Controller ) : void
+}
+
+
+class com.moshi.reg.AccountGenerator {
+}
+
+
+class com.moshi.reg.AccountGenerator$Companion {
+	{method} +gen () : void
+}
+
+
+class com.moshi.reg.AccountGenerator$Companion$gen$1 {
+	{field} ~$index : java.util.concurrent.atomic.AtomicInteger
+	{method} +accept ( paramObject1 : Object ) : void
+}
+
+
+class com.moshi.reg.RegController {
+	{method} +activate ( paramString1 : String ) : void
+	{method} +captcha () : void
+	{method} +index ( paramString1 : String , paramString2 : String , paramString3 : String ) : void
+	{method} +reSendActivateEmail () : void
+}
+
+
+class com.moshi.reg.RegService {
+	{field} -accountDao : com.moshi.common.model.Account
+	{method} +activate ( paramString1 : String ) : com.jfinal.kit.Ret
+	{method} +isEmailExists ( paramString1 : String ) : boolean
+	{method} +isNickNameExists ( paramString1 : String ) : boolean
+	{method} +isPhoneExists ( paramString1 : String ) : boolean
+	{method} +reSendActivateEmail ( paramString1 : String ) : com.jfinal.kit.Ret
+	{method} +regByEmail ( paramString1 : String , paramString2 : String , paramString3 : String ) : com.jfinal.kit.Ret
+	{method} -sendRegActivateAuthEmail ( paramString1 : String , paramAccount2 : com.moshi.common.model.Account ) : boolean
+}
+
+
+class com.moshi.reg.RegValidator {
+	{method} #handleError ( paramController1 : com.jfinal.core.Controller ) : void
+	{method} #validate ( paramController1 : com.jfinal.core.Controller ) : void
+	{method}  {static} +validateNickName ( paramString1 : String ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.section.SectionController {
+	{method} +create () : void
+	{method} +delete () : void
+	{method} +find () : void
+	{method} +update () : void
+}
+
+
+class com.moshi.section.SectionService {
+	{field} -dao : com.moshi.common.model.Section
+	{field} -pgDao : com.moshi.common.model.Paragraph
+	{method} +create ( paramint1 : int , paramint2 : int , paramString3 : String ) : com.jfinal.kit.Ret
+	{method} +delete ( paramint1 : int ) : com.jfinal.kit.Ret
+	{method} +delete ( paramint1 : int , paramint2 : int ) : com.jfinal.kit.Ret
+}
+
+
+class com.moshi.select.SqlServiceController {
+	{method} +index () : void
+	{method} +manager () : void
+	{method} +teacher () : void
+}
+
+
+class com.moshi.select.SqlServiceParams {
+	{field} +args : [Ljava.lang.Object;
+	{field} +sql : String
+}
+
+
+class com.moshi.select.SqlSrvLearnerInterceptor {
+	{field} -filter : com.moshi.select.wall.WallFilter
+	{method} -buildConfig () : com.moshi.select.wall.WallConfig
+	{method} +intercept ( paramInvocation1 : com.jfinal.aop.Invocation ) : void
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.select.SqlSrvLearnerInterceptor$1 {
+	{field} ~val$config : com.moshi.select.wall.WallConfig
+	{method} +containsKey ( paramObject1 : Object ) : boolean
+	{method} +containsKey ( paramString1 : String ) : boolean
+	{method} +value ( paramObject1 : Object , paramType2 : reflect.Type ) : Object
+	{method} +value ( paramString1 : String , paramType2 : reflect.Type ) : Object
+}
+
+
+class com.moshi.select.SqlSrvManagerInterceptor {
+	{field} -filter : com.moshi.select.wall.WallFilter
+	{method} -buildConfig () : com.moshi.select.wall.WallConfig
+	{method} +intercept ( paramInvocation1 : com.jfinal.aop.Invocation ) : void
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.select.SqlSrvManagerInterceptor$1 {
+	{field} ~val$config : com.moshi.select.wall.WallConfig
+	{method} +containsKey ( paramObject1 : Object ) : boolean
+	{method} +containsKey ( paramString1 : String ) : boolean
+	{method} +value ( paramObject1 : Object , paramType2 : reflect.Type ) : Object
+	{method} +value ( paramString1 : String , paramType2 : reflect.Type ) : Object
+}
+
+
+class com.moshi.select.SqlSrvTeacherInterceptor {
+	{field} -filter : com.moshi.select.wall.WallFilter
+	{method} -buildConfig () : com.moshi.select.wall.WallConfig
+	{method} +intercept ( paramInvocation1 : com.jfinal.aop.Invocation ) : void
+	{method}  {static} +main ( paramString;1 : [Ljava.lang.String; ) : void
+}
+
+
+class com.moshi.select.SqlSrvTeacherInterceptor$1 {
+	{field} ~val$config : com.moshi.select.wall.WallConfig
+	{method} +containsKey ( paramObject1 : Object ) : boolean
+	{method} +containsKey ( paramString1 : String ) : boolean
+	{method} +value ( paramObject1 : Object , paramType2 : reflect.Type ) : Object
+	{method} +value ( paramString1 : String , paramType2 : reflect.Type ) : Object
+}
+
+
+class com.moshi.subscription.SubscriptionService {
+	{field} {static} +cacheName : String
+	{field} -dao : com.moshi.common.model.Subscription
+	{method} +clearCache ( paramint1 : int ) : void
+	{method} +findByAccountId ( paramint1 : int ) : java.util.List
+	{method} +subscribed ( paramint1 : int , paramString2 : String , paramint3 : int ) : boolean
+	{method} +subscribedCourse ( paramint1 : int , paramint2 : int ) : boolean
+}
+
+
+class com.moshi.video.VideoController {
+	{method} +delete () : void
+	{method}  {static} -getNextId () : long
+	{method} +index () : void
+	{method}  {static} -lambda$upload$0 ( paramUploadFile1 : com.jfinal.upload.UploadFile ) : Boolean
+	{method} +myUploaded () : void
+	{method} +upload () : void
+}
+
+
+
+
+com.moshi.App -->  com.moshi.App : INSTANCE
+com.moshi.App$main$1 -->  com.moshi.App$main$1 : INSTANCE
+com.moshi._admin.account.AccountAdminController -->  com.moshi._admin.account.AccountAdminService : srv
+com.moshi._admin.account.AccountAdminController -->  com.moshi._admin.role.RoleAdminService : roleAdminSrv
+com.moshi._admin.apply.ApplyAdminController -->  com.moshi._admin.apply.ApplyAdminService : srv
+com.moshi._admin.article.ArticleAdminController -->  com.moshi._admin.article.ArticleAdminService : srv
+com.moshi._admin.auth.AdminAuthInterceptor -->  com.moshi._admin.auth.AdminAuthService : srv
+com.moshi._admin.auth.AdminAuthKit -->  com.moshi._admin.auth.AdminAuthService : adminAuthSrv
+com.moshi._admin.course.CourseAdminController -->  com.moshi._admin.course.CourseAdminService : srv
+com.moshi._admin.course.CourseAdminController -->  com.moshi.course.CourseService : courseService
+com.moshi._admin.news.NewsAdminController -->  com.moshi._admin.article.ArticleAdminService : srv
+com.moshi._admin.news.NewsAdminController -->  com.moshi.article.ArticleService : srv2
+com.moshi._admin.permission.PermissionAdminController -->  com.moshi._admin.permission.PermissionAdminService : srv
+com.moshi._admin.permission.PermissionAdminService -->  com.moshi._admin.permission.PermissionAdminService : me
+com.moshi._admin.permission.PermissionDirective -->  com.moshi._admin.auth.AdminAuthService : adminAuthSrv
+com.moshi._admin.role.RoleAdminController -->  com.moshi._admin.permission.PermissionAdminService : permissionAdminSrv
+com.moshi._admin.role.RoleAdminController -->  com.moshi._admin.role.RoleAdminService : srv
+com.moshi._admin.role.RoleDirective -->  com.moshi._admin.auth.AdminAuthService : adminAuthSrv
+com.moshi.account.AccountService -->  com.moshi.account.AccountService : me
+com.moshi.apply.ApplyController -->  com.moshi.apply.ApplyService : srv
+com.moshi.apply.ApplyService -->  com.moshi.apply.ApplyService : me
+com.moshi.article.ArticleController -->  com.moshi.article.ArticleService : srv
+com.moshi.article.ArticleService -->  com.moshi.article.ArticleService : me
+com.moshi.authcode.AuthCodeService -->  com.moshi.authcode.AuthCodeService : me
+com.moshi.common.MainConfig -->  com.moshi.common.MainConfig$Companion : Companion
+com.moshi.course.CourseController -->  com.moshi.course.CourseService : srv
+com.moshi.course.CourseService -->  com.moshi.course.CourseService : me
+com.moshi.easyrec.EasyrecService -->  com.moshi.easyrec.EasyrecConfig : config
+com.moshi.easyrec.EasyrecService -->  com.moshi.easyrec.EasyrecService$Companion : Companion
+com.moshi.easyrec.EasyrecService$Companion$mock$1 -->  com.moshi.easyrec.EasyrecService : $srv
+com.moshi.easyrec.EasyrecService$Companion$mock$1$1 -->  com.moshi.easyrec.EasyrecService$Companion$mock$1 : this$0
+com.moshi.easyrec.EasyrecService$Companion$mock$1$2 -->  com.moshi.easyrec.EasyrecService$Companion$mock$1 : this$0
+com.moshi.im.ImController -->  com.moshi.im.ImController$Companion : Companion
+com.moshi.im.ImController$token$1 -->  com.moshi.im.ImController : this$0
+com.moshi.im.ImPlugin -->  com.moshi.im.ImPlugin$Me : Me
+com.moshi.issue.IssueController -->  com.moshi.issue.IssueService : srv
+com.moshi.issue.IssueService -->  com.moshi.issue.IssueService : me
+com.moshi.login.LoginController -->  com.moshi.login.LoginService : srv
+com.moshi.login.LoginService -->  com.moshi.login.LoginService : me
+com.moshi.reg.AccountGenerator -->  com.moshi.reg.AccountGenerator$Companion : Companion
+com.moshi.reg.AccountGenerator$Companion$gen$1 -->  com.moshi.reg.RegService : $srv
+com.moshi.reg.RegController -->  com.moshi.reg.RegService : srv
+com.moshi.reg.RegService -->  com.moshi.reg.RegService : me
+com.moshi.section.SectionController -->  com.moshi.section.SectionService : srv
+com.moshi.section.SectionService -->  com.moshi.section.SectionService : me
+com.moshi.select.SqlSrvLearnerInterceptor$1 -->  com.moshi.select.SqlSrvLearnerInterceptor : this$0
+com.moshi.select.SqlSrvManagerInterceptor$1 -->  com.moshi.select.SqlSrvManagerInterceptor : this$0
+com.moshi.select.SqlSrvTeacherInterceptor$1 -->  com.moshi.select.SqlSrvTeacherInterceptor : this$0
+com.moshi.subscription.SubscriptionService -->  com.moshi.subscription.SubscriptionService : me
+
+hide fields
+hide methods
+hide com.moshi.common
+
+@enduml

@@ -15,8 +15,8 @@ import org.tio.http.common.HttpRequest
 import org.tio.http.common.HttpResponse
 import org.tio.utils.lock.ReadLockHandler
 import org.tio.utils.lock.SetWithLock
-import com.moshi.im.server.websocket.common.WsRequest
-import com.moshi.im.server.websocket.server.handler.IWsMsgHandler
+import org.tio.websocket.common.WsRequest
+import org.tio.websocket.server.handler.IWsMsgHandler
 import org.cliffc.high_scale_lib.NonBlockingHashMap
 import org.tio.cluster.TioClusterConfig
 

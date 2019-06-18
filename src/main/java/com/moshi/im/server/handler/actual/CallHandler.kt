@@ -23,7 +23,7 @@ import org.tio.core.ChannelContext
 import org.tio.core.Tio
 import org.tio.utils.lock.SetWithLock
 import org.tio.utils.page.Page
-import com.moshi.im.server.websocket.common.WsRequest
+import org.tio.websocket.common.WsRequest
 import org.reflections.Reflections
 import java.lang.reflect.Method
 import java.util.stream.Collector
